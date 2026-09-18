@@ -308,6 +308,16 @@ const TOOLS = [
     name:"صادرات مواد البناء", desc:"مقارنة صادرات مواد البناء بين تركيا والسعودية", mb:1.77 },
 ];
 
+/* النسخة ذات الملف الواحد: كل لوحة مضمّنة مضغوطة (gzip) داخل <script id="z_<id>"> */
+function srcFor(t){
+  const el = document.getElementById("z_" + t.id);
+  if (!el) return Promise.resolve(encodeURI(t.file));
+  const bin = atob(el.textContent.trim()), buf = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+  const stream = new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Response(stream).blob().then(b => URL.createObjectURL(new Blob([b], {type:"text/html;charset=utf-8"})));
+}
+
 const HEAVY_MB = 20;      // فوقها تظهر ملاحظة وقت التحميل
 const KEEP_ALIVE = 3;     // عدد اللوحات التي تبقى محمّلة في الذاكرة للتنقل الفوري
 
@@ -421,7 +431,8 @@ function showTool(t){
   if (fr){ frames.delete(t.id); frames.set(t.id, fr); $("#loading").hidden = true; }
   else {
     fr = document.createElement("iframe");
-    fr.title = t.name; fr.src = encodeURI(t.file);
+    fr.title = t.name;
+    srcFor(t).then(u => { if (u.startsWith("blob:")) fr.dataset.blob = "1"; fr.src = u; }).catch(() => { $("#loadNote").textContent = "تعذّر فتح اللوحة"; });
     $("#loadName").textContent = t.name;
     $("#loadNote").textContent = t.mb >= HEAVY_MB ? `ملف كبير (${fmtMB(t.mb)})، قد يستغرق التحميل بضع ثوانٍ` : "جارٍ التحميل";
     $("#loading").style.setProperty("--c", s.color);
@@ -429,7 +440,7 @@ function showTool(t){
     fr.addEventListener("load", () => { if (current === t.id) $("#loading").hidden = true; });
     $("#stage").appendChild(fr);
     frames.set(t.id, fr);
-    while (frames.size > KEEP_ALIVE){ const [oid, of] = frames.entries().next().value; of.remove(); frames.delete(oid); }
+    while (frames.size > KEEP_ALIVE){ const [oid, of] = frames.entries().next().value; if (of.dataset.blob) URL.revokeObjectURL(of.src); of.remove(); frames.delete(oid); }
   }
   frames.forEach((f, id) => f.hidden = id !== t.id);
   current = t.id;
@@ -452,7 +463,7 @@ $("#prevBtn").onclick = () => step(-1);
 $("#nextBtn").onclick = () => step(1);
 $("#reloadBtn").onclick = () => { const f = frames.get(current); if (f){ $("#loading").hidden = false; f.src = f.src; } };
 $("#fullBtn").onclick = () => { const s = $("#stage"); document.fullscreenElement ? document.exitFullscreen() : s.requestFullscreen?.(); };
-$("#popBtn").onclick = () => { const t = TOOLS.find(t => t.id === current); if (t) window.open(encodeURI(t.file), "_blank"); };
+$("#popBtn").onclick = () => { const f = frames.get(current); if (f && f.src) window.open(f.src, "_blank"); };
 $("#menuBtn").onclick = () => document.body.classList.toggle("menu-open");
 
 /* ---------- البحث السريع Ctrl+K ---------- */
