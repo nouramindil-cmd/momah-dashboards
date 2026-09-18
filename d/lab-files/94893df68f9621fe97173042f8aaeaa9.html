@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منهجية المقارنات المعيارية للسياسات — النسخة الكاملة | Policy Benchmarking Methodology — Full Version</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20302e;
+  --ink-soft:#4a5c59;
+  --teal:#0d5f5f;
+  --teal-deep:#083f3f;
+  --teal-wash:#eef5f4;
+  --line:#d8e2e0;
+  --paper:#fdfdfb;
+  --card:#ffffff;
+  --amber:#8a6d1f;
+  --amber-wash:#faf5e6;
+  --green:#557a2e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  font-size:15.5px;
+  line-height:1.85;
+}
+.page{max-width:1180px;margin:0 auto;padding:0 28px 90px}
+
+/* ===== Masthead ===== */
+header.mast{
+  border-bottom:3px double var(--teal);
+  padding:56px 0 30px;
+  margin-bottom:14px;
+}
+.mast .doc-kicker{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;letter-spacing:.14em;color:var(--teal);
+  text-transform:uppercase;margin-bottom:20px;
+}
+.mast h1{font-size:31px;font-weight:700;line-height:1.5;color:var(--teal-deep)}
+.mast .h1-en{
+  font-family:'Source Serif 4',Georgia,serif;font-weight:600;
+  font-size:24px;color:var(--ink-soft);direction:ltr;text-align:left;
+  margin-top:10px;line-height:1.45;
+}
+.mast .legend{
+  display:flex;gap:26px;margin-top:26px;font-size:12.5px;color:var(--ink-soft);
+}
+.mast .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-left:7px;vertical-align:baseline}
+.mast .legend .l-ar::before{background:var(--teal)}
+.mast .legend .l-en::before{background:#b9c6c4}
+
+/* ===== Bilingual pair grid ===== */
+.pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-bottom:1px solid var(--line);
+}
+.pair:last-child{border-bottom:none}
+.pair > .ar{
+  padding:20px 0 20px 30px;
+  border-left:1px solid var(--line);
+}
+.pair > .en{
+  direction:ltr;text-align:left;
+  padding:20px 0 20px 30px;
+  padding-right:0;padding-left:30px;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px;line-height:1.75;color:var(--ink-soft);
+}
+.pair > .en{padding:20px 30px 20px 0;padding-left:30px}
+@media (max-width:820px){
+  .pair{grid-template-columns:1fr}
+  .pair > .ar{border-left:none;padding:18px 0 6px}
+  .pair > .en{padding:0 0 18px;border-bottom:none}
+}
+
+/* ===== Section heads ===== */
+.sec{margin-top:52px}
+.sec-head{
+  display:grid;grid-template-columns:1fr 1fr;align-items:baseline;
+  border-bottom:2px solid var(--teal);padding-bottom:12px;margin-bottom:4px;
+}
+.sec-head .num{
+  font-family:'Source Serif 4',serif;font-size:15px;color:var(--teal);
+  letter-spacing:.08em;display:block;margin-bottom:4px;
+}
+.sec-head h2{font-size:22.5px;font-weight:700;color:var(--teal-deep);line-height:1.5}
+.sec-head .en-h{
+  direction:ltr;text-align:left;font-family:'Source Serif 4',serif;
+  font-size:19px;font-weight:600;color:var(--ink-soft);align-self:end;padding-left:30px;
+}
+@media (max-width:820px){
+  .sec-head{grid-template-columns:1fr}
+  .sec-head .en-h{padding-left:0;margin-top:4px}
+}
+.sub-head{
+  display:grid;grid-template-columns:1fr 1fr;align-items:baseline;
+  margin:34px 0 2px;border-bottom:1px solid var(--line);padding-bottom:8px;
+}
+.sub-head h3{font-size:18px;font-weight:600;color:var(--teal)}
+.sub-head .en-h{direction:ltr;text-align:left;font-family:'Source Serif 4',serif;font-size:16px;font-weight:600;color:var(--ink-soft);padding-left:30px}
+@media (max-width:820px){
+  .sub-head{grid-template-columns:1fr}
+  .sub-head .en-h{padding-left:0}
+}
+
+/* ===== Purpose note ===== */
+.note{
+  background:var(--teal-wash);border:1px solid var(--line);
+  border-right:4px solid var(--teal);border-radius:8px;
+  margin:26px 0 8px;overflow:hidden;
+}
+.note .pair{border-bottom:none}
+.note .pair > .ar{padding:22px 26px}
+.note .pair > .en{padding:22px 26px}
+
+/* ===== Emphasis inside text ===== */
+strong{color:var(--teal-deep);font-weight:600}
+.en strong{color:var(--ink)}
+
+/* ===== Diagram strip ===== */
+.flow-strip{
+  display:flex;align-items:stretch;justify-content:center;gap:14px;
+  margin:30px 0 10px;flex-wrap:wrap;
+}
+.flow-strip .node{
+  background:var(--card);border:1.5px solid var(--teal);border-radius:10px;
+  padding:14px 22px;text-align:center;min-width:190px;
+}
+.flow-strip .node .t-ar{font-weight:600;color:var(--teal-deep);font-size:15px}
+.flow-strip .node .t-en{direction:ltr;font-family:'Source Serif 4',serif;font-size:12.5px;color:var(--ink-soft)}
+.flow-strip .node .d-ar{font-size:12.5px;color:var(--ink-soft);margin-top:5px}
+.flow-strip .arrow{align-self:center;color:var(--teal);font-size:22px}
+
+/* ===== Vertical workflow ===== */
+.wf{margin:26px 0 8px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.wf .wf-row{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:1px solid var(--line)}
+.wf .wf-row:last-child{border-bottom:none}
+.wf .wf-num{
+  background:var(--teal-wash);color:var(--teal);font-family:'Source Serif 4',serif;
+  font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;
+}
+.wf .wf-ar{padding:16px 20px;border-left:1px solid var(--line)}
+.wf .wf-en{direction:ltr;text-align:left;padding:16px 20px;font-family:'Source Serif 4',serif;font-size:14.5px;color:var(--ink-soft)}
+.wf .wf-ar .lead, .wf .wf-en .lead{font-weight:600;color:var(--teal-deep)}
+.wf .gate .wf-num{background:var(--amber-wash);color:var(--amber)}
+@media (max-width:820px){
+  .wf .wf-row{grid-template-columns:44px 1fr}
+  .wf .wf-en{grid-column:2;border-top:1px dashed var(--line)}
+}
+
+/* ===== Tables ===== */
+table{width:100%;border-collapse:collapse;margin:24px 0 10px;font-size:13.5px;background:var(--card)}
+th{
+  background:var(--teal);color:#fff;font-weight:600;text-align:right;
+  padding:10px 14px;font-size:13px;
+}
+th .th-en{display:block;direction:ltr;text-align:right;font-family:'Source Serif 4',serif;font-weight:400;font-size:11.5px;opacity:.85}
+td{border:1px solid var(--line);padding:10px 14px;vertical-align:top}
+td .c-ar{display:block}
+td .c-en{display:block;direction:ltr;text-align:left;font-family:'Source Serif 4',serif;font-size:12.5px;color:var(--ink-soft);margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}
+tr:nth-child(even) td{background:#fafcfb}
+
+/* ===== Bullet pairs ===== */
+ul.b{margin:6px 0 0;padding-right:22px}
+.en ul.b{padding-right:0;padding-left:22px}
+ul.b li{margin-bottom:7px}
+
+/* ===== Footer ===== */
+footer{
+  margin-top:70px;border-top:3px double var(--teal);padding-top:18px;
+  display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);
+}
+footer .f-en{direction:ltr;font-family:'Source Serif 4',serif}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <div class="doc-kicker">
+    <span>وثيقة منهجية — نسخة ثنائية اللغة</span>
+    <span style="direction:ltr;font-family:'Source Serif 4',serif">Methodology Document — Bilingual Edition</span>
+  </div>
+  <h1>منهجية المقارنات المعيارية للسياسات — النسخة الكاملة</h1>
+  <div class="h1-en">Policy Benchmarking Methodology — Full Version</div>
+  <div class="legend">
+    <span class="l-ar">النص العربي (الترجمة)</span>
+    <span class="l-en" style="direction:ltr;font-family:'Source Serif 4',serif">English source text</span>
+  </div>
+</header>
+
+<div class="note">
+  <div class="pair">
+    <div class="ar"><strong>الغرض من هذه الوثيقة.</strong> تعرض هذه الوثيقة المنهجية الكاملة المقترحة للمقارنات المعيارية للسياسات. وقد أُعدت لغرض المواءمة مع العميل، وتشرح النموذج التحليلي، وسير العمل، وقواعد التقييم، ومتطلبات الأدلة، والمخرجات، واعتماديات البيانات، ونقاط المراجعة البشرية، ونهج التجربة الاستطلاعية.</div>
+    <div class="en"><strong>Purpose of this document.</strong> This document sets out the full proposed methodology for policy benchmarking. It is written for client alignment and explains the analytical model, workflow, scoring rules, evidence requirements, outputs, data dependencies, human review points and pilot approach.</div>
+  </div>
+</div>
+
+<!-- ================= Section 1 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">1</span>الغرض والنطاق</h2>
+    <div class="en-h">Purpose and Scope</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يتمثل الغرض من منهجية المقارنة المعيارية هذه في دعم توليد خيارات السياسات وفرزها الأولي. وقد صُممت لتحديد آليات السياسات الجديرة بالدراسة للمملكة العربية السعودية، والشروط التي تتطلبها تلك الآليات، والمخاطر التي رُصدت في تجارب أخرى، وفجوات الأدلة الواجب معالجتها قبل الانتقال إلى تقييم الأثر التفصيلي.</div>
+    <div class="en">The purpose of this benchmark methodology is to support policy option generation and initial screening. It is designed to identify which policy mechanisms are worth considering for Saudi Arabia, what conditions those mechanisms require, what risks have been observed elsewhere, and what evidence gaps must be resolved before moving into detailed impact assessment.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">لا ينبغي قراءة المقارنة المعيارية بوصفها تقييم أثر كامل، أو تحليل تكلفة ومنفعة، أو مسوّغًا تنظيميًا، أو توصية نهائية بالسياسة؛ إذ تتطلب تلك الأنشطة بيانات محلية أعمق، وتقييمًا رسميًا للخيارات، وتقييمًا لأصحاب المصلحة، وتحليلًا ماليًا، وتخطيطًا للتنفيذ. فالمقارنة المعيارية هي الخطوة التمهيدية التي تجعل تلك التحليلات اللاحقة أكثر تركيزًا وقابلية للدفاع عنها.</div>
+    <div class="en">The benchmark should not be read as a full impact assessment, cost-benefit analysis, regulatory justification or final policy recommendation. Those activities require deeper local data, formal option appraisal, stakeholder assessment, fiscal analysis and implementation planning. The benchmark is the upstream step that makes those later analyses more focused and defensible.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">مبدأ التصميم المحوري هو <strong>الصرامة العملية</strong>: أن تكون العملية منظمة بما يكفي للصمود أمام الأسئلة المنهجية، وبسيطة بما يكفي للتشغيل ضمن سير عمل سياساتي واقعي. ولذلك تعتمد المنهجية بوابات أهلية حاسمة، ونموذج بيانات على مستوى الآلية، وتصنيفًا صريحًا للأدلة، وفحوصًا لقابلية النقل، ومراجعة بشرية موجهة، بدلًا من الاكتفاء بمقارنات عامة على مستوى الدول.</div>
+    <div class="en">The central design principle is practical rigor: the process should be structured enough to withstand methodological questions, but simple enough to run within a real policy workflow. The methodology therefore uses hard eligibility gates, a mechanism-level data model, explicit evidence grading, transferability checks and targeted human review, rather than relying only on broad country-level comparisons.</div>
+  </div>
+</section>
+
+<!-- ================= Section 2 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">2</span>وحدة التحليل ونموذج البيانات</h2>
+    <div class="en-h">Analytical Unit and Data Model</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تجيب المقارنة المعيارية عن السؤال: <strong>أي آليات السياسات نجحت، وفي ظل أي شروط، وهل تتوافر تلك الشروط في المملكة العربية السعودية أو يمكن إيجادها؟</strong> وهي لا تسأل عن الدولة التي ينبغي استنساخ تجربتها.</div>
+    <div class="en">The benchmark answers the question: <strong>which policy mechanisms worked under which conditions, and whether those conditions exist or can be created in Saudi Arabia.</strong> It does not ask which country should be copied.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يتكون نموذج البيانات من ثلاثة مستويات:</div>
+    <div class="en">The data model has three levels:</div>
+  </div>
+
+  <div class="flow-strip">
+    <div class="node">
+      <div class="t-ar">الحالة</div>
+      <div class="t-en">Case</div>
+      <div class="d-ar">مثال دولة أو مدينة</div>
+    </div>
+    <div class="arrow">←</div>
+    <div class="node">
+      <div class="t-ar">الآلية</div>
+      <div class="t-en">Mechanism</div>
+      <div class="d-ar">منطق السياسة وتغيير السلوك</div>
+    </div>
+    <div class="arrow">←</div>
+    <div class="node">
+      <div class="t-ar">الخيار</div>
+      <div class="t-en">Option</div>
+      <div class="d-ar">خيار سياسة سعودي مُوطَّن</div>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الحالة</strong> هي مثال دولة أو مدينة يُستخدم نقطةَ دخول للبحث. و<strong>الآلية</strong> هي منطق السياسة الذي يغيّر سلوك فئة من الأفراد أو المؤسسات ويفضي إلى نتيجة سياساتية. و<strong>الخيار</strong> هو مقترح سياسة مُوطَّن للسياق السعودي يُجمَّع من آلية واحدة أو أكثر.</div>
+    <div class="en">A <strong>case</strong> is a country or city example used as the research entry point. A <strong>mechanism</strong> is the policy logic that changes the behavior of a group of people or institutions and leads to a policy outcome. An <strong>option</strong> is a Saudi-localized policy proposal assembled from one or more mechanisms.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">قد يجمع خيار السياسة الواحد بين آلية وثلاث آليات، وقد تأتي تلك الآليات من حالات مختلفة. ويحول ذلك دون انغلاق المقارنة المعيارية في بنية «دولة واحدة – خيار واحد». وعليه، فإن المخرج النهائي ليس «خيار أيرلندا» ولا «خيار رواندا»، بل خيار سعودي مُوطَّن مبني من آليات تبدو ملائمة وموثقة بالأدلة وقابلة للنقل.</div>
+    <div class="en">A policy option may combine 1-3 mechanisms, and those mechanisms may come from different cases. This prevents the benchmark from becoming locked into a one-country-one-option structure. The final output is therefore not an "Ireland option" or a "Rwanda option". It is a localized Saudi option built from mechanisms that appear relevant, evidenced and transferable.</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>2.1 ما آلية السياسة؟</h3>
+    <div class="en-h">2.1 What Is a Policy Mechanism?</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">آلية السياسة هي السبب الذي تنجح به السياسة. فهي توضّح <strong>سلوكَ مَن يتغير، وكيف يتغير، ولماذا يُنتج ذلك التغيير النتيجة المنشودة</strong>. أما الشكل الظاهر للسياسة فليس سوى التطبيق المحلي لتلك الآلية.</div>
+    <div class="en">A policy mechanism is the reason a policy works. It explains <strong>whose behavior changes, how that behavior changes, and why that produces the desired outcome</strong>. The visible policy form is only the local implementation of that mechanism.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">من الطرق العملية لتحديد الآلية الاستمرار في طرح سؤال «لماذا نجح هذا؟» حتى يصل الجواب إلى صيغة لا يمكن اختزالها أكثر وتتضمن تغييرًا سلوكيًا. عند ذلك المستوى، يكون التحليل قد انتقل من استنساخ شكل السياسة إلى فهم الآلية الكامنة خلفها.</div>
+    <div class="en">A practical way to identify a mechanism is to keep asking "why did this work?" until the answer can no longer be reduced further and contains a behavior change. At that level, the analysis has moved from copying a policy form to understanding the mechanism behind it.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>مثال: الإسكان العام.</strong> يوصف الإسكان العام في سنغافورة غالبًا بأنه «إسكان تبنيه الحكومة». غير أن الآليات أكثر تحديدًا: سيطرة الحكومة على الأراضي والمعروض السكني، والادخار الإلزامي عبر صندوق الادخار المركزي (CPF)، وقيود إعادة البيع التي تحدّ من المضاربة. واستنساخ الشكل الظاهر وحده دون الآليات الداعمة قد يُنتج عبئًا ماليًا أو مشكلات في التخصيص بدلًا من مكاسب في القدرة على تحمّل التكلفة.</div>
+    <div class="en"><strong>Example: Public housing.</strong> Singapore public housing is often described as "government-built housing". But the mechanisms are more specific: government control over land and housing supply, mandatory savings through CPF, and resale restrictions that reduce speculation. Copying only the visible form without the supporting mechanisms may create fiscal burden or allocation problems rather than affordability gains.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>مثال: الحد من الأكياس البلاستيكية.</strong> تعالج ضريبة الأكياس البلاستيكية في أيرلندا وحظرها في رواندا مشكلة متشابهة لكنهما تعملان بآليتين مختلفتين. فأيرلندا تغيّر سلوك المستهلك عند نقطة الشراء بجعل التكلفة مرئية، بينما تتدخل رواندا عند المنبع بتقييد الإنتاج والاستيراد. تعتمد الآلية الأولى على نظم دفع رسمية في قطاع التجزئة؛ وتعتمد الثانية على الرقابة الجمركية والقدرة على الإنفاذ. ولذلك ينبغي تقييمهما بوصفهما آليتين مختلفتين، لا نسختين من السياسة نفسها.</div>
+    <div class="en"><strong>Example: Plastic bag reduction.</strong> Ireland's plastic bag levy and Rwanda's plastic bag ban address a similar problem but operate through different mechanisms. Ireland changes consumer behavior at the point of purchase by making the cost visible. Rwanda intervenes upstream by restricting production and import. The first mechanism depends on formal retail payment systems; the second depends on customs control and enforcement capacity. They should therefore be assessed as different mechanisms, not two versions of the same policy.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>مثال: رسوم الازدحام.</strong> رسوم الازدحام في لندن ليست مجرد رسم لدخول وسط المدينة؛ فالآلية هي جعل ندرة الطرق مرئية عبر التسعير، ومن ثم تغيير سلوك التنقل. وتعتمد هذه الآلية على وجود بدائل نقل موثوقة، وبدونها قد يولّد الرسم استياءً عامًا بدلًا من تغيير سلوكي.</div>
+    <div class="en"><strong>Example: Congestion charging.</strong> London congestion charging is not only a fee to enter a city center. The mechanism is to make road scarcity visible through pricing, thereby changing travel behavior. This mechanism depends on credible transport alternatives. Without those alternatives, the charge may create public dissatisfaction rather than behavioral change.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">في نموذج البيانات المقترح، تُوثَّق كل آلية في <strong>بطاقة آلية</strong>. تسجّل البطاقة ماهية الآلية، والشروط التي تعتمد عليها، والأجزاء التي تمثل وظائف جوهرية مقابل تلك التي تمثل أشكال تطبيق محلية، والأدلة المتوافرة على النتائج، وشروط الفشل المعروفة، والمصادر الداعمة للادعاءات. ويتبع ذلك منطق «السياق – الآلية – النتيجة»: فالسياق يوضّح متى يمكن للآلية أن تعمل؛ والآلية توضّح التغيير السلوكي؛ والنتيجة تسجّل الحصيلة والأدلة.</div>
+    <div class="en">In the proposed data model, each mechanism is captured in a <strong>Mechanism Card</strong>. The card records what the mechanism is, what conditions it depends on, which parts are essential functions and which are local implementation forms, what outcome evidence exists, what failure conditions are known, and which sources support the claims. This follows the logic of Context - Mechanism - Outcome: context explains when the mechanism can work; mechanism explains the behavior change; outcome records the result and evidence.</div>
+  </div>
+</section>
+
+<!-- ================= Section 3 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">3</span>سير العمل من البداية إلى النهاية</h2>
+    <div class="en-h">End-to-end Workflow</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">صُمم سير العمل لتفادي ثلاثة إخفاقات شائعة في المقارنات المعيارية: اختيار الحالات لمجرد مظهرها الناجح، والسماح للحالات الضعيفة بالمرور عبر التقييم، وإنتاج توصيات عاجزة عن تفسير سبب نجاح السياسة في المملكة العربية السعودية.</div>
+    <div class="en">The workflow is designed to avoid three common benchmark failures: selecting cases only because they look successful, allowing weak cases to pass through scoring, and producing recommendations that cannot explain why the policy would work in Saudi Arabia.</div>
+  </div>
+
+  <div class="wf">
+    <div class="wf-row">
+      <div class="wf-num">1</div>
+      <div class="wf-ar"><span class="lead">تعريف سؤال المقارنة المعيارية.</span> حدِّد قضية السياسة، ومؤشر الأداء المستهدف، ونطاق أدوات السياسة، والنافذة الزمنية. وسجِّل مصطلحات البحث وحدود المصادر في سجل بحث مبسّط. وأكمِل في الوقت نفسه قائمة التحقق من جاهزية البيانات لتحديد الفجوات المحتملة في خط الأساس السعودي وفي الأدلة الدولية.</div>
+      <div class="wf-en"><span class="lead">Define the benchmark question.</span> Define the policy issue, target KPI, policy tool scope and time window. Record search terms and source boundaries in a lightweight search log. Complete a data-readiness checklist at the same time to identify likely Saudi baseline gaps and international evidence gaps.</div>
+    </div>
+    <div class="wf-row gate">
+      <div class="wf-num">2</div>
+      <div class="wf-ar"><span class="lead">تطبيق بوابات الأهلية.</span> يجب أن تجتاز الحالات المرشحة أربعة فحوص حاسمة: الصلة بسؤال السياسة، والتنفيذ الفعلي، ووجود مصادر قابلة للتحقق، والاندراج ضمن نطاق أدوات السياسة المسموح به. وإذا أخفقت الحالة في أي بوابة، تُستبعد ويُسجَّل السبب. ويمنع ذلك إنقاذ حالة جذابة لكنها غير ملائمة عبر التقييم اللاحق.</div>
+      <div class="wf-en"><span class="lead">Apply eligibility gates.</span> Candidate cases must pass four hard checks: relevance to the policy question, actual implementation, verifiable sources and fit within the allowed policy tool scope. If a case fails any gate, it is excluded and the reason is recorded. This prevents an attractive but unsuitable case from being rescued by later scoring.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">3</div>
+      <div class="wf-ar"><span class="lead">بناء مجمع الحالات.</span> قد يشمل مجمع الحالات حالات يرشحها العميل، ونظراء محددين مسبقًا، وحالات إضافية يحددها البحث؛ ولا تَعِد المنهجية ببحث عالمي مؤتمت، فمجمع الحالات مجموعة منتقاة. وينبغي أن يتضمن حالة فشل أو إنذار واحدة على الأقل حيثما أمكن. ولا تُستخدم حالات الفشل للتوصية بالخيارات، بل لتحديد المخاطر وشروط الفشل. وإذا تعذّر العثور على حالة فشل قابلة للتحقق، وجب أن يفصح الموجز عن فجوة في تغطية أدلة الفشل.</div>
+      <div class="wf-en"><span class="lead">Build the case pool.</span> The case pool may include client-nominated cases, predefined peers and additional cases identified by research; the methodology does not promise automated global search, and the case pool is a curated set. It should include at least one failure or warning case where possible. Failure cases are not used to recommend options; they are used to identify risks and failure conditions. If no verifiable failure case can be found, the brief should disclose a failure-evidence coverage gap.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">4</div>
+      <div class="wf-ar"><span class="lead">تقييم قابلية المقارنة والأداء.</span> تُقيَّم الحالات المؤهلة من حيث قابلية مقارنتها بالمملكة العربية السعودية. ويُقيَّم أداء السياسة على نحو منفصل استنادًا إلى الفاعلية والكفاءة والإنصاف والآثار الجانبية. فالحالة التي تبدو قابلة للمقارنة لكن أداءها ضعيف لا ينبغي أن تصبح مرجعًا رئيسيًا.</div>
+      <div class="wf-en"><span class="lead">Score comparability and performance.</span> Eligible cases are scored for comparability with Saudi Arabia. Separately, policy performance is assessed based on effectiveness, efficiency, equity and side effects. A case that looks comparable but performs poorly should not become a lead benchmark.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">5</div>
+      <div class="wf-ar"><span class="lead">استخراج بطاقات الآليات.</span> تُفكَّك كل حالة رئيسية إلى آلية حتى ثلاث آليات. وتسجّل كل بطاقة آلية: الآلية، والشروط المطلوبة، والوظائف الجوهرية مقابل أشكال التطبيق المحلية، وأدلة النتائج، وشروط الفشل المعروفة، والمصادر. وشروط الفشل المعروفة إلزامية؛ فإن لم يُعثر على شيء منها وجب توثيق محاولة البحث وفجوة الأدلة. كما تُراجَع في هذه الخطوة درجة الأداء على مستوى الحالة (من الخطوة 4) على مستوى الآلية؛ وعند تعارض الاثنين تسود خلاصة مستوى الآلية ويُسجَّل السبب.</div>
+      <div class="wf-en"><span class="lead">Extract mechanism cards.</span> Each lead case is decomposed into 1-3 mechanisms. Each mechanism card records the mechanism, required conditions, essential functions versus local implementation forms, outcome evidence, known failure conditions and sources. Known failure conditions are mandatory; if none are found, the search attempt and evidence gap must be recorded. The case-level performance rating from Step 4 is also reviewed at mechanism level during this step; where the two conflict, the mechanism-level conclusion prevails and the reason is recorded.</div>
+    </div>
+    <div class="wf-row gate">
+      <div class="wf-num">6</div>
+      <div class="wf-ar"><span class="lead">تقييم قابلية النقل إلى السياق السعودي.</span> تُقيَّم كل آلية عبر مصفوفة قابلية النقل التي تغطي: الصلاحية النظامية، والجهة المسؤولة، والجدوى المالية، والقدرة التنفيذية, والقدرة البيانية والتنظيمية، وبنية السوق، وقبول أصحاب المصلحة، والاعتماد على سياسات مكمّلة. والنتيجة إحدى حالات: إبقاء، أو تكييف، أو استبعاد، أو فجوة أدلة، ويُبنى القرار على نتيجة المصفوفة. ويجب أن يحمل كل بند أحمر مسار معالجة، مثل تعديل نظامي، أو ترتيب صلاحية مشتركة، أو جمع بيانات إضافية، أو تجربة استطلاعية، أو التخلي. ويجب أن يسجّل قرار «استبعاد» أو «فجوة أدلة» البنود الحمراء الرئيسية بوصفها مسوّغه. كما يجب أن تحمل كل آلية «تكييف» قائمة تكييف: المواد التنظيمية الواجب تعديلها، والجهة المسؤولة، واعتماديات الميزانية والبيانات، والمخاطر المتبقية.</div>
+      <div class="wf-en"><span class="lead">Assess Saudi transferability.</span> Each mechanism is assessed through a transferability matrix covering legal authority, responsible entity, fiscal feasibility, implementation capacity, data and regulatory capacity, market structure, stakeholder acceptance and dependency on complementary policies. The result is Keep, Adapt, Reject or Evidence Gap, and the decision is based on the matrix result. Red items must state a handling path, such as legal amendment, joint authority arrangement, additional data collection, a pilot, or abandonment. A Reject or Evidence Gap decision must record the main red items as its rationale. Each Adapt mechanism must also carry an adaptation checklist: the regulatory articles to amend, the responsible entity, budget and data dependencies, and residual risks.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">7</div>
+      <div class="wf-ar"><span class="lead">تجميع خيارات السياسات.</span> تُجمَّع حتى ثلاثة خيارات من آليات «الإبقاء» و«التكييف». ولا يجوز أن تدخل آليات «فجوة الأدلة» إلا بوصفها عناصر مشروطة، مع بيان واضح للبيانات المطلوبة أو التأكيد الخبير اللازم.</div>
+      <div class="wf-en"><span class="lead">Assemble policy options.</span> Up to three options are assembled from Keep and Adapt mechanisms. Evidence Gap mechanisms may enter only as conditional elements, with the required data or expert confirmation clearly stated.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">8</div>
+      <div class="wf-ar"><span class="lead">إجراء فحوص التحقق.</span> يُفحص كل خيار مقابل: الاختصاص، والسياسات أو الذاكرة التنظيمية القائمة، وما إذا كان يتطلب قاعدة جديدة أم تحديثًا، والجهة المسؤولة، وجاهزية البيانات.</div>
+      <div class="wf-en"><span class="lead">Run validation checks.</span> Each option is checked against mandate, existing policy or regulatory memory, whether it requires a new rule or an update, responsible entity and data readiness.</div>
+    </div>
+  </div>
+
+  <div class="sub-head">
+    <h3>3.1 مثال تطبيقي خطوة بخطوة: الحد من الأكياس البلاستيكية</h3>
+    <div class="en-h">3.1 Step-by-step Example: Plastic Bag Reduction</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يوضّح المثال التالي كيفية عمل سير العمل عمليًا. لنفترض أن سؤال السياسة هو: كيف يمكن للمملكة العربية السعودية الحد من استهلاك أكياس البلاستيك أحادية الاستخدام وما يرتبط بها من نفايات، مع إدارة عبء التنفيذ على تجار التجزئة والمستهلكين وجهات الإنفاذ؟</div>
+    <div class="en">The following example shows how the workflow would operate in practice. Assume the policy question is how Saudi Arabia could reduce single-use plastic bag consumption and related waste while managing implementation burden for retailers, consumers and enforcement agencies.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 1 – تعريف سؤال المقارنة المعيارية.</strong> لا ينبغي صياغة السؤال بصيغة «أي دولة لديها أفضل سياسة لأكياس البلاستيك؟». والصياغة الأنفع: أي آليات السياسات خفّضت استهلاك أكياس البلاستيك أحادية الاستخدام، وفي ظل أي شروط تتعلق بالتجزئة والإنفاذ وسلوك المستهلك، وأيها قد يكون ملائمًا للمملكة العربية السعودية؟</div>
+    <div class="en"><strong>Step 1 - Define the benchmark question.</strong> The question should not be framed as "which country has the best plastic bag policy?" A more useful formulation would be: Which policy mechanisms have reduced single-use plastic bag consumption, under what retail, enforcement and consumer-behavior conditions, and which of those mechanisms could be relevant to Saudi Arabia?</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يسجّل سجل البحث مصطلحات البحث وحدود المصادر والنافذة الزمنية. فقد يغطي البحث مثلًا اللوائح الحكومية، وتقارير المنظمات الدولية، والتقييمات الأكاديمية، وتقييمات سياساتية مختارة. كما تحدد قائمة التحقق من جاهزية البيانات ما إذا كانت بيانات خط الأساس السعودية متوافرة عن استهلاك الأكياس البلاستيكية، وتغطية قنوات التجزئة، وتركيبة النفايات، والقدرة على الإنفاذ، وسلوك الإحلال لدى المستهلك.</div>
+    <div class="en">The search log would record the search terms, source boundaries and time window. For example, the search may cover government regulations, international organization reports, academic evaluations and selected policy assessments. The data-readiness checklist would also identify whether Saudi baseline data exists for plastic bag consumption, retail channel coverage, waste composition, enforcement capacity and consumer substitution behavior.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 2 – تطبيق بوابات الأهلية.</strong> تُفرز الحالات المرشحة قبل التقييم. فتُستبعد الحالة إذا كانت السياسة قد أُعلنت فقط دون تنفيذ، أو تعذّر تتبع نتيجتها إلى مصادر قابلة للتحقق، أو عالجت إدارة النفايات عمومًا لا الأكياس البلاستيكية تحديدًا، أو كانت الأداة خارج النطاق التنظيمي المقصود. وهذه البوابة اجتياز أو إخفاق؛ لا عملية تقييم بالدرجات.</div>
+    <div class="en"><strong>Step 2 - Apply eligibility gates.</strong> Candidate cases are screened before scoring. A case would be excluded if the policy was only announced but not implemented, if the result cannot be traced to verifiable sources, if it addresses broader waste management rather than plastic bags specifically, or if the tool is outside the intended regulatory scope. This gate is pass/fail; it is not a scoring exercise.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 3 – بناء مجمع الحالات.</strong> قد يشمل مجمع الحالات أيرلندا التي استخدمت ضريبة أكياس بلاستيكية، ورواندا التي استخدمت قيدًا أشد عند المنبع، والمملكة المتحدة التي استخدمت رسمًا على تجار التجزئة، وأمثلة أخرى ذات صلة. وينبغي أن يشمل أيضًا حالة إنذار واحدة على الأقل كان فيها الإنفاذ ضعيفًا، أو كانت آثار الإحلال كبيرة، أو تحوّل فيها المستهلكون إلى أكياس أخرى أحادية الاستخدام. وحالة الإنذار ليست نموذجًا يُحتذى؛ بل تُستخدم لتحديد شروط الفشل.</div>
+    <div class="en"><strong>Step 3 - Build the case pool.</strong> The case pool may include Ireland, which used a plastic bag levy; Rwanda, which used a stronger upstream restriction; the United Kingdom, which used a retailer charge; and other relevant examples. It should also include at least one warning case where enforcement was weak, substitution effects were significant, or consumers shifted to other disposable bags. The warning case is not a model to follow; it is used to identify failure conditions.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 4 – تقييم قابلية المقارنة والأداء.</strong> تُقيَّم كل حالة مؤهلة من حيث قابلية المقارنة والأداء. فقد تُعامَل أيرلندا بوصفها دليلًا أقوى على آلية إشارة السعر في التجزئة إذا كانت تغطية التجزئة الرسمية مرتفعة وانخفض استخدام الأكياس بعد الضريبة. وقد تُظهر رواندا آلية مختلفة قائمة على تقييد المعروض والإنفاذ. أما الحالة ذات الإنفاذ الضعيف أو الامتثال المتدني أو آثار الإحلال الكبيرة فقد تظل مفيدة مرجعًا للمخاطر، لكنها لا ينبغي أن تصبح مرجعًا رئيسيًا.</div>
+    <div class="en"><strong>Step 4 - Score comparability and performance.</strong> Each eligible case is assessed on comparability and performance. Ireland may be treated as stronger evidence for a retail price-signal mechanism if formal retail coverage is high and bag usage dropped after the levy. Rwanda may show a different mechanism based on supply restriction and enforcement. A case with poor enforcement, weak compliance or major substitution effects may remain useful as a risk reference, but should not become a lead benchmark.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 5 – استخراج بطاقات الآليات.</strong> تُفكَّك الحالات إلى آليات بدل معاملتها نماذجَ قُطرية. فأيرلندا تمثل آلية إشارة السعر: جعل التكلفة مرئية عند الدفع يغيّر سلوك المستهلك. ورواندا تمثل آلية التقييد عند المنبع: التحكم في الإنتاج والاستيراد والتوزيع يُقصد به خفض التوافر. وقد يحوّل نموذج رسم تجار التجزئة جزءًا من المسؤولية إلى تجار التجزئة ونظم الإبلاغ. وتسجّل كل بطاقة آلية الشروط المطلوبة، وأدلة النتائج، وشكل التطبيق، وشروط الفشل المعروفة.</div>
+    <div class="en"><strong>Step 5 - Extract mechanism cards.</strong> The cases are decomposed into mechanisms rather than treated as country models. Ireland represents a price-signal mechanism: making the cost visible at checkout changes consumer behavior. Rwanda represents an upstream restriction mechanism: controlling production, import and distribution is intended to reduce availability. A retailer-charge model may shift part of the responsibility to retailers and reporting systems. Each mechanism card records required conditions, outcome evidence, implementation form and known failure conditions.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 6 – تقييم قابلية النقل إلى السياق السعودي.</strong> تُختبر كل آلية مقابل الظروف السعودية. فقد تكون ضريبة التجزئة قابلة للنقل إذا كانت نظم نقاط البيع وامتثال تجار التجزئة والتواصل العام قوية بما يكفي. وقد يتطلب التقييد عند المنبع رقابة جمركية وقدرة تفتيش وتغطية إنفاذ. وقد يعتمد نموذج مسؤولية تجار التجزئة على إمكانية تطبيق الإبلاغ والرصد والعقوبات باتساق. وإذا كانت بيانات تغطية التجزئة أو القدرة على الإنفاذ أو إحلال المستهلك مفقودة، وجب وسم الآلية بـ«فجوة أدلة» بدلًا من اعتبارها جاهزة.</div>
+    <div class="en"><strong>Step 6 - Assess Saudi transferability.</strong> Each mechanism is tested against Saudi conditions. A retail levy may be transferable if point-of-sale systems, retailer compliance and public communication are strong enough. An upstream restriction may require customs control, inspection capacity and enforcement coverage. A retailer responsibility model may depend on whether reporting, monitoring and penalties can be implemented consistently. If the data on retail coverage, enforcement capacity or consumer substitution is missing, the mechanism should be marked as an Evidence Gap rather than treated as ready.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 7 – تجميع خيارات السياسات.</strong> قد يجمع خيار سعودي مُوطَّن بين رسم متدرج على تجار التجزئة، وإعفاءات لحالات استخدام محددة، ومتطلبات إبلاغ لكبار تجار التجزئة، وتواصل عام. وقد يركّز خيار آخر على تقييد أضيق عند المنبع لأنواع أكياس مختارة إذا كانت قدرة الإنفاذ قوية بما يكفي. فالخيار إذن ليس «نموذج أيرلندا» ولا «نموذج رواندا»؛ بل حزمة مُوطَّنة مُجمَّعة من آليات تبدو ملائمة وقابلة للنقل.</div>
+    <div class="en"><strong>Step 7 - Assemble policy options.</strong> A Saudi-localized option might combine a phased retailer charge, exemptions for specific use cases, reporting requirements for large retailers and public communication. Another option might focus on a narrower upstream restriction for selected bag types if enforcement capacity is strong enough. The option is therefore not "Ireland's model" or "Rwanda's model"; it is a localized package assembled from mechanisms that appear relevant and transferable.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة 8 – إجراء فحوص التحقق.</strong> يُفحص كل خيار بعد ذلك مقابل الاختصاص، واللوائح البيئية أو البلدية القائمة، وما إذا كانت السياسة تتطلب قاعدة جديدة أم تحديثًا، والجهة التي ستتولى مسؤولية التنفيذ، ومدى توافر البيانات اللازمة. وإذا اعتمدت آلية على أدلة مفقودة، فلا يمكنها الدخول إلا خيارًا مشروطًا مع بيان واضح للبيانات المطلوبة أو التأكيد الخبير اللازم.</div>
+    <div class="en"><strong>Step 8 - Run validation checks.</strong> Each option is then checked against mandate, existing environmental or municipal regulations, whether the policy requires a new rule or an update, which entity would be responsible for implementation and whether the necessary data is available. If a mechanism depends on missing evidence, it can only enter as a conditional option with the required data or expert confirmation clearly stated.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يوضّح الجدول أدناه كيف قد تُترجَم الآليات في هذا المثال إلى قرارات قابلية نقل. وهو للتوضيح فحسب ― يبيّن كيف تتحول بطاقات الآليات ومصفوفة قابلية النقل إلى أحكام عملية، وليس نتيجة تحليل مكتمل.</div>
+    <div class="en">The table below illustrates how the mechanisms in this example might map to transferability decisions. It is illustrative only ― it shows how Mechanism Cards and the transferability matrix translate into practical judgments, not the result of a completed analysis.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>الآلية<span class="th-en">Mechanism</span></th>
+      <th>الحالة المثال<span class="th-en">Example Case</span></th>
+      <th>الشروط المطلوبة<span class="th-en">Required Conditions</span></th>
+      <th>قابلية النقل للسعودية (توضيحي)<span class="th-en">Saudi Transferability (illustrative)</span></th>
+      <th>القرار<span class="th-en">Decision</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">إشارة سعر في التجزئة (ضريبة عند الدفع)</span><span class="c-en">Retail price signal (checkout levy)</span></td>
+      <td><span class="c-ar">أيرلندا</span><span class="c-en">Ireland</span></td>
+      <td><span class="c-ar">تغطية رسمية للتجزئة ونقاط البيع؛ تواصل عام</span><span class="c-en">Formal retail and point-of-sale coverage; public communication</span></td>
+      <td><span class="c-ar">تغطية نقاط البيع قوية في التجزئة الكبرى؛ خطر الإحلال يُسجَّل بندًا أصفر يُراقَب أثناء التنفيذ</span><span class="c-en">POS coverage strong in major retail; substitution risk marked as a yellow item to be monitored during implementation</span></td>
+      <td><span class="c-ar">تكييف</span><span class="c-en">Adapt</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">تقييد عند المنبع (إنتاج / استيراد)</span><span class="c-en">Upstream restriction (production / import)</span></td>
+      <td><span class="c-ar">رواندا</span><span class="c-en">Rwanda</span></td>
+      <td><span class="c-ar">رقابة جمركية؛ قدرة تفتيش وإنفاذ</span><span class="c-en">Customs control; inspection and enforcement capacity</span></td>
+      <td><span class="c-ar">بيانات تغطية الإنفاذ مفقودة</span><span class="c-en">Enforcement coverage data missing</span></td>
+      <td><span class="c-ar">فجوة أدلة</span><span class="c-en">Evidence Gap</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">مسؤولية تجار التجزئة (رسم + إبلاغ)</span><span class="c-en">Retailer responsibility (charge + reporting)</span></td>
+      <td><span class="c-ar">المملكة المتحدة</span><span class="c-en">United Kingdom</span></td>
+      <td><span class="c-ar">إبلاغ تجار التجزئة والرصد والعقوبات</span><span class="c-en">Retailer reporting, monitoring and penalties</span></td>
+      <td><span class="c-ar">الجهة المسؤولة وقناة الإبلاغ بانتظار التأكيد</span><span class="c-en">Responsible entity and reporting channel to be confirmed</span></td>
+      <td><span class="c-ar">تكييف</span><span class="c-en">Adapt</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ================= Section 4 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">4</span>قواعد التقييم والأدلة</h2>
+    <div class="en-h">Scoring and Evidence Rules</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>4.1 قابلية المقارنة والأداء</h3>
+    <div class="en-h">4.1 Comparability and Performance</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يجيب التقييم على مستوى الحالة عن سؤال: هل تستحق الحالة بحثًا أعمق؟ ولا يقرر ما إذا كانت الآلية قابلة للنقل إلى المملكة العربية السعودية؛ فذلك القرار يُتخذ لاحقًا عبر تقييم قابلية النقل على مستوى الآلية.</div>
+    <div class="en">Case-level scoring answers whether a case is worth deeper research. It does not decide whether a mechanism can be transferred to Saudi Arabia; that decision is made later through mechanism-level transferability assessment.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">لا ينبغي معاملة توافر البيانات معيارَ قابلية مقارنة مُرجَّحًا؛ فهو شرط تنفيذي. ولذلك تعامله المنهجية تصنيفًا منفصلًا: <strong>جاهز البيانات</strong> أو <strong>محدود البيانات</strong>.</div>
+    <div class="en">Data availability should not be treated as a weighted comparability criterion. It is an execution condition. The methodology therefore treats data availability as a separate label: <strong>Data-Ready</strong> or <strong>Data-Limited</strong>.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>المعيار<span class="th-en">Criterion</span></th>
+      <th>الوزن الافتراضي<span class="th-en">Default Weight</span></th>
+      <th>الغرض<span class="th-en">Purpose</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الصلة بالسياسة</span><span class="c-en">Policy relevance</span></td>
+      <td><span class="c-ar">40%</span></td>
+      <td><span class="c-ar">هل تعالج الحالة مشكلة السياسة نفسها ومؤشر الأداء المستهدف نفسه؟</span><span class="c-en">Whether the case addresses the same policy problem and target KPI.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قابلية مقارنة السوق</span><span class="c-en">Market comparability</span></td>
+      <td><span class="c-ar">20%</span></td>
+      <td><span class="c-ar">هل الظروف السوقية والديموغرافية وظروف جانب الطلب الرئيسية قابلة للمقارنة؟</span><span class="c-en">Whether key market, demographic and demand-side conditions are comparable.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قابلية المقارنة الحضرية / الجغرافية</span><span class="c-en">Urban / geographic comparability</span></td>
+      <td><span class="c-ar">15%</span></td>
+      <td><span class="c-ar">هل شكل المدينة أو الجغرافيا أو التباين الإقليمي أو القيود المكانية قابلة للمقارنة؟</span><span class="c-en">Whether city form, geography, regional variation or spatial constraints are comparable.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الملاءمة الحوكمية / النظامية</span><span class="c-en">Governance / legal fit</span></td>
+      <td><span class="c-ar">15%</span></td>
+      <td><span class="c-ar">هل البنى المؤسسية والتنفيذية قابلة للمقارنة؟</span><span class="c-en">Whether institutional and implementation structures are comparable.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قرب الاختصاص</span><span class="c-en">Mandate proximity</span></td>
+      <td><span class="c-ar">10%</span></td>
+      <td><span class="c-ar">هل تقع أداة السياسة ضمن اختصاص الجهة المسؤولة أو قريبًا منه؟</span><span class="c-en">Whether the policy tool falls within or near the responsible entity's mandate.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">توافر البيانات</span><span class="c-en">Data availability</span></td>
+      <td><span class="c-ar">غير مُقيَّم</span><span class="c-en">Not scored</span></td>
+      <td><span class="c-ar">يُسجَّل منفصلًا: جاهز البيانات أو محدود البيانات.</span><span class="c-en">Recorded separately as Data-Ready or Data-Limited.</span></td>
+    </tr>
+  </table>
+
+  <div class="pair">
+    <div class="ar">نطاقات الدرجات: 80–100 = مرجع معياري قوي؛ 60–79 = قابل للمقارنة مع الإفصاح عن الفروق؛ 40–59 = محدود، لا يُستخدم إلا مرجعًا داعمًا؛ أقل من 40 = لا يُستخدم لتوليد الخيارات. ولا تُستخدم المؤشرات المركبة، كمؤشرات جودة الحياة أو الملاءمة للعيش، بوصفها درجات كلية؛ بل تُفكَّك إلى مؤشرات فرعية، ولا يدخل التقييمَ إلا المؤشرات الفرعية ذات الصلة بسؤال السياسة ومؤشر الأداء المستهدف؛ وتُدوَّن المؤشرات الفرعية المستبعدة في الموجز. والمعايير وتعريفاتها إطار افتراضي يمكن استبداله أو تنقيحه لكل موضوع: فمثلًا، يمكن الاستعاضة عن قابلية المقارنة الحضرية / الجغرافية بقابلية مقارنة نظم التجزئة أو النفايات في موضوع الأكياس البلاستيكية.</div>
+    <div class="en">The score bands are: 80-100 = Strong benchmark; 60-79 = Comparable, with differences disclosed; 40-59 = Limited, useful only as a supporting reference; below 40 = not used for option generation. Composite indices such as quality-of-life or livability rankings are not used as total scores. They are decomposed into sub-indicators, and only the sub-indicators relevant to the policy question and target KPI enter the assessment; excluded sub-indicators are noted in the brief. The criteria and their definitions are a default framework and can be replaced or refined per topic: for example, Urban / geographic comparability may be replaced by retail or waste-system comparability for a plastic-bag topic.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>تقييم الأداء.</strong> تسأل قابلية المقارنة: هل الحالة متشابهة بما يكفي لدراستها؟ ويسأل الأداء: هل نجحت السياسة فعلًا؟ يُقيَّم الأداء على نحو منفصل بتصنيف مرتفع أو متوسط أو منخفض استنادًا إلى الفاعلية والكفاءة والإنصاف والآثار الجانبية. وبحسب الإعداد الافتراضي، يعني «مرتفع» أن مؤشر الأداء المستهدف تحسّن بما يكفي لبلوغ هدف السياسة في الحالة نفسها أو عتبة محددة مسبقًا، دون آثار جانبية كبيرة، وبأدلة لا تقل عن مستوى «استدلالي»؛ ويعني «متوسط» تحسنًا في الاتجاه لكن بنطاق محدود، أو بأدلة أضعف، أو بآثار جانبية يمكن إدارتها؛ ويعني «منخفض» غياب التحسن، أو التدهور، أو مكاسب قابلتها التكاليف والآثار الجانبية. والعتبات قابلة للضبط لكل موضوع. ويُعرض الأداء وقابلية المقارنة جنبًا إلى جنب دون دمجهما في درجة واحدة. فالحالة منخفضة الأداء لا ينبغي أن تصبح حالة رئيسية حتى لو كانت عالية القابلية للمقارنة.</div>
+    <div class="en"><strong>Performance assessment.</strong> Comparability asks whether a case is similar enough to study. Performance asks whether the policy actually worked. Performance is assessed separately as High, Medium or Low based on effectiveness, efficiency, equity and side effects. By default, High means the target KPI improved enough to meet the case's own policy target or a preset threshold, without major side effects and with at least Indicative evidence; Medium means directional improvement with limited scale, weaker evidence or manageable side effects; Low means no improvement, deterioration, or gains offset by costs and side effects. Thresholds are configurable per topic. Performance and comparability are shown side by side and are not merged into a single score. A low-performance case should not become a lead case even if it is highly comparable.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>مراسي التقييم.</strong> يستخدم كل بُعد من أبعاد قابلية المقارنة مرساة من 0 إلى 5 قبل تحويلها إلى الدرجة المرجَّحة. ولا تُستخدم الدرجة صفر إلا عند وجود دليل على عدم القابلية للمقارنة أو عدم الانطباق. وعند عدم كفاية الأدلة، يُوسم البُعد بـ«غير متاح» (N/A) لا بصفر. وتُستبعد أبعاد «غير متاح» من الحساب المرجَّح وتُعاد معايرة الأوزان المتبقية. وإذا كان بُعدان أو أكثر «غير متاح»، أو كانت الصلة بالسياسة «غير متاح»، وجب وسم الحالة بـ«محدود البيانات» واستخدامها مرجعًا داعمًا فقط. ويجب أن تحمل كل درجة بُعد وكل تصنيف أداء مسوّغًا من سطر واحد يذكر مؤشر الأداء المُقيَّم والنافذة الزمنية والدليل الداعم.</div>
+    <div class="en"><strong>Scoring anchors.</strong> Each comparability dimension uses a 0-5 anchor before being converted into the weighted score. A score of 0 should be used only when there is evidence of non-comparability or inapplicability. When the evidence is insufficient, the dimension should be marked N/A, not scored as 0. N/A dimensions are excluded from the weighted calculation and the remaining weights are normalized. If two or more dimensions are N/A, or if Policy relevance is N/A, the case should be marked Data-Limited and used only as a supporting reference. Every dimension score and every performance rating must carry a one-line justification stating the KPI assessed, the time window and the supporting evidence.</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>4.2 تصنيف الأدلة ثنائي المسار</h3>
+    <div class="en-h">4.2 Dual-track Evidence Grading</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تفصل المنهجية بين مصداقية المصدر وقوة الدليل. فالمصدر الموثوق لا يثبت تلقائيًا أن الآلية نجحت؛ فقد يثبت فقط أن السياسة نُفِّذت.</div>
+    <div class="en">The methodology separates source credibility from evidence strength. A credible source does not automatically prove that a mechanism worked; it may only prove that a policy was implemented.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>الحقل<span class="th-en">Field</span></th>
+      <th>المستويات<span class="th-en">Levels</span></th>
+      <th>السؤال المُجاب عنه<span class="th-en">Question Answered</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">درجة المصدر</span><span class="c-en">Source Grade</span></td>
+      <td><span class="c-ar">أ: جهة حكومية / منظمة دولية؛ ب: أكاديمي / مركز فكر؛ ج: إعلام أو نقل ثانوي؛ د: لا مصدر قابل للتتبع.</span><span class="c-en">A: government / international organization; B: academic / think tank; C: media or secondary reporting; D: no traceable source.</span></td>
+      <td><span class="c-ar">هل المصدر موثوق؟</span><span class="c-en">Is the source credible?</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قوة الدليل</span><span class="c-en">Evidence Strength</span></td>
+      <td><span class="c-ar">موثَّق: تقييم سببي؛ استدلالي: دليل قبلي–بعدي أو ارتباط؛ وصفي: دليل على التنفيذ فقط.</span><span class="c-en">Verified: causal evaluation; Indicative: before-after evidence or correlation; Descriptive: implementation evidence only.</span></td>
+      <td><span class="c-ar">هل يدعم الدليل الفاعلية؟</span><span class="c-en">Does the evidence support effectiveness?</span></td>
+    </tr>
+  </table>
+
+  <div class="pair">
+    <div class="ar">يجب أن يكون لكل آلية «إبقاء» أو «تكييف» مصدران على الأقل، بينهما مصدر واحد على الأقل من الدرجة (أ) أو (ب). وفي الحالات الاستثنائية، كسياسة ناشئة لا يدعمها إلا تقييم رسمي واحد عالي الجودة، يتطلب الاستثناء موافقة صريحة من المراجع المعيَّن، ويجب وسم الآلية بأنها محدودة المصادر. أما آليات «فجوة الأدلة» فتُوسم صراحة بأنها غير موثقة بأدلة كافية، ولا تخضع لقاعدة كفاية المصادر نفسها.</div>
+    <div class="en">Each Keep or Adapt mechanism must have at least two sources, including at least one A or B grade source. In exceptional cases, such as an emerging policy supported by only one high-quality official evaluation, the exception requires explicit approval by the designated reviewer and the mechanism must be labelled source-limited. Evidence Gap mechanisms are explicitly marked as insufficiently evidenced and are not subject to the same source sufficiency rule.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">لا يجوز تقديم آلية لا يدعمها إلا دليل وصفي على أنها ثابتة الفاعلية؛ إذ لا يمكن وصفها إلا بأنها نُفِّذت مع بقاء الفاعلية بانتظار التحقق. كما ينبغي أن تحمل شروط الفشل المعروفة تصنيفًا لقوة الدليل. ويجوز استخدام أدلة الفشل الوصفية إشارةَ مخاطر، لا نمط فشل مؤكدًا.</div>
+    <div class="en">A mechanism supported only by Descriptive evidence must not be presented as proven effective. It can only be described as implemented, with effectiveness pending verification. Known failure conditions should also carry an evidence strength label. Descriptive failure evidence may be used as a risk signal, but not as a confirmed failure pattern.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يسجّل الحد الأدنى من <strong>سجل الأدلة</strong> الادعاءات الحاسمة للقرار على مستوى الادعاء. وينبغي أن يتضمن كل قيد: الادعاء، والمصدر، ودرجة المصدر، وقوة الدليل، وعلاقته بالخلاصة، والتاريخ، والقيود الرئيسية. وإذا كانت الأدلة متعارضة أو مختلطة، وجب أن يعرض الموجز التعارض بدلًا من الانتقاء الصامت للدليل المؤيد.</div>
+    <div class="en">The minimum <strong>Evidence Ledger</strong> records decision-critical claims at claim level. Each record should include the claim, source, Source Grade, Evidence Strength, relationship to the conclusion, date and key limitations. If evidence is conflicting or mixed, the brief must present the conflict rather than silently selecting the favorable evidence.</div>
+  </div>
+</section>
+
+<!-- ================= Section 5 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">5</span>المخرجات</h2>
+    <div class="en-h">Outputs</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">المخرج الرئيسي هو <strong>موجز المقارنة المعيارية</strong>، مدعومًا ببطاقات الخيارات وبطاقات الآليات. وينبغي أن يوضّح موجز المقارنة: الحالات التي دُرست، والحالات التي استُبعدت، والآليات التي استُخرجت، والأدلة الداعمة لتلك الآليات، والشروط التي تعتمد عليها، والمخاطر أو شروط الفشل المعروفة، والخيارات السعودية المُوطَّنة التي يمكن تجميعها من الآليات القابلة للنقل.</div>
+    <div class="en">The main output is a <strong>Benchmark Brief</strong>, supported by Option Cards and Mechanism Cards. The benchmark should explain which cases were considered, which cases were excluded, which mechanisms were extracted, what evidence supports those mechanisms, what conditions they depend on, what risks or failure conditions are known, and which localized Saudi options can be assembled from transferable mechanisms.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ينبغي أن يتضمن موجز المقارنة المعيارية:
+      <ul class="b">
+        <li>سجل البحث والفرز، متضمنًا مصادر البحث، ومصطلحات البحث، وقواعد الإدراج والاستبعاد، وعدد الحالات المرشحة وأسباب الاستبعاد، مع إفصاح ثابت بأن الخلاصات هي الأفضل ضمن مجمع المرشحين لا نتيجة بحث عالمي شامل؛</li>
+        <li>النظراء المختارين والنظراء المرفوضين؛</li>
+        <li>نتائج الأهلية وأسباب الاستبعاد؛</li>
+        <li>درجات قابلية المقارنة وتقييم الأداء؛</li>
+        <li>بطاقات الآليات للحالات الرئيسية؛</li>
+        <li>رؤى حالات الفشل وشروط الفشل المعروفة؛</li>
+        <li>ملخص سجل الأدلة بحسب الآلية؛</li>
+        <li>مصفوفة قابلية النقل وقرار إبقاء / تكييف / استبعاد / فجوة أدلة لكل آلية؛</li>
+        <li>حتى ثلاثة خيارات سياسات مُوطَّنة ونتائج التحقق منها.</li>
+      </ul>
+    </div>
+    <div class="en">The Benchmark Brief should include:
+      <ul class="b">
+        <li>search and screening record, including search sources, search terms, inclusion and exclusion rules, number of candidate cases and reasons for exclusion, together with a standing disclosure that the conclusions are the best within the candidate pool rather than the result of an exhaustive global search;</li>
+        <li>selected peers and rejected peers;</li>
+        <li>eligibility results and exclusion reasons;</li>
+        <li>comparability scores and performance assessment;</li>
+        <li>mechanism cards for lead cases;</li>
+        <li>failure case insights and known failure conditions;</li>
+        <li>Evidence Ledger summary by mechanism;</li>
+        <li>transferability matrix and Keep / Adapt / Reject / Evidence Gap decision for each mechanism;</li>
+        <li>up to three localized policy options and their validation results.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">جدول الأدلة في الموجز هو عرض ملخص لسجل الأدلة، ولا ينبغي الاحتفاظ به سجلًا مستقلًا للأدلة. فيُدخل فريق البحث الأدلة على مستوى الادعاء مرة واحدة، ثم يجمّعها لأغراض الإبلاغ.</div>
+    <div class="en">The evidence table in the brief is a summary view of the Evidence Ledger. It should not be maintained as a separate evidence record. The research team should enter claim-level evidence once, then aggregate it for reporting.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ينبغي أن تُحيل بطاقة الخيار إلى الآليات المكوِّنة للخيار. وتُرفَق قرارات قابلية النقل ومتطلبات التكييف والمخاطر المتبقية بالخيار نفسه بدلًا من إخفائها في النص السردي.</div>
+    <div class="en">The Option Card should reference the mechanisms that compose the option. Transferability decisions, adaptation requirements and residual risks should be attached to the option rather than hidden in narrative text.</div>
+  </div>
+</section>
+
+<!-- ================= Section 6 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">6</span>التشغيل والتبعات على الأنظمة</h2>
+    <div class="en-h">Operationalization and System Implications</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يمكن تنفيذ المنهجية تدريجيًا، فهي لا تتطلب إعادة تصميم كاملة للنظام. والإضافة الرئيسية هي معاملة «الآلية» كيانًا من الدرجة الأولى مرتبطًا بكل من «الحالة» و«الخيار».</div>
+    <div class="en">The methodology can be implemented incrementally. It does not require a full system redesign. The main addition is treating Mechanism as a first-class entity linked to both Case and Option.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>المكوّن<span class="th-en">Component</span></th>
+      <th>التغيير التدريجي<span class="th-en">Incremental Change</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الحالات / النظراء</span><span class="c-en">Cases / peers</span></td>
+      <td><span class="c-ar">إضافة نتيجة الأهلية، وسبب الاستبعاد، وتصنيف جاهز البيانات / محدود البيانات.</span><span class="c-en">Add eligibility result, exclusion reason and Data-Ready / Data-Limited label.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الإسناد / الأدلة</span><span class="c-en">Provenance / evidence</span></td>
+      <td><span class="c-ar">إضافة قوة الدليل، وقيود الأدلة على مستوى الادعاء، وعلاقة مؤيد / مناقض / مختلط، والقيود.</span><span class="c-en">Add Evidence Strength, claim-level evidence records, support / contradict / mixed relationship and limitations.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">إعدادات قابلية المقارنة</span><span class="c-en">Comparability configuration</span></td>
+      <td><span class="c-ar">استخدام أوزان قابلة للضبط وإضافة تقييم أداء منفصل مرتفع / متوسط / منخفض.</span><span class="c-en">Use configurable weights and add separate High / Medium / Low performance assessment.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الآلية</span><span class="c-en">Mechanism</span></td>
+      <td><span class="c-ar">إضافة حقول بطاقة الآلية وعلاقاتها بالحالات والخيارات.</span><span class="c-en">Add mechanism card fields and relationships to cases and options.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قالب الموجز</span><span class="c-en">Brief template</span></td>
+      <td><span class="c-ar">إضافة سجل بحث وفرز بأسلوب PRISMA المبسّط، وسجل الأهلية، ورؤى حالات الفشل، وملخص قابلية النقل.</span><span class="c-en">Add PRISMA-lite search and screening record, eligibility record, failure case insights and transferability summary.</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ================= Section 7 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">7</span>المعايير الافتراضية</h2>
+    <div class="en-h">Default Parameters</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">جميع المعايير قابلة للضبط، وينبغي تأكيدها مع العميل قبل الاستخدام الرسمي.</div>
+    <div class="en">All parameters are configurable and should be confirmed with the client before formal use.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>المعيار<span class="th-en">Parameter</span></th>
+      <th>القيمة الافتراضية<span class="th-en">Default</span></th>
+      <th>ملاحظات<span class="th-en">Notes</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">حجم مجمع الحالات</span><span class="c-en">Case Pool size</span></td>
+      <td><span class="c-ar">5–8 حالات</span><span class="c-en">5-8 cases</span></td>
+      <td><span class="c-ar">تضمين حالة فشل أو إنذار واحدة على الأقل حيثما توافرت أدلة قابلة للتحقق.</span><span class="c-en">Include at least one failure or warning case where verifiable evidence exists.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الحالات الرئيسية</span><span class="c-en">Lead Cases</span></td>
+      <td><span class="c-ar">3 حالات</span><span class="c-en">3 cases</span></td>
+      <td><span class="c-ar">الحالات المخصصة لاستخراج الآليات بعمق.</span><span class="c-en">Cases for deeper mechanism extraction.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الخيارات</span><span class="c-en">Options</span></td>
+      <td><span class="c-ar">حتى 3</span><span class="c-en">Up to 3</span></td>
+      <td><span class="c-ar">تُجمَّع من آليات الإبقاء والتكييف؛ وتُحتسب الخيارات المشروطة ضمن السقف.</span><span class="c-en">Assembled from Keep and Adapt mechanisms; conditional options count toward the cap.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">نطاقات الدرجات</span><span class="c-en">Score bands</span></td>
+      <td><span class="c-ar">80 / 60 / 40</span></td>
+      <td><span class="c-ar">مرجع قوي / قابل للمقارنة / محدود.</span><span class="c-en">Strong benchmark / Comparable / Limited.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">تقييم الأداء</span><span class="c-en">Performance assessment</span></td>
+      <td><span class="c-ar">مرتفع / متوسط / منخفض</span><span class="c-en">High / Medium / Low</span></td>
+      <td><span class="c-ar">يُعرض منفصلًا عن درجة قابلية المقارنة.</span><span class="c-en">Shown separately from comparability score.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قاعدة المصادر</span><span class="c-en">Source rule</span></td>
+      <td><span class="c-ar">مصدران على الأقل لكل آلية إبقاء أو تكييف، بينهما مصدر واحد على الأقل من الدرجة أ أو ب</span><span class="c-en">At least 2 sources per Keep or Adapt mechanism, including at least 1 A or B source</span></td>
+      <td><span class="c-ar">تُعامَل آليات فجوة الأدلة معاملة منفصلة.</span><span class="c-en">Evidence Gap mechanisms are treated separately.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">حالة قابلية النقل</span><span class="c-en">Transferability status</span></td>
+      <td><span class="c-ar">إبقاء / تكييف / استبعاد / فجوة أدلة</span><span class="c-en">Keep / Adapt / Reject / Evidence Gap</span></td>
+      <td><span class="c-ar">تُقيَّم على مستوى الآلية.</span><span class="c-en">Assessed at mechanism level.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قوة الدليل</span><span class="c-en">Evidence Strength</span></td>
+      <td><span class="c-ar">موثَّق / استدلالي / وصفي</span><span class="c-en">Verified / Indicative / Descriptive</span></td>
+      <td><span class="c-ar">مستقلة عن درجة المصدر.</span><span class="c-en">Independent from Source Grade.</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ================= Section 8 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">8</span>اعتماديات البيانات</h2>
+    <div class="en-h">Data Dependencies</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تنقسم اعتماديات البيانات إلى فئتين: بيانات المنهجية التي تُبنى مرة واحدة ويُعاد استخدامها عبر موضوعات السياسات، والبيانات الخاصة بالموضوع التي تُعَد لكل موضوع مقارنة معيارية. وقد صُممت المنهجية للتشغيل حتى مع نقص البيانات، لكن يجب أن تُخفِّض الفجوات مستوى المخرج وأن يُفصح عنها صراحة.</div>
+    <div class="en">Data dependencies fall into two categories. Methodology data is built once and reused across policy topics. Topic-specific data is prepared for each benchmark topic. The methodology is designed to run even when data is incomplete, but gaps must downgrade the output and be disclosed explicitly.</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>8.1 بيانات المنهجية</h3>
+    <div class="en-h">8.1 Methodology Data</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>البيانات<span class="th-en">Data</span></th>
+      <th>الاستخدام<span class="th-en">Use</span></th>
+      <th>المصدر<span class="th-en">Source</span></th>
+      <th>عند الفقدان<span class="th-en">If Missing</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الاختصاص والمدونة التنظيمية</span><span class="c-en">Mandate and regulatory corpus</span></td>
+      <td><span class="c-ar">فحوص التحقق عبر الموضوعات.</span><span class="c-en">Validation checks across topics.</span></td>
+      <td><span class="c-ar">أنظمة ولوائح ومتطلبات وقواعد وأدلة يوفرها العميل.</span><span class="c-en">Client-provided laws, regulations, requirements, rules and guides.</span></td>
+      <td><span class="c-ar">تنتقل فحوص الاختصاص والذاكرة إلى التأكيد اليدوي.</span><span class="c-en">Mandate and memory checks move to manual confirmation.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">قائمة المصادر المعتمدة وأذونات البحث</span><span class="c-en">Approved source whitelist and search permissions</span></td>
+      <td><span class="c-ar">حدود جمع الأدلة.</span><span class="c-en">Evidence collection boundary.</span></td>
+      <td><span class="c-ar">تأكيد العميل؛ وقد تشمل الافتراضات المواقع الحكومية وOECD والبنك الدولي وIMF وUN-Habitat وقواعد البيانات الأكاديمية.</span><span class="c-en">Client confirmation; defaults may include government websites, OECD, World Bank, IMF, UN-Habitat and academic databases.</span></td>
+      <td><span class="c-ar">استخدام القائمة الافتراضية ووسمها بأنها غير مؤكدة.</span><span class="c-en">Use default whitelist and mark as unconfirmed.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">إعدادات التقييم والقرار</span><span class="c-en">Scoring and decision configuration</span></td>
+      <td><span class="c-ar">الأوزان والعتبات وقوة الدليل وأدوار المراجعين.</span><span class="c-en">Weights, thresholds, Evidence Strength and reviewer roles.</span></td>
+      <td><span class="c-ar">تأكيد العميل.</span><span class="c-en">Client confirmation.</span></td>
+      <td><span class="c-ar">استخدام القيم الافتراضية ووسمها بأنها غير مؤكدة.</span><span class="c-en">Use default values and mark as unconfirmed.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">معيار البيانات الوصفية للمصادر</span><span class="c-en">Source metadata standard</span></td>
+      <td><span class="c-ar">عرض الحداثة ومستوى الثقة.</span><span class="c-en">Timeliness and confidence display.</span></td>
+      <td><span class="c-ar">تُلتقط أثناء البحث.</span><span class="c-en">Captured during research.</span></td>
+      <td><span class="c-ar">وسم البيانات الوصفية بأنها ناقصة وتحويلها إلى المراجعة البشرية.</span><span class="c-en">Mark metadata incomplete and route to human review.</span></td>
+    </tr>
+  </table>
+
+  <div class="sub-head">
+    <h3>8.2 البيانات الخاصة بالموضوع</h3>
+    <div class="en-h">8.2 Topic-specific Data</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>البيانات<span class="th-en">Data</span></th>
+      <th>الاستخدام<span class="th-en">Use</span></th>
+      <th>المصدر<span class="th-en">Source</span></th>
+      <th>عند الفقدان<span class="th-en">If Missing</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">بيانات خط الأساس السعودية</span><span class="c-en">Saudi baseline data</span></td>
+      <td><span class="c-ar">تقييم قابلية المقارنة وتقييم قابلية النقل.</span><span class="c-en">Comparability scoring and transferability assessment.</span></td>
+      <td><span class="c-ar">الهيئة العامة للإحصاء، ووزارة البلديات والإسكان، والبنك المركزي السعودي، والجهات القطاعية ذات الصلة، وبيانات العميل.</span><span class="c-en">GASTAT, MOMAH, SAMA, relevant sector authorities and client data.</span></td>
+      <td><span class="c-ar">تتحول الآلية المعنية إلى فجوة أدلة أو خيار مشروط.</span><span class="c-en">Relevant mechanism becomes Evidence Gap or Conditional Option.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">أدلة الحالات الدولية</span><span class="c-en">International case evidence</span></td>
+      <td><span class="c-ar">فرز الحالات، وبطاقات الآليات، ومسوّغات التقييم.</span><span class="c-en">Case screening, mechanism cards and scoring rationale.</span></td>
+      <td><span class="c-ar">قائمة المصادر المعتمدة.</span><span class="c-en">Approved source whitelist.</span></td>
+      <td><span class="c-ar">الآليات التي لا تتوافر لها مصادر كافية من الدرجة أ / ب لا تدخل الموجز الرئيسي إبقاءً أو تكييفًا، ما لم ينطبق الاستثناء الموثق في القسم 4.2.</span><span class="c-en">Mechanisms without sufficient A / B sources do not enter the main brief as Keep or Adapt, unless the documented exception in Section 4.2 applies.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">أدلة حالات الفشل أو الإنذار</span><span class="c-en">Failure or warning case evidence</span></td>
+      <td><span class="c-ar">استخراج المخاطر وشروط الفشل.</span><span class="c-en">Risk and failure condition extraction.</span></td>
+      <td><span class="c-ar">تقييمات السياسات، وتقارير المراجعة، والمراجعات الأكاديمية.</span><span class="c-en">Policy evaluations, audit reports and academic reviews.</span></td>
+      <td><span class="c-ar">الإفصاح عن فجوة في تغطية أدلة الفشل.</span><span class="c-en">Disclose failure-evidence coverage gap.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">مرشحو النظراء الافتراضيون</span><span class="c-en">Default peer candidates</span></td>
+      <td><span class="c-ar">نقطة انطلاق لمجمع الحالات.</span><span class="c-en">Starting point for case pool.</span></td>
+      <td><span class="c-ar">ترشيح العميل، وقوائم النظراء المحددة مسبقًا، ومدخلات البحث.</span><span class="c-en">Client nomination, predefined peer lists and research input.</span></td>
+      <td><span class="c-ar">يرشّح فريق البحث الحالات ويسجّل المسوّغات.</span><span class="c-en">Research team nominates cases and records rationale.</span></td>
+    </tr>
+  </table>
+
+  <div class="sub-head">
+    <h3>8.3 قائمة التحقق من جاهزية البيانات</h3>
+    <div class="en-h">8.3 Data-readiness Checklist</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ينبغي أن يستكمل كل موضوع سياساتي جديد قائمة تحقق قصيرة من جاهزية البيانات قبل بدء المقارنة المعيارية الكاملة:
+      <ul class="b">
+        <li>هل القيمة السعودية الحالية لمؤشر الأداء المستهدف متاحة، وما مصدرها وتاريخ تحديثها؟</li>
+        <li>أي بيانات خط الأساس السوقية والمالية والتنفيذية والإقليمية متاحة؟</li>
+        <li>هل تتوافر لحالات النظراء المرشحة لوائح أو تقارير رسمية أو تقييمات عامة؟</li>
+        <li>هل يمكن العثور على شروط فشل قابلة للتحقق لأنواع الآليات الجوهرية؟</li>
+        <li>هل شروط التنفيذ في الجانب السعودي والجهات المسؤولة ونظم البيانات معروفة بما يكفي؟</li>
+        <li>هل أُضيفت المدونة التنظيمية ذات الصلة إلى الذاكرة أو أُتيحت بطريقة أخرى لأغراض التحقق؟</li>
+      </ul>
+    </div>
+    <div class="en">Each new policy topic should complete a short data-readiness checklist before full benchmarking begins:
+      <ul class="b">
+        <li>Is the current Saudi value for the target KPI available, and what is the source and update date?</li>
+        <li>Which market, fiscal, implementation and regional baseline data are available?</li>
+        <li>Do candidate peer cases have regulations, official reports or public evaluations?</li>
+        <li>Can verifiable failure conditions be found for the core mechanism types?</li>
+        <li>Are Saudi-side implementation conditions, responsible entities and data systems sufficiently known?</li>
+        <li>Has the relevant regulatory corpus been added to memory or otherwise made available for validation?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تحدد قائمة التحقق حالة «جاهز البيانات / محدود البيانات» للحالات المرشحة، وما إذا كان ينبغي إصدار طلب بيانات مبكرًا، وما إذا كان الموضوع مناسبًا لتجربة استطلاعية أولى. فالموضوعات الأخف، كالحد من الأكياس البلاستيكية، قد يكون تمريرها عبر التجربة الأولى أيسر من الموضوعات الثقيلة ذات السلاسل السببية الطويلة ومتطلبات خط الأساس الواسعة.</div>
+    <div class="en">The checklist determines the Data-Ready / Data-Limited status of candidate cases, whether a data request should be issued early, and whether the topic is suitable for a first pilot. Lighter topics, such as plastic bag reduction, may be easier to run through the first pilot than heavy topics with long causal chains and extensive baseline requirements.</div>
+  </div>
+</section>
+
+<!-- ================= Section 9 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">9</span>نقاط القوة والقيود والمخاطر</h2>
+    <div class="en-h">Strengths, Limitations and Risks</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>9.1 نقاط القوة</h3>
+    <div class="en-h">9.1 Strengths</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخلاصات أكثر قابلية للدفاع عنها.</strong> تمنع بوابات الأهلية الحاسمة الحالات غير ذات الصلة من دخول مسار التوصية. وتُلزم بطاقات الآليات كل خيار بتفسير كيفية عمله والشروط التي يعتمد عليها. وتقلّل حالات الفشل وتقييم الأداء من خطر الإفراط في التعلم من قصص النجاح.</div>
+    <div class="en"><strong>The conclusions are more defensible.</strong> Hard eligibility gates prevent irrelevant cases from entering the recommendation path. Mechanism cards force each option to explain how it works and what conditions it depends on. Failure cases and performance assessment reduce the risk of over-learning from success stories.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>صيغة التسليم تظل عملية.</strong> يتحول سير العمل بسلاسة إلى خطوات نظامية، والمعايير الافتراضية صريحة، ويمكن التحقق من قواعد التقييم والأدلة عبر الإعدادات والقوالب.</div>
+    <div class="en"><strong>The delivery format remains practical.</strong> The workflow maps cleanly into system steps, the default parameters are explicit, and scoring and evidence rules can be checked through configuration and templates.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>معلومات المخاطر تُقدَّم مبكرًا.</strong> تصبح رؤى حالات الفشل مدخلات مباشرة لتقييم الأثر اللاحق ومراجعة مخاطر التنفيذ.</div>
+    <div class="en"><strong>Risk information is brought forward.</strong> Failure case insights become direct inputs for later impact assessment and implementation risk review.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>المنهجية قادرة على التطور دون إعادة تصميم.</strong> تُنشئ كيانات الآليات وقوة الدليل وقيود الأدلة على مستوى الادعاء مسارًا نحو حوكمة أدلة وتقييم أثر أكثر تقدمًا عند الحاجة.</div>
+    <div class="en"><strong>The method can evolve without redesign.</strong> Mechanism entities, Evidence Strength and claim-level evidence records create a path toward more advanced evidence governance and impact assessment when needed.</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>9.2 القيود والمخاطر</h3>
+    <div class="en-h">9.2 Limitations and Risks</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>استخراج الآليات يتطلب مراجعة بشرية.</strong> يمكن للذكاء الاصطناعي صياغة مسودات بطاقات الآليات، لكنه قد يخلط بين الشكل الظاهر للسياسة والآلية الكامنة. والمراجعة الخبيرة مطلوبة للتأكيد النهائي للآلية.</div>
+    <div class="en"><strong>Mechanism extraction requires human review.</strong> AI can draft mechanism cards, but it may confuse visible policy form with the underlying mechanism. Expert review is required for final mechanism confirmation.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>هناك كلفة تواصل أولية.</strong> قد يتوقع بعض أصحاب المصلحة ترتيبًا للدول أو ثلاثة أمثلة قُطرية. وتحتاج المنهجية إلى توضيح أن الدول نقاط دخول بحثية، بينما الآليات هي وحدة التحليل.</div>
+    <div class="en"><strong>There is an initial communication cost.</strong> Some stakeholders may expect a country ranking or three country examples. The methodology needs to explain that countries are research entry points, while mechanisms are the analytical unit.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>قد يصعب العثور على حالات الفشل.</strong> كثيرًا ما تُبرز المصادر العامة قصص النجاح. وإذا كانت أدلة الفشل أو الإنذار القابلة للتحقق محدودة، فينبغي أن يفصح الموجز عن الفجوة بدلًا من إضعاف المعيار.</div>
+    <div class="en"><strong>Failure cases can be difficult to find.</strong> Public sources often emphasize success stories. If verifiable failure or warning evidence is limited, the brief should disclose the gap rather than weakening the standard.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>النسخة الأولى مبسّطة عمدًا.</strong> فهي لا تتضمن بعدُ تحليل حساسية كامل للأوزان، ولا حوكمة كاملة لبروتوكول البحث، ولا تقديرًا رسميًا لحجم الأثر، ولا تحليلًا متعدد المعايير على مستوى الخيار. ويمكن إضافة هذه القدرات عند ظهور محفز القرار أو الامتثال ذي الصلة.</div>
+    <div class="en"><strong>The first version is intentionally simplified.</strong> It does not yet include full weight sensitivity analysis, complete research protocol governance, formal effect-size estimation or option-level MCDA. These can be added when the relevant decision or compliance trigger appears.</div>
+  </div>
+</section>
+
+<!-- ================= Section 10 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">10</span>ضبط الجودة بالمراجعة البشرية ضمن الحلقة</h2>
+    <div class="en-h">Human-in-the-loop Quality Control</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">حيثما تسمح حوكمة بيانات العميل وقواعد الوصول إلى المصادر، يمكن للذكاء الاصطناعي دعم عملية البحث بصياغة مسودات سجلات البحث، ومجمعات الحالات الأولية، ومسودات بطاقات الآليات، وقيود سجل الأدلة، والتقييمات الأولية للأداء. غير أن المراجعة البشرية تبقى ضرورية للأحكام التي تحمل أعلى مخاطر سياساتية.</div>
+    <div class="en">Where permitted by client data governance and source-access rules, AI can support the research process by drafting search logs, initial case pools, mechanism card drafts, Evidence Ledger entries and preliminary performance assessments. However, human review remains necessary for the judgments that carry the highest policy risk.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>مستوى المراجعة<span class="th-en">Review Tier</span></th>
+      <th>الخطوات<span class="th-en">Steps</span></th>
+      <th>قاعدة التشغيل<span class="th-en">Operating Rule</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">مراجعة بشرية إلزامية</span><span class="c-en">Mandatory human review</span></td>
+      <td><span class="c-ar">التأكيد النهائي لبطاقات الآليات؛ والبنود الحمراء في قابلية النقل؛ وقرارات فجوة الأدلة / الاستبعاد؛ والمبالغة في تقديم الأدلة الضعيفة؛ والاعتماد النهائي للخيارات.</span><span class="c-en">Final mechanism card confirmation; transferability red flags; Evidence Gap / Reject decisions; overstatement of weak evidence; final option approval.</span></td>
+      <td><span class="c-ar">تُراجَع حالة بحالة، مع تسجيل المراجع والقرار.</span><span class="c-en">Reviewed case by case, with reviewer and decision recorded.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">مسودة ذكاء اصطناعي + مراجعة عيّنية</span><span class="c-en">AI draft + sample review</span></td>
+      <td><span class="c-ar">سجل البحث، وسجل PRISMA المبسّط، وفرز مجمع الحالات، ومسودة بطاقة الآلية، ومسودة سجل الأدلة, والتقييم الأولي للأداء، واستخراج مرشحي حالات الفشل، والبنود الخضراء / الصفراء في المصفوفة.</span><span class="c-en">Search log, PRISMA-lite record, case pool screening, mechanism card draft, Evidence Ledger draft, performance initial rating, failure case candidate extraction, green / yellow matrix items.</span></td>
+      <td><span class="c-ar">يصيغ الذكاء الاصطناعي المسودة؛ ويأخذ الإنسان عيّنة افتراضية بنسبة 20%. ويُراجَع المحتوى الحاسم للقرار مراجعة كاملة. وإذا تجاوز معدل الأخطاء الحرجة 10%، انتقلت الخطوة إلى المراجعة الكاملة حتى تستقر الجودة. وتتبع وحدة أخذ العينات الخطوة نفسها: الادعاءات لسجل الأدلة، والبطاقات لبطاقات الآليات، والحالات لفرز المجمع. والخطأ الحرج هو ما يغيّر قرار إبقاء / تكييف / استبعاد / فجوة أدلة، أو تصنيف أداء، أو إدراج خيار أو استبعاده.</span><span class="c-en">AI drafts; human samples by default 20%. Decision-critical content is fully reviewed. If critical error rate exceeds 10%, the step moves to full review until quality stabilizes. The sampling unit follows the step: claims for the Evidence Ledger, cards for mechanism cards, cases for pool screening. A critical error is one that would change a Keep / Adapt / Reject / Evidence Gap decision, a performance rating, or option inclusion or exclusion.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">أتمتة قابلة للضبط</span><span class="c-en">Configurable automation</span></td>
+      <td><span class="c-ar">فحوص الأهلية الأساسية، واستخراج البيانات الوصفية للمصادر، ودرجة المصدر الأولية، ومعايرة أوزان «غير متاح»، وتوليد قالب الموجز، وتجميع جدول الأدلة.</span><span class="c-en">Basic eligibility checks, source metadata extraction, initial Source Grade, N/A weight normalization, brief template generation, evidence table aggregation.</span></td>
+      <td><span class="c-ar">يطبّق النظام القواعد المضبوطة؛ وتُحوَّل الاستثناءات إلى المراجعة البشرية.</span><span class="c-en">System applies configured rules; exceptions route to human review.</span></td>
+    </tr>
+  </table>
+
+  <div class="pair">
+    <div class="ar">لمنع التقديرات الذاتية في المصفوفة، يجب أن يتضمن كل بند أحمر أو أصفر في قابلية النقل مسوّغًا موجزًا، إما مرتبطًا بادعاء في سجل الأدلة أو موسومًا صراحة بأنه افتراض له مالك محدد. أما البنود الخضراء فتُغطى عبر أخذ العينات لا عبر إدخال أدلة إلزامي.</div>
+    <div class="en">To prevent subjective matrix ratings, each red or yellow transferability item must include a short rationale, either linked to an Evidence Ledger claim or explicitly marked as an assumption with an owner. Green items are covered through sampling rather than mandatory evidence entry.</div>
+  </div>
+
+  <div class="sub-head">
+    <h3>10.1 الادعاءات الحاسمة للقرار</h3>
+    <div class="en-h">10.1 Decision-critical Claims</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ثلاث فئات فقط من الادعاءات إلزامية في سجل الأدلة:
+      <ul class="b">
+        <li>الادعاءات الداعمة لقرارات إبقاء / تكييف / استبعاد / فجوة أدلة؛</li>
+        <li>الادعاءات الداعمة لتصنيفات الأداء مرتفع / متوسط / منخفض؛</li>
+        <li>الادعاءات الداعمة لإدراج الخيارات أو استبعادها.</li>
+      </ul>
+    </div>
+    <div class="en">Only three categories of claims are mandatory in the Evidence Ledger:
+      <ul class="b">
+        <li>claims supporting Keep / Adapt / Reject / Evidence Gap decisions;</li>
+        <li>claims supporting High / Medium / Low performance ratings;</li>
+        <li>claims supporting option inclusion or exclusion.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">وفق هذا التعريف، يُتوقع أن يتطلب موجز المقارنة المعيارية النموذجي نحو 10–20 قيد ادعاء إلزاميًا، بدلًا من توثيق كل جملة وصفية.</div>
+    <div class="en">Under this definition, a typical Benchmark Brief is expected to require around 10-20 mandatory claim records, rather than documenting every descriptive sentence.</div>
+  </div>
+</section>
+
+<!-- ================= Section 11 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">11</span>خطة التجربة الاستطلاعية</h2>
+    <div class="en-h">Pilot Plan</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ينبغي أن تُمرِّر التجربة الاستطلاعية موضوعَ سياسة حقيقيًا واحدًا عبر سير عمل المقارنة المعيارية الكامل بمعايير مضيَّقة: 5–8 حالات، و3 حالات رئيسية، و6–9 بطاقات آليات، وحتى 3 خيارات، وقيود سجل أدلة للادعاءات الحاسمة للقرار فقط.</div>
+    <div class="en">The pilot should run one real policy topic through the full benchmark workflow using narrowed parameters: 5-8 cases, 3 lead cases, 6-9 mechanism cards, up to 3 options, and Evidence Ledger entries only for decision-critical claims.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">ينبغي أن تقيس التجربة كميًا خمسة أسئلة تشغيلية:
+      <ul class="b">
+        <li>كم ساعة يستغرق العمل من بدء الموضوع إلى تسليم موجز المقارنة، وكم من ذلك الوقت مراجعة بشرية؟</li>
+        <li>كم عدد ادعاءات سجل الأدلة المتولدة، وهل عبء البحث قابل للاستدامة؟</li>
+        <li>كم جولة مراجعة تحتاجها بطاقات الآليات لاجتياز التأكيد الخبير؟</li>
+        <li>أي أبعاد قابلية النقل تفتقر إلى البيانات أكثر من غيرها وتتطلب افتراضات؟</li>
+        <li>أين تُحدث عملية التأكيد لدى العميل التأخير الأكبر؟</li>
+      </ul>
+    </div>
+    <div class="en">The pilot should quantify five operational questions:
+      <ul class="b">
+        <li>How many hours are required from topic initiation to Benchmark Brief delivery, and how much of that time is human review?</li>
+        <li>How many Evidence Ledger claims are generated, and is the research burden sustainable?</li>
+        <li>How many review rounds are needed for mechanism cards to pass expert confirmation?</li>
+        <li>Which transferability dimensions most often lack data and require assumptions?</li>
+        <li>Where does the client-side confirmation process most often create delay?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>قاعدة الخروج.</strong> ينبغي أن تظل المنهجية مستقرة خلال التجربة. وبعد توافر بيانات التجربة، يُعدَّل سير العمل استنادًا إلى عبء العمل الفعلي ونتائج الجودة. وإذا كانت الكلفة أعلى من المتوقع، فينبغي أن تكون التعديلات الأولى في معدلات أخذ العينات أو نطاق التسجيل أو مستوى الأتمتة. أما قاعدة الادعاءات الحاسمة للقرار، وفحص حالات الفشل، وتقييم الأداء فلا ينبغي إزالتها.</div>
+    <div class="en"><strong>Exit rule.</strong> The methodology should remain stable during the pilot. After pilot data is available, the workflow should be adjusted based on actual workload and quality results. If the cost is higher than expected, the first adjustments should be to sampling rates, registration scope or automation level. The decision-critical claim rule, failure case check and performance assessment should not be removed.</div>
+  </div>
+</section>
+
+<!-- ================= Section 12 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">12</span>خارطة التطور</h2>
+    <div class="en-h">Evolution Roadmap</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">النسخة الأولى محددة النطاق عمدًا. وينبغي إضافة القدرات الإضافية عند ظهور محفزات قرار أو امتثال محددة، لا لمجرد كونها مرغوبة منهجيًا.</div>
+    <div class="en">The first version is intentionally scoped. Additional capabilities should be added when specific decision or compliance triggers appear, not simply because they are methodologically desirable.</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>القدرة المستقبلية<span class="th-en">Future Capability</span></th>
+      <th>الخطوة ذات الصلة<span class="th-en">Related Step</span></th>
+      <th>المحفز<span class="th-en">Trigger</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">حوكمة الأوزان وتحليل الحساسية</span><span class="c-en">Weight governance and sensitivity analysis</span></td>
+      <td><span class="c-ar">التقييم</span><span class="c-en">Scoring</span></td>
+      <td><span class="c-ar">عند ظهور خيارات متنافسة أو اعتراض العميل على بنية الأوزان.</span><span class="c-en">When competing options emerge or the client challenges the weight structure.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">تقدير حجم الأثر كميًا</span><span class="c-en">Effect-size quantification</span></td>
+      <td><span class="c-ar">أدلة الآليات وتقييم الأثر</span><span class="c-en">Mechanism evidence and impact assessment</span></td>
+      <td><span class="c-ar">عند انتقال العمل إلى تقييم أثر بالمستوى المعياري.</span><span class="c-en">When the work moves into Standard-level impact assessment.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">بروتوكول بحث كامل وسجل أدلة بمستوى المراجعة الرقابية</span><span class="c-en">Full research protocol and audit-grade Evidence Ledger</span></td>
+      <td><span class="c-ar">البحث والفرز وحوكمة الأدلة</span><span class="c-en">Search, screening and evidence governance</span></td>
+      <td><span class="c-ar">عند اشتراط مراجعة تنظيمية رسمية أو قابلية تكرار من طرف ثالث.</span><span class="c-en">When formal regulatory review or third-party replicability is required.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">تحليل متعدد المعايير على مستوى الخيار (MCDA)</span><span class="c-en">Option-level MCDA</span></td>
+      <td><span class="c-ar">مقارنة الخيارات / البوابة 2</span><span class="c-en">Option comparison / Gate 2</span></td>
+      <td><span class="c-ar">عند حاجة عدة خيارات سياساتية إلى مقارنة رسمية متعددة المعايير.</span><span class="c-en">When multiple policy options need formal multi-criteria comparison.</span></td>
+    </tr>
+  </table>
+
+  <div class="pair">
+    <div class="ar">خارطة الطريق إذن قائمة على المحفزات لا على الزمن. فإذا ظهر المحفز، أمكن إضافة القدرة ذات الصلة؛ وإن لم يظهر، بقيت المنهجية رشيقة وتشغيلية.</div>
+    <div class="en">The roadmap is therefore trigger-based rather than time-based. If a trigger appears, the relevant capability can be added. If it does not appear, the methodology remains lean and operational.</div>
+  </div>
+</section>
+
+<!-- ================= Section 13 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">13</span>نقاط المواءمة مع العميل</h2>
+    <div class="en-h">Client Alignment Points</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">قبل الاستخدام الرسمي، ينبغي مواءمة النقاط التالية مع العميل:
+      <ul class="b">
+        <li>هل يمكن معاملة الدول والمدن نقاطَ دخول بحثية، مع معاملة الآليات وحدةَ التحليل الجوهرية؟</li>
+        <li>هل ينبغي تجميع خيارات السياسات المُوطَّنة من آليات بدلًا من استنساخها من نموذج دولة واحدة؟</li>
+        <li>هل أوزان قابلية المقارنة المقترحة وتصنيف جاهز البيانات / محدود البيانات مقبولة؟</li>
+        <li>أي النظراء الافتراضيين ومرشحي حالات الفشل / الإنذار ينبغي النظر فيهم؟</li>
+        <li>أي قائمة مصادر معتمدة وأذونات بحث تُعتمد؟</li>
+        <li>هل يُحظر تقديم الدليل الوصفي على أنه فاعلية موثَّقة؟</li>
+        <li>مَن سيراجع ويعتمد بطاقات الآليات وعتبات التقييم وتصنيفات الأداء؟</li>
+        <li>هل تُدرج سجلات فرز PRISMA المبسّطة، وسجل الأدلة على مستوى الادعاء، ومراجعة نقص البيانات الوصفية في نطاق التسليم الأول؟</li>
+      </ul>
+    </div>
+    <div class="en">Before formal use, the following points should be aligned with the client:
+      <ul class="b">
+        <li>whether countries and cities can be treated as research entry points, while mechanisms are treated as the core analytical unit;</li>
+        <li>whether localized policy options should be assembled from mechanisms rather than copied from a single country model;</li>
+        <li>whether the proposed comparability weights and Data-Ready / Data-Limited label are acceptable;</li>
+        <li>which default peers and failure / warning case candidates should be considered;</li>
+        <li>which source whitelist and search permissions are approved;</li>
+        <li>whether Descriptive evidence should be prohibited from being presented as verified effectiveness;</li>
+        <li>who will review and approve mechanism cards, scoring thresholds and performance ratings;</li>
+        <li>whether PRISMA-lite screening records, claim-level Evidence Ledger and metadata-incomplete review should be included in the first delivery scope.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>منهجية المقارنات المعيارية للسياسات — النسخة الكاملة — وثيقة ثنائية اللغة</span>
+  <span class="f-en">Policy Benchmarking Methodology — Full Version — Bilingual Edition</span>
+</footer>
+
+</div>
+</body>
+</html>

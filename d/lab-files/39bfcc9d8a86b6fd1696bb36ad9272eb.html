@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منهجية تقييم الأثر — نسخة تمهيدية | Impact Assessment Methodology — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20302e;
+  --ink-soft:#4a5c59;
+  --teal:#0d5f5f;
+  --teal-deep:#083f3f;
+  --teal-wash:#eef5f4;
+  --line:#d8e2e0;
+  --paper:#fdfdfb;
+  --card:#ffffff;
+  --amber:#8a6d1f;
+  --amber-wash:#faf5e6;
+  --green:#557a2e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  font-size:15.5px;
+  line-height:1.85;
+}
+.page{max-width:1180px;margin:0 auto;padding:0 28px 90px}
+
+/* ===== Masthead ===== */
+header.mast{
+  border-bottom:3px double var(--teal);
+  padding:56px 0 30px;
+  margin-bottom:14px;
+}
+.mast .doc-kicker{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;letter-spacing:.14em;color:var(--teal);
+  text-transform:uppercase;margin-bottom:20px;
+}
+.mast h1{font-size:31px;font-weight:700;line-height:1.5;color:var(--teal-deep)}
+.mast .h1-en{
+  font-family:'Source Serif 4',Georgia,serif;font-weight:600;
+  font-size:24px;color:var(--ink-soft);direction:ltr;text-align:left;
+  margin-top:10px;line-height:1.45;
+}
+.mast .legend{
+  display:flex;gap:26px;margin-top:26px;font-size:12.5px;color:var(--ink-soft);
+}
+.mast .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-left:7px;vertical-align:baseline}
+.mast .legend .l-ar::before{background:var(--teal)}
+.mast .legend .l-en::before{background:#b9c6c4}
+
+/* ===== Bilingual pair grid ===== */
+.pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-bottom:1px solid var(--line);
+}
+.pair:last-child{border-bottom:none}
+.pair > .ar{
+  padding:20px 0 20px 30px;
+  border-left:1px solid var(--line);
+}
+.pair > .en{
+  direction:ltr;text-align:left;
+  padding:20px 0 20px 30px;
+  padding-right:0;padding-left:30px;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px;line-height:1.75;color:var(--ink-soft);
+}
+.pair > .en{padding:20px 30px 20px 0;padding-left:30px}
+@media (max-width:820px){
+  .pair{grid-template-columns:1fr}
+  .pair > .ar{border-left:none;padding:18px 0 6px}
+  .pair > .en{padding:0 0 18px;border-bottom:none}
+}
+
+/* ===== Section heads ===== */
+.sec{margin-top:52px}
+.sec-head{
+  display:grid;grid-template-columns:1fr 1fr;align-items:baseline;
+  border-bottom:2px solid var(--teal);padding-bottom:12px;margin-bottom:4px;
+}
+.sec-head .num{
+  font-family:'Source Serif 4',serif;font-size:15px;color:var(--teal);
+  letter-spacing:.08em;display:block;margin-bottom:4px;
+}
+.sec-head h2{font-size:22.5px;font-weight:700;color:var(--teal-deep);line-height:1.5}
+.sec-head .en-h{
+  direction:ltr;text-align:left;font-family:'Source Serif 4',serif;
+  font-size:19px;font-weight:600;color:var(--ink-soft);align-self:end;padding-left:30px;
+}
+@media (max-width:820px){
+  .sec-head{grid-template-columns:1fr}
+  .sec-head .en-h{padding-left:0;margin-top:4px}
+}
+.sub-head{
+  display:grid;grid-template-columns:1fr 1fr;align-items:baseline;
+  margin:34px 0 2px;border-bottom:1px solid var(--line);padding-bottom:8px;
+}
+.sub-head h3{font-size:18px;font-weight:600;color:var(--teal)}
+.sub-head .en-h{direction:ltr;text-align:left;font-family:'Source Serif 4',serif;font-size:16px;font-weight:600;color:var(--ink-soft);padding-left:30px}
+@media (max-width:820px){
+  .sub-head{grid-template-columns:1fr}
+  .sub-head .en-h{padding-left:0}
+}
+
+/* ===== Purpose note ===== */
+.note{
+  background:var(--teal-wash);border:1px solid var(--line);
+  border-right:4px solid var(--teal);border-radius:8px;
+  margin:26px 0 8px;overflow:hidden;
+}
+.note .pair{border-bottom:none}
+.note .pair > .ar{padding:22px 26px}
+.note .pair > .en{padding:22px 26px}
+
+/* ===== Emphasis inside text ===== */
+strong{color:var(--teal-deep);font-weight:600}
+.en strong{color:var(--ink)}
+
+/* ===== Diagram strip ===== */
+.flow-strip{
+  display:flex;align-items:stretch;justify-content:center;gap:14px;
+  margin:30px 0 10px;flex-wrap:wrap;
+}
+.flow-strip .node{
+  background:var(--card);border:1.5px solid var(--teal);border-radius:10px;
+  padding:14px 22px;text-align:center;min-width:190px;
+}
+.flow-strip .node .t-ar{font-weight:600;color:var(--teal-deep);font-size:15px}
+.flow-strip .node .t-en{direction:ltr;font-family:'Source Serif 4',serif;font-size:12.5px;color:var(--ink-soft)}
+.flow-strip .node .d-ar{font-size:12.5px;color:var(--ink-soft);margin-top:5px}
+.flow-strip .arrow{align-self:center;color:var(--teal);font-size:22px}
+
+/* ===== Vertical workflow ===== */
+.wf{margin:26px 0 8px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.wf .wf-row{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:1px solid var(--line)}
+.wf .wf-row:last-child{border-bottom:none}
+.wf .wf-num{
+  background:var(--teal-wash);color:var(--teal);font-family:'Source Serif 4',serif;
+  font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;
+}
+.wf .wf-ar{padding:16px 20px;border-left:1px solid var(--line)}
+.wf .wf-en{direction:ltr;text-align:left;padding:16px 20px;font-family:'Source Serif 4',serif;font-size:14.5px;color:var(--ink-soft)}
+.wf .wf-ar .lead, .wf .wf-en .lead{font-weight:600;color:var(--teal-deep)}
+.wf .gate .wf-num{background:var(--amber-wash);color:var(--amber)}
+@media (max-width:820px){
+  .wf .wf-row{grid-template-columns:44px 1fr}
+  .wf .wf-en{grid-column:2;border-top:1px dashed var(--line)}
+}
+
+/* ===== Tables ===== */
+table{width:100%;border-collapse:collapse;margin:24px 0 10px;font-size:13.5px;background:var(--card)}
+th{
+  background:var(--teal);color:#fff;font-weight:600;text-align:right;
+  padding:10px 14px;font-size:13px;
+}
+th .th-en{display:block;direction:ltr;text-align:right;font-family:'Source Serif 4',serif;font-weight:400;font-size:11.5px;opacity:.85}
+td{border:1px solid var(--line);padding:10px 14px;vertical-align:top}
+td .c-ar{display:block}
+td .c-en{display:block;direction:ltr;text-align:left;font-family:'Source Serif 4',serif;font-size:12.5px;color:var(--ink-soft);margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}
+tr:nth-child(even) td{background:#fafcfb}
+
+/* ===== Bullet pairs ===== */
+ul.b{margin:6px 0 0;padding-right:22px}
+.en ul.b{padding-right:0;padding-left:22px}
+ul.b li{margin-bottom:7px}
+
+/* ===== Footer ===== */
+footer{
+  margin-top:70px;border-top:3px double var(--teal);padding-top:18px;
+  display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);
+}
+footer .f-en{direction:ltr;font-family:'Source Serif 4',serif}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <div class="doc-kicker">
+    <span>وثيقة منهجية — نسخة ثنائية اللغة</span>
+    <span style="direction:ltr;font-family:'Source Serif 4',serif">Methodology Document — Bilingual Edition</span>
+  </div>
+  <h1>منهجية تقييم الأثر — نسخة تمهيدية</h1>
+  <div class="h1-en">Impact Assessment Methodology — Preview</div>
+  <div class="legend">
+    <span class="l-ar">النص العربي (الترجمة)</span>
+    <span class="l-en" style="direction:ltr;font-family:'Source Serif 4',serif">English source text</span>
+  </div>
+</header>
+
+<div class="pair" style="border-bottom:none">
+  <div class="ar">تعرض هذه النسخة التمهيدية كيفية قياسنا الكمي للأثر المتوقع لخيار سياسة قبل التنفيذ. وهي النظير الكمي لمنهجية المقارنات المعيارية: فالمقارنة المعيارية تحدد ما نجح في أماكن أخرى ولماذا (نوعي)؛ وتقييم الأثر يقدّر ما سيغيّره الخيار في المملكة (كمي). وتأتي وثيقة المنهجية الكاملة بعد المواءمة على النقاط التوجيهية الثلاث في الختام.</div>
+  <div class="en">This preview outlines how we quantify the expected impact of a policy option before implementation. It is the quantitative counterpart to the Benchmarking methodology: benchmarking identifies what worked elsewhere and why (qualitative); impact assessment estimates what an option would change in the Kingdom (quantitative). The full methodology document follows once we align on the three directional points at the end.</div>
+</div>
+
+<!-- ================= Section 1 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">1</span>ما تقييم الأثر؟</h2>
+    <div class="en-h">What impact assessment is</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">
+      <ul class="b">
+        <li>عملية تقدير منظمة، لا درجة تنبؤية واحدة ― فالمحاكاة وتحليل التكلفة والمنفعة والمعادلات أدوات تُستخدم داخلها، وتُختار بحسب السؤال؛</li>
+        <li>تجيب عن سؤال واحد: <strong>مقارنةً بعدم فعل شيء، ماذا سيغيّر هذا الخيار</strong> ― عبر مؤشرات الأداء، والكلفة المالية، والسوق، والمجتمع، والاختصاص النظامي، ومخاطر التنفيذ بما فيها الآثار غير المقصودة؛</li>
+        <li>كل رقم في المخرج أحد ثلاثة أشياء ― <strong>بيانات حقيقية، أو افتراض صريح، أو عملية حساب</strong> ― موسوم دائمًا، وقابل دائمًا للتتبع إلى مصدره.</li>
+      </ul>
+    </div>
+    <div class="en">
+      <ul class="b">
+        <li>A structured estimation process, not a single predictive score ― simulation, cost-benefit analysis, and formulas are tools used within it, chosen per question;</li>
+        <li>It answers one question: <strong>compared to doing nothing, what would this option change</strong> ― across KPIs, fiscal cost, market, society, legal mandate, and implementation risk including unintended effects;</li>
+        <li>Every number in the output is one of three things ― <strong>real data, an explicit assumption, or a calculation</strong> ― always labeled, always traceable to its source.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Section 2 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">2</span>المنهجية في لمحة</h2>
+    <div class="en-h">The methodology at a glance</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تقوم المنهجية على خمسة التزامات لا تتغير من موضوع إلى آخر ― فهي ما يجعل أي نتيجة من هذه العملية قابلة للدفاع عنها:</div>
+    <div class="en">The methodology rests on five commitments. They never change from topic to topic ― they are what makes any result of this process defensible:</div>
+  </div>
+
+  <div class="note">
+    <div class="pair">
+      <div class="ar">
+        <ul class="b">
+          <li><strong>تُقاس الآثار مقابل خط أساس مضاد للواقع</strong> ― مستقبل «عدم فعل شيء» المُسقَط، لا رقم اليوم. وإلا لالتبس النمو الطبيعي بفشل السياسة، والتحسن الطبيعي بنجاحها.</li>
+          <li><strong>السلسلة السببية تسبق الأرقام</strong> ― يحصل كل خيار أولًا على نظرية تغيير من صفحة واحدة، فيكون خلف كل رقم آلية مُعلنة وافتراضات مسماة.</li>
+          <li><strong>لكل رقم مصدر ― لا يخترع الذكاء الاصطناعي رقمًا أبدًا</strong> ― بيانات حقيقية، أو أدلة دولية منقولة، أو افتراض خبير مسمى؛ كلٌّ موسوم بوضوح وقابل للتتبع.</li>
+          <li><strong>عرض مفكَّك بدلًا من درجة مركبة</strong> ― تبقى المفاضلات مرئية عبر ستة أبعاد؛ والثقة تُقيِّد النتيجة ولا تُخلط أبدًا في ترتيب.</li>
+          <li><strong>العمق يتبع الرهانات، والأسلوب يتبع السؤال</strong> ― السياسات الصغيرة القابلة للعكس تحصل على معالجة سريعة، والمهمة على المعالجة الكمية الكاملة؛ وأساليب الحساب وحدات قابلة للتوصيل، تدخل كلها عبر البوابة المعيارية نفسها.</li>
+        </ul>
+      </div>
+      <div class="en">
+        <ul class="b">
+          <li><strong>Effects are measured against a counterfactual baseline</strong> ― the projected "do nothing" future, not today's number. Otherwise natural growth would be mistaken for policy failure, and natural improvement for policy success.</li>
+          <li><strong>The causal chain comes before the numbers</strong> ― every option gets a one-page theory of change first, so every figure has a stated mechanism and named assumptions behind it.</li>
+          <li><strong>Every number has a source ― AI never invents a figure</strong> ― real data, transferred international evidence, or a named expert's assumption; each visibly labeled, each traceable.</li>
+          <li><strong>Decomposed presentation instead of a composite score</strong> ― trade-offs stay visible across six dimensions; confidence qualifies a result and is never mixed into a ranking.</li>
+          <li><strong>Depth follows stakes, method follows question</strong> ― small reversible policies get rapid treatment, significant ones the full quantitative treatment; calculation methods are pluggable modules, each admitted through the same standard gate.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">المنهجية مؤسسة على معايير التقييم الحكومي الراسخة: الكتاب الأخضر لخزانة المملكة المتحدة (التقييم المضاد للواقع، والتناسب)، والكتاب الأرجواني (التقويم واختيار الأساليب)، والكتاب المائي (ضمان الجودة التحليلية والتتبع)، وإطار التنظيم الأفضل للاتحاد الأوروبي ― مع توسعتها بضمانات من إعدادنا لعصر الذكاء الاصطناعي.</div>
+    <div class="en">Grounded in established government appraisal standards: HM Treasury Green Book (counterfactual appraisal, proportionality), Magenta Book (evaluation and method selection), Aqua Book (analytical quality assurance and traceability), and the EU Better Regulation framework ― extended with AI-era safeguards of our own.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">الخطوات الست أدناه هي كيفية تنفيذ هذه الالتزامات الخمسة ― بالتسلسل نفسه أيًا كان الموضوع:</div>
+    <div class="en">The six steps below are how these five commitments are executed ― the same sequence whatever the topic:</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>الخطوة<span class="th-en">Step</span></th>
+      <th>ما تفعله<span class="th-en">What it does</span></th>
+      <th>في حالة الأكياس البلاستيكية (بكلمات بسيطة)<span class="th-en">In the plastic-bag case (plain words)</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>1. تأسيس خط الأساس</strong></span><span class="c-en">1. Establish the baseline</span></td>
+      <td><span class="c-ar">إسقاط معتمد لمستقبل «عدم فعل شيء» ― مرتكز على بيانات حقيقية، بافتراضات نمو ضمن سيناريوهات منخفض / أساس / مرتفع، ومحكوم بالإصدارات. وتُقاس جميع الخيارات في المقارنة الواحدة مقابل نسخة خط الأساس نفسها.</span><span class="c-en">An approved projection of the "do nothing" future ― anchored in real data, growth assumptions under low / base / high scenarios, versioned. All options in one comparison are measured against the same baseline version.</span></td>
+      <td><span class="c-ar">500,000 متجر مرخص × نحو 100 عميل × كيس واحد ≈ 50 مليون كيس يوميًا اليوم؛ ومع نمو السكان والتجزئة، أقرب إلى 60 مليونًا خلال خمس سنوات إن لم يتغير شيء. ويُقاس كل أثر مقابل ذلك الخط الصاعد ― لا مقابل اليوم.</span><span class="c-en">500,000 licensed stores × ~100 customers × 1 bag ≈ 50 million bags a day today; with population and retail growth, closer to 60 million in five years if nothing changes. Every effect is measured against that rising line ― not against today.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>2. الخيار والسلسلة السببية</strong></span><span class="c-en">2. Option and causal chain</span></td>
+      <td><span class="c-ar">يصل كل خيار من مخرجات المقارنة المعيارية ومعه بطاقة آليته. فنكتب نظرية تغيير من صفحة واحدة ― كيف يُفترض أن يعمل التدخل ― ونحدد الافتراضات التي يعتمد عليها.</span><span class="c-en">Each option arrives from the Benchmarking output with its mechanism card. We write a one-page theory of change ― how the intervention is supposed to work ― and mark the assumptions it depends on.</span></td>
+      <td><span class="c-ar">يعمل الرسم على الكيس هكذا: يرى المتسوقون سعرًا عند الدفع ← يجلب مزيد منهم أكياسهم ← ينخفض الاستخدام. ويتوقف على افتراضين: قوة استجابة الناس للسعر، وما إذا كانت أكياس الورق / النفايات سترتفع بدلًا منها.</span><span class="c-en">A per-bag charge works like this: shoppers see a price at the till → more bring their own bags → usage falls. It hangs on two assumptions: how strongly people react to the price, and whether paper / garbage bags rise instead.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>3. الفرز وتوجيه العمق</strong></span><span class="c-en">3. Screening and depth routing</span></td>
+      <td><span class="c-ar">ما الحجم؟ وما قابلية العكس؟ وما التعقيد النظامي؟ صغير وقابل للعكس ← تقييم نوعي سريع؛ مهم ← معالجة كمية كاملة. ويُعلَن الدليل المفقود ويُطلب ― ولا يُخفَّض العمق بصمت أبدًا. ويختار التوجيه أيضًا وحدات الحساب التي ستستخدمها الحالة.</span><span class="c-en">How big, how reversible, how legally complex? Small and reversible → rapid qualitative assessment; significant → full quantitative treatment. Missing evidence is stated and requested ― the depth is never quietly downgraded. The routing also selects which calculation modules the case will use.</span></td>
+      <td><span class="c-ar">أثر متوسط، وقابل للعكس (يمكن تعديل الرسم)، ونطاق تجزئة وطني، ولا حاجز نظاميًا ← معالجة كمية كاملة.</span><span class="c-en">Moderate impact, reversible (the fee can be adjusted), nationwide retail scope, no legal barrier → full quantitative treatment.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>4. المعاملات بمصادرها</strong></span><span class="c-en">4. Parameters with sources</span></td>
+      <td><span class="c-ar">يُوسم كل معامل: بيانات محلية مقيسة / أدلة دولية منقولة / افتراض خبير / متغير سيناريو. لا يدخل شيء الحساب دون مصدر؛ وتحمل الافتراضات معتمِدًا مسمى.</span><span class="c-en">Every parameter is labeled: measured local data / transferred international evidence / expert assumption / scenario variable. Nothing enters the calculation without a source; assumptions carry a named approver.</span></td>
+      <td><span class="c-ar">تُنقل استجابة السعر من أيرلندا / المملكة المتحدة، وتُعدَّل للعادات المحلية، وتُحفظ نطاقًا؛ وتُقدَّر كلفة تهيئة المتجر بافتراض خبير مسمى. وكلاهما موسوم بوضوح.</span><span class="c-en">The price response is transferred from Ireland / UK, adjusted for local habits, kept as a range; store setup cost is estimated by a named expert. Both visibly labeled.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>5. الحساب والحساسية</strong></span><span class="c-en">5. Calculation and sensitivity</span></td>
+      <td><span class="c-ar">وحدات الحساب المختارة عند التوجيه ― معادلات، أو تحليل تكلفة ومنفعة، أو نموذج مسجل ― تُختار كلٌّ بحسب السؤال (انظر القسم 4). وتُشغَّل سيناريوهات منخفض / أساس / مرتفع دائمًا؛ وتُسمى المعاملات القادرة على قلب الخلاصة. وتتجاوز الحالات السريعة وحدات الحساب: فالمصفوفة النوعية ذاتها هي المخرج، مع التعبير عن اللايقين بنطاقات سيناريوهات لا بتشغيلات معاملات.</span><span class="c-en">The calculation modules selected at routing ― formulas, cost-benefit analysis, or a registered model ― each chosen per question (see section 4). Low / base / high always run; the parameters that could flip the conclusion are named. Rapid cases skip the calculation modules: the qualitative matrix itself is the output, with uncertainty expressed as scenario ranges rather than parameter runs.</span></td>
+      <td><span class="c-ar">إيراد الرسم = الأكياس × الرسم × الامتثال. تشغيل النطاق: ينخفض الاستخدام نحو 30% في حالة الأساس لكن 10% فقط عند الطرف الأدنى ― فيُعلَّم ذلك المعامل الوحيد بوصفه القادر على تغيير القرار.</span><span class="c-en">Fee revenue = bags × fee × compliance. Run the range: usage falls ~30% in the base case but only ~10% at the low end ― that single parameter is flagged as the one that could change the decision.</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>6. موجز الأثر</strong></span><span class="c-en">6. Impact Brief</span></td>
+      <td><span class="c-ar">حتى ثلاثة خيارات جنبًا إلى جنب عبر ستة أبعاد، لكلٍّ اتجاه ونطاق حجم ودليل؛ وتصنيف ثقة؛ وتوصية مشروطة. ويبقى القرار النهائي لدى الوحدة المالكة.</span><span class="c-en">Up to three options side by side across six dimensions, each with direction, magnitude range and evidence; a confidence label; a conditional recommendation. The final decision stays with the owning unit.</span></td>
+      <td><span class="c-ar">الرسم مقابل التزام تجار التجزئة، جنبًا إلى جنب؛ ويُوصى بالرسم بشرط تأكيد الإعفاءات؛ والثقة «متوسطة» ― لأن المعامل الرئيسي مستعار لا مقيس هنا.</span><span class="c-en">Charge vs retailer obligation, side by side; the charge is recommended on condition that exemptions are confirmed; confidence Medium ― because the key parameter is borrowed, not measured here.</span></td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <div class="pair">
+      <div class="ar"><strong>ضمانات دائمة عبر الخطوات الست جميعها</strong>
+        <ul class="b">
+          <li>ثلاث بوابات حاسمة: الاختصاص (خارج اختصاص وزارة البلديات والإسكان ← إحالة لا تقييم)، والمالية (تجاوز سقف الميزانية ← إيقاف أو إعفاء)، والتتبع (الأرقام غير المسندة لا تصل إلى الخلاصات أبدًا)؛</li>
+          <li>اعتماد بشري مسمى على خطوط الأساس وافتراضات الخبراء والتوصيات؛ ومراجعة مستقلة عن الفريق مقترح الخيار؛ والذكاء الاصطناعي يصيغ وينظم، ولا يخترع رقم أثر أبدًا؛</li>
+          <li>التوصيات مشروطة دائمًا («في ظل هذه الافتراضات، نتوقع…») ― فالتقييم المسبق يقدّر ولا يَعِد.</li>
+        </ul>
+      </div>
+      <div class="en"><strong>Standing safeguards across all six steps</strong>
+        <ul class="b">
+          <li>Three hard gates: mandate (outside MOMAH's remit → transfer, not assess), fiscal (beyond budget cap → block or waiver), traceability (unsourced numbers never reach conclusions);</li>
+          <li>Named human sign-off on baselines, expert assumptions and recommendations; review independent of the team proposing the option; AI drafts and organizes, and never invents an impact number;</li>
+          <li>Recommendations are always conditional ("under these assumptions, we expect…") ― an ex-ante assessment estimates, it does not promise.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">تعرض الأقسام 3–6 أدناه هذه المنهجية في التطبيق والقواعد التي تتبعها.</div>
+    <div class="en">Sections 3‒6 below show this methodology in action and the rules it follows.</div>
+  </div>
+</section>
+
+<!-- ================= Section 3 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">3</span>داخل الأرقام ― من أين تأتي؟</h2>
+    <div class="en-h">Inside the numbers ― where the figures come from</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">يتعمق هذا القسم في الخطوات 1 و4 و5 من المنهجية ― كيف تُبنى الأرقام نفسها، وفق مسار القياس الكمي الذي نوقش في اجتماع 18 أغسطس.</div>
+    <div class="en">This section zooms into steps 1, 4 and 5 of the methodology ― how the figures themselves are built, following the quantification path discussed in the 18 Aug meeting.</div>
+  </div>
+
+  <div class="flow-strip">
+    <div class="node">
+      <div class="t-ar">هل البيانات مفقودة؟</div>
+      <div class="t-en">Data missing?</div>
+    </div>
+  </div>
+  <div class="flow-strip" style="margin-top:0">
+    <div class="node">
+      <div class="t-ar">بناء التقدير من بيانات حقيقية + افتراضات صريحة موسومة</div>
+      <div class="t-en">build estimate from real data + explicit labeled assumptions</div>
+    </div>
+    <div class="node" style="border-color:var(--amber)">
+      <div class="t-ar">لا افتراض قابل للدفاع (الملاذ الأخير): طلب بيانات صريح يحدد بدقة ما يسد الفجوة</div>
+      <div class="t-en">no defensible assumption possible (last resort): explicit data request stating exactly what would close the gap</div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>اللبنة<span class="th-en">Building block</span></th>
+      <th>ما يحدث<span class="th-en">What happens</span></th>
+      <th>طبيعة كل مدخل<span class="th-en">Nature of each input</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>تثبيت المستوى الحالي</strong></span><span class="c-en">Anchor the current level</span></td>
+      <td><span class="c-ar">نحو 500,000 متجر بقالة مرخص (من قاعدة بيانات الترخيص في وزارة البلديات والإسكان) × نحو 100 عميل يوميًا × كيس واحد لكل عميل ≈ 50 مليون كيس يوميًا.</span><span class="c-en">~500,000 licensed grocery stores (from the MOMAH licensing database) × ~100 customers per day × 1 bag per customer ≈ 50 million bags per day.</span></td>
+      <td><span class="c-ar">بيانات حقيقية × افتراضات موسومة</span><span class="c-en">Real data × labeled assumptions</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>بناء خط الأساس</strong></span><span class="c-en">Build the baseline</span></td>
+      <td><span class="c-ar">إسقاط مسار عدم التدخل: المرتكز مضافًا إليه نمو السكان والتجزئة ضمن سيناريوهات منخفض / أساس / مرتفع. فخط الأساس هو «ما يحدث إن لم نفعل شيئًا خلال السنوات الخمس المقبلة»، لا رقم اليوم فحسب ― وإلا لقُرئ النمو الطبيعي خطأً فشلًا للسياسة (أو التحسن الطبيعي نجاحًا لها).</span><span class="c-en">Project the no-intervention path: the anchor plus population and retail growth under low / base / high scenarios. The baseline is "what happens if we do nothing over the next 5 years", not just today's number ― otherwise natural growth would be misread as policy failure (or natural improvement as policy success).</span></td>
+      <td><span class="c-ar">إسقاط قائم على افتراضات، معتمد من مالك مسمى</span><span class="c-en">Assumption-based projection, approved by a named owner</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>تقدير استجابة السياسة</strong></span><span class="c-en">Estimate the policy response</span></td>
+      <td><span class="c-ar">كم يخفّض الرسم الاستخدام؟ يُنقل معامل الاستجابة للسعر من نظامي الرسوم في المملكة المتحدة / أيرلندا، ويُعدَّل للدخل وأنماط التسوق المحلية، ويُعبَّر عنه نطاقًا ― لا نقطة واحدة أبدًا.</span><span class="c-en">How much does a charge reduce usage? The price-response parameter is transferred from the UK / Ireland charging schemes, adjusted for local income and shopping patterns, and expressed as a range ― never a single point.</span></td>
+      <td><span class="c-ar">أدلة دولية منقولة، موسومة بالمصدر ومسوّغ التعديل</span><span class="c-en">Transferred international evidence, labeled with source and adjustment rationale</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>المحاسبة المباشرة</strong></span><span class="c-en">Direct accounting</span></td>
+      <td><span class="c-ar">إيراد الرسم = الحجم × الرسم × معدل الامتثال؛ وكلفة تجار التجزئة = المتاجر × كلفة التهيئة للوحدة. وإيراد الرسم تحويل من المستهلكين إلى الحكومة ― يُعرض في البعد المالي، ولا يُحتسب مكسبًا اجتماعيًا صافيًا.</span><span class="c-en">Fee revenue = volume × fee × compliance rate; retailer cost = stores × unit setup cost. Fee revenue is a transfer from consumers to government ― shown in the fiscal dimension, not counted as a net social gain.</span></td>
+      <td><span class="c-ar">حساب (حتمي)</span><span class="c-en">Calculation (deterministic)</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar"><strong>الحساسية</strong></span><span class="c-en">Sensitivity</span></td>
+      <td><span class="c-ar">إعادة التشغيل بمعاملات استجابة منخفض / أساس / مرتفع؛ وتسمية المعامل أو المعاملين القادرين على قلب الخلاصة.</span><span class="c-en">Re-run with low / base / high response parameters; name the one or two parameters that could flip the conclusion.</span></td>
+      <td><span class="c-ar">حساب</span><span class="c-en">Calculation</span></td>
+    </tr>
+  </table>
+
+  <div class="sub-head">
+    <h3>بكلمات بسيطة ― كيف سيجري الأمر فعليًا</h3>
+    <div class="en-h">In plain words ― how this would actually go</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>نبدأ بما نعرفه.</strong> لا أحد يحتفظ بإحصاء وطني للأكياس البلاستيكية المستخدمة. لكن قاعدة بيانات الترخيص لدى وزارة البلديات والإسكان تخبرنا بعدد متاجر البقالة القائمة ― ولنقل 500,000. نفترض أن كل متجر يخدم نحو 100 عميل يوميًا، وأن كل عميل يأخذ كيسًا واحدًا. فينتج نحو 50 مليون كيس يوميًا. واحد من تلك الأرقام الثلاثة بيانات حقيقية واثنان افتراضان ― فنكتبهما افتراضين، بوضوح. ومن يرى أن «100 عميل» رقم خاطئ فمرحب باعتراضه ― بأن يخبرنا بالرقم الأفضل.</div>
+    <div class="en"><strong>Start with what we know.</strong> Nobody keeps a national statistic of plastic bags used. But MOMAH's own licensing database tells us how many grocery stores exist ― say 500,000. Assume each store serves about 100 customers a day, and each customer takes one bag. That gives roughly 50 million bags a day. One of those three numbers is real data and two are assumptions ― so we write them down as assumptions, visibly. Anyone who thinks "100 customers" is wrong is welcome to say so ― by telling us the better number.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>نسأل: ماذا يحدث إن لم نفعل شيئًا؟</strong> السكان يتزايدون والتجزئة تتوسع، فبعد خمس سنوات لن يكون الرقم 50 مليونًا يوميًا ― بل قد يقترب من 60. ذلك الخط الصاعد هو خط الأساس. ويُقاس كل أثر للسياسة مقابل ذلك الخط، لا مقابل رقم اليوم. وإلا لجعل النمو الطبيعي أي سياسة تبدو فاشلة.</div>
+    <div class="en"><strong>Ask what happens if we do nothing.</strong> Population is growing and retail is expanding, so five years from now it will not be 50 million a day ― it might be closer to 60. That rising line is the baseline. Every effect of the policy is measured against that line, not against today's number. Otherwise natural growth would make any policy look like it failed.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الآن نضيف السياسة.</strong> فرضت أيرلندا رسمًا صغيرًا على الكيس فانخفض الاستخدام انخفاضًا حادًا؛ وشهدت المملكة المتحدة انخفاضًا مماثلًا. لا ننسخ تلك الأرقام نسخًا أعمى ― بل نعدّلها للدخل وعادات التسوق المحلية، ونبقيها نطاقًا: ينخفض الاستخدام بين 10% و30% مقابل خط الأساس. وفي حالة الأساس، يعني ذلك ملايين الأكياس المتجنَّبة يوميًا.</div>
+    <div class="en"><strong>Now add the policy.</strong> Ireland charged a small fee per bag and usage fell sharply; the UK saw a similar drop. We do not copy those numbers blindly ― we adjust for local income and shopping habits, and we keep it as a range: usage falls somewhere between 10% and 30% against the baseline. In the base case that is millions of bags a day avoided.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>ثم نحسب المال.</strong> إيراد الرسم = الأكياس المستمرة في الاستخدام × الرسم × عدد المتاجر الممتثلة فعلًا. ويدفع تجار التجزئة كلفة تهيئة لمرة واحدة. وتفصيل أمين واحد: إيراد الرسم ينتقل من جيوب المستهلكين إلى الحكومة ― فنعرضه في العمود المالي، لكننا لا نسميه مكسبًا للمجتمع.</div>
+    <div class="en"><strong>Then count the money.</strong> Fee revenue = bags still used × fee × how many stores actually comply. Retailers pay a one-off setup cost. One honest detail: the fee revenue moves from consumers' pockets into government's ― so we show it in the fiscal column, but we do not call it a gain to society.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>ثم نقول ما قد يسوء.</strong> قد ترتفع مشتريات أكياس الورق وأكياس النفايات مع إحلال الناس ― ويُتتبع ذلك خطرًا مسمى، لا يُتجاهل. وإن تبيّن أن الاستجابة الحقيقية عند الطرف الأدنى للنطاق، انكمش الأثر إلى 10% ― نخبرك بذلك مسبقًا ونسمي المعامل المسؤول، لأنه الرقم الوحيد القادر على تغيير القرار.</div>
+    <div class="en"><strong>Then say what could go wrong.</strong> Paper and garbage-bag purchases may rise as people substitute ― that is tracked as a named risk, not ignored. And if the real response turns out to be at the low end of the range, the effect shrinks to 10% ― we tell you that upfront and name the parameter responsible, because it is the one number that could change the decision.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>ما الذي تتسلمه.</strong> صفحة واحدة لكل خيار، جنبًا إلى جنب: الاستخدام ينخفض 10–30% مقابل خط الأساس، والأثر المالي، وكلفة تجار التجزئة، ومن يتحمل ماذا، والمخاطر الرئيسية ― وتصنيف ثقة «متوسط»، لأن المعامل الرئيسي مستعار من الخارج لا مقيس هنا. فالمفاضلات مرئية؛ ولا شيء يختبئ خلف درجة واحدة.</div>
+    <div class="en"><strong>What you receive.</strong> One page per option, side by side: usage down 10‒30% vs baseline, fiscal effect, retailer cost, who bears what, main risks ― and a confidence label of Medium, because the key parameter is borrowed from abroad rather than measured here. The trade-offs are visible; nothing hides behind a single score.</div>
+  </div>
+
+  <div class="note">
+    <div class="pair">
+      <div class="ar">جميع الأرقام أعلاه توضيحية للأسلوب، وليست نتائج تحليل.</div>
+      <div class="en">All figures above are illustrative of the method, not analysis results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Section 4 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">4</span>ليست كل سياسة بهذه البساطة ― كيف نختار الأسلوب</h2>
+    <div class="en-h">Not every policy is this simple ― how we choose the method</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">لا تحتاج حالة الأكياس البلاستيكية إلا إلى حساب بسيط: خط أساس، ومعامل سلوكي واحد، ومحاسبة. وكثير من السياسات كذلك ― لكن ليس كلها. والقاعدة أن <strong>يطابق الأسلوبُ السؤالَ، لا العكس أبدًا</strong>:</div>
+    <div class="en">The plastic-bag case needs only arithmetic: a baseline, one behavioural parameter, and accounting. Many policies are like that ― but not all. The rule is that <strong>the method must match the question, never the other way around</strong>:</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>إذا كان السؤال…<span class="th-en">If the question is…</span></th>
+      <th>نستخدم…<span class="th-en">We use…</span></th>
+      <th>مثال<span class="th-en">Example</span></th>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الرسوم والأهلية والتكاليف والإيرادات المباشرة</span><span class="c-en">Fees, eligibility, direct costs and revenues</span></td>
+      <td><span class="c-ar">معادلات</span><span class="c-en">Formulas</span></td>
+      <td><span class="c-ar">إيراد رسم الأكياس، ورسوم الترخيص، والكلفة الإدارية</span><span class="c-en">Bag charge revenue, licensing fees, administrative cost</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">استجابة سلوكية رئيسية واحدة، دون تفاعل</span><span class="c-en">One main behavioural response, no interaction</span></td>
+      <td><span class="c-ar">معامل × خط أساس</span><span class="c-en">Parameter × baseline</span></td>
+      <td><span class="c-ar">الأكياس البلاستيكية؛ الإقبال على إعانة جديدة</span><span class="c-en">Plastic bags; uptake of a new subsidy</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">التكاليف مقابل المنافع عبر السنوات</span><span class="c-en">Costs vs benefits over the years</span></td>
+      <td><span class="c-ar">تحليل التكلفة والمنفعة</span><span class="c-en">Cost-benefit analysis</span></td>
+      <td><span class="c-ar">مقارنة الخيارات على أساس واحد</span><span class="c-en">Comparing options on one footing</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">من يكسب ومن يخسر</span><span class="c-en">Who gains and who loses</span></td>
+      <td><span class="c-ar">محاكاة دقيقة على سجلات فردية</span><span class="c-en">Microsimulation on individual records</span></td>
+      <td><span class="c-ar">أي فئات الدخل تستفيد إذا تغيّرت قواعد إعانة الإسكان</span><span class="c-en">Which income groups benefit if housing subsidy rules change</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">الطوابير وطاقة المعالجة وأزمنة الانتظار</span><span class="c-en">Queues, processing capacity, waiting times</span></td>
+      <td><span class="c-ar">محاكاة الأحداث المتقطعة</span><span class="c-en">Discrete-event simulation</span></td>
+      <td><span class="c-ar">أزمنة اعتماد التصاريح، وطاقة التفتيش</span><span class="c-en">Permit approval times, inspection capacity</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">فاعلون كثر يتفاعل بعضهم مع بعض</span><span class="c-en">Many actors reacting to each other</span></td>
+      <td><span class="c-ar">نموذج قائم على الوكلاء (ABM)</span><span class="c-en">Agent-based model (ABM)</span></td>
+      <td><span class="c-ar">سوق الإسكان: يستجيب المشترون والبنوك والمطورون لتحركات بعضهم ― ونموذج الإسكان القائم لدى الوزارة يغطي هذا تحديدًا</span><span class="c-en">Housing market: buyers, banks and developers respond to each other's moves ― the ministry's existing housing model covers exactly this</span></td>
+    </tr>
+    <tr>
+      <td><span class="c-ar">بعد التنفيذ: هل نجحت فعلًا؟</span><span class="c-en">After implementation: did it actually work</span></td>
+      <td><span class="c-ar">طرح متدرج ومقارنة</span><span class="c-en">Phased rollout and comparison</span></td>
+      <td><span class="c-ar">مناطق التجربة مقابل غيرها، قبل التوسع (يُخطط له من مرحلة التجربة فصاعدًا)</span><span class="c-en">Pilot regions vs others, before scaling up (planned from the pilot phase onwards)</span></td>
+    </tr>
+  </table>
+
+  <div class="pair">
+    <div class="ar"><strong>متى تدخل النماذج الثقيلة؟</strong> لا يُبرَّر النموذج القائم على الوكلاء ― كنموذج الإسكان القائم لدى الوزارة ― إلا عند تحقق شرطين: أن تكون تفاعلات الفاعلين قادرة فعلًا على تغيير الجواب (مثلًا توقعات الأسعار المغذية للمضاربة في سوق إسكان)، وأن تتوافر بيانات حقيقية لمعايرة النموذج عليها. فالنموذج الذي لا يمكن معايرته يحكي قصة معقولة، لا دليلًا. إذن: الأكياس البلاستيكية ― لا حاجة لنموذج وكلاء، والحساب البسيط يكفي؛ وتدخل كبير في سوق الإسكان ― ربما نعم، باستخدام نموذج الإسكان القائم ضمن نطاقه المُتحقق منه. وإذا شُغِّل نموذج ثقيل يومًا دون استيفاء هذين الشرطين، وُسم مخرجه <strong>سيناريو استكشافيًا</strong> ولا يُقدَّم أبدًا تنبؤًا.</div>
+    <div class="en"><strong>When do the heavy models come in?</strong> An ABM ― like the ministry's existing housing model ― is justified only when two things are true: actors' reactions to each other could genuinely change the answer (for example, price expectations feeding speculation in a housing market), and there is real data to calibrate the model against. A model that cannot be calibrated tells a plausible story, not evidence. So: plastic bags ― no ABM needed, arithmetic wins; a major housing-market intervention ― possibly yes, using the existing housing model within its validated scope. If a heavy model is ever run without meeting these conditions, its output is labeled an <strong>exploratory scenario</strong> and is never presented as a forecast.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>منهجية واحدة، وحاسبات قابلة للتوصيل.</strong> الخطوات الست وقواعد الحوكمة وصيغة العرض لا تتغير من موضوع إلى آخر ― وما يتغير هو أسلوب الحساب الموصول في الخطوة 5 فقط. فكل أسلوب <strong>وحدة</strong> تُقبل عبر البوابة نفسها: تُعلن أي الأسئلة تناسبها (وأيها لا)، وما المدخلات التي تحتاجها، وما مخرجاتها، وكيف جرى التحقق منها. فالموضوع الجديد لا يعني إذن منهجية جديدة أبدًا ― بل يعني في أقصاه وحدة جديدة تجتاز المراجعة نفسها.</div>
+    <div class="en"><strong>One methodology, pluggable calculators.</strong> The six steps, the governance rules and the presentation format never change from topic to topic ― what changes is only the calculation method plugged into step 5. Every method is a <strong>module</strong> admitted through the same gate: it declares which questions it fits (and which it does not), what inputs it needs, what it outputs, and how it was validated. A new topic therefore never means a new methodology ― at most it means a new module passing the same review.</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>العمق يتبع الرهانات.</strong> السياسات الصغيرة القابلة للعكس المحدودة النطاق تحصل على تقييم نوعي سريع؛ والمهمة أو المكلفة أو الصعبة العكس تحصل على المعالجة الكمية الكاملة. وعندما يكون العمق المطلوب واضحًا لكن الدليل غير متوافر بعد، نُبقي على المتطلب، ونعلن الفجوة، ونصدر طلب البيانات ― فلا يُخفَّض العمق بصمت أبدًا ليلائم البيانات المتاحة.</div>
+    <div class="en"><strong>Depth follows stakes.</strong> Small, reversible, limited policies get a rapid qualitative assessment; significant, costly or hard-to-reverse ones get the full quantitative treatment. And when the required depth is clear but the evidence is not yet there, we keep the requirement, state the gap, and issue the data request ― the depth is never quietly downgraded to fit the data at hand.</div>
+  </div>
+</section>
+
+<!-- ================= Section 5 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">5</span>كيف تُعرض النتائج</h2>
+    <div class="en-h">How results are presented</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">
+      <ul class="b">
+        <li><strong>ستة أبعاد، جنبًا إلى جنب</strong> (حتى 3 خيارات): تحقيق مؤشرات الأداء، والمالية، والسوق والامتثال، والاجتماعي والتوزيعي، والنظامي والاختصاص، ومخاطر التنفيذ والآثار غير المقصودة؛</li>
+        <li>يعرض كل بُعد <strong>الاتجاه + نطاق الحجم + الدليل الداعم</strong>؛</li>
+        <li>يُرفق <strong>تصنيف ثقة</strong> (مرتفع / متوسط / منخفض) <strong>بكل خيار على حدة</strong>، فلا يُمزج خيار غني بالبيانات بآخر مثقل بالافتراضات أبدًا. والخيار الذي ترتكز معاملاته الرئيسية على افتراضات خبراء أو أدلة منقولة غير معايرة يُسقَّف دون «مرتفع»، وتظهر تلك الافتراضات ضمن شروط التوصية. فالتصنيف يقيّد النتيجة ― ولا يُخلط أبدًا في درجة؛</li>
+        <li><strong>لا درجة مركبة واحدة افتراضيًا</strong>: تُذكر المفاضلات بالكلمات ليراها صانع القرار («الخيار أ يحرّك المؤشر أكثر؛ والخيار ب يكلّف قرابة النصف»). وإذا لزم عرض مركب، أمكنت إضافته عرضًا اختياريًا ― بأوزان تعتمدونها وتُعرض بجواره، مع الاحتفاظ دائمًا بنتائج مستوى الأبعاد؛</li>
+        <li><strong>كيف تتشكل التوصية دون درجة:</strong> ترشّح البوابات الحاسمة أولًا؛ وتُوزن أدلة الأبعاد الستة ونتائج الحساسية بالكلمات؛ وتتحول فجوات الأدلة إلى شروط التوصية؛ ويبقى الحكم النهائي لدى الوحدة المالكة ― لا ترتيب خفيًا في أي موضع.</li>
+      </ul>
+    </div>
+    <div class="en">
+      <ul class="b">
+        <li><strong>Six dimensions, side by side</strong> (up to 3 options): KPI achievement, fiscal, market &amp; compliance, social &amp; distributional, legal &amp; mandate, implementation &amp; unintended-effects risk;</li>
+        <li>Each dimension shows <strong>direction + magnitude range + supporting evidence</strong>;</li>
+        <li>A <strong>confidence label</strong> (High / Medium / Low) is attached to <strong>each option separately</strong>, so a data-rich option and an assumption-heavy one are never blended. An option whose key parameters rest on expert assumptions or uncalibrated transferred evidence is capped below High, and those assumptions appear among the recommendation's conditions. The label qualifies the result ― it is never mixed into a score;</li>
+        <li><strong>No single composite score by default</strong>: trade-offs are stated in words so the decision-maker sees them ("Option A moves the KPI further; Option B costs roughly half"). If a composite view is required, it can be added as an optional display ― with weights approved by you and shown next to it, and the dimension-level results always retained;</li>
+        <li><strong>How the recommendation is formed without a score:</strong> hard gates filter first; the six-dimension evidence and sensitivity results are weighed in words; evidence gaps become the recommendation's conditions; the final judgment rests with the owning unit ― no hidden ranking anywhere.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Section 6 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">6</span>قواعد الشفافية</h2>
+    <div class="en-h">Transparency rules</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">
+      <ul class="b">
+        <li>كل مدخل موسوم ― بيانات حقيقية / افتراض / حساب ― وقابل للتوسيع إلى مصدره؛</li>
+        <li><strong>«لا يمكننا قياس هذا كميًا» ليست إجابة افتراضية مقبولة.</strong> فعندما تكون البيانات شحيحة، نبني التقدير من بيانات حقيقية مضافًا إليها افتراضات صريحة ونسم كلًا منها. ولا نعلن الفجوة إلا عند تعذر بناء افتراض قابل للدفاع ― مصحوبةً ببيان دقيق للبيانات التي تسدها؛</li>
+        <li><strong>الاعتراضات يجب أن تحمل أرقامًا:</strong> إذا قال مراجع إن رقمًا خاطئ، قدّم الرقم الصحيح أو البيانات الداعمة لاعتراضه؛ وتدخل القيمة البديلة السجل نفسه وتتبع القواعد نفسها؛</li>
+        <li><strong>اعتماد بشري مسمى:</strong> تُعتمد خطوط الأساس وافتراضات الخبراء والتوصيات النهائية من مالكين مسمين؛ والمراجعة مستقلة عن الفريق مقترح الخيار. والذكاء الاصطناعي يصيغ وينظم ― ولا يخترع رقم أثر أبدًا.</li>
+      </ul>
+    </div>
+    <div class="en">
+      <ul class="b">
+        <li>Every input is labeled ― real data / assumption / calculation ― and expandable to its source;</li>
+        <li><strong>"We cannot quantify this" is not an acceptable default.</strong> When data is thin, we build the estimate from real data plus explicit assumptions and label each one. Only when no defensible assumption can be constructed do we state the gap ― together with exactly what data would close it;</li>
+        <li><strong>Challenges must carry numbers:</strong> if a reviewer says a figure is wrong, they provide the correct figure or the data behind the objection; the alternative value enters the same registry and follows the same rules;</li>
+        <li><strong>Named human sign-off:</strong> baselines, expert assumptions, and final recommendations are approved by named owners; review is independent of the team proposing the option. AI drafts and organizes ― it never invents an impact number.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Section 7 ================= -->
+<section class="sec">
+  <div class="sec-head">
+    <h2><span class="num">7</span>ثلاث نقاط للمواءمة</h2>
+    <div class="en-h">Three points to align on</div>
+  </div>
+
+  <div class="pair">
+    <div class="ar">
+      <ul class="b">
+        <li><strong>خط الأساس هو مسار «عدم فعل شيء».</strong> تُقاس الآثار مقابل المستقبل المُسقَط لعدم التدخل (المرتكز الحالي + سيناريوهات النمو)، وتُقاس جميع الخيارات في المقارنة الواحدة مقابل نسخة خط الأساس المعتمدة نفسها.</li>
+        <li><strong>تفكيك شفاف بدلًا من درجة واحدة.</strong> تُعرض النتائج عبر ستة أبعاد مع وسم كل رقم بأنه بيانات أو افتراض أو حساب؛ ولا توجد درجة مركبة إلا عرضًا اختياريًا يضبطه العميل.</li>
+        <li><strong>الافتراض أولًا عند شح البيانات.</strong> البيانات الحقيقية مضافًا إليها افتراضات موسومة تُنتج تقديرًا قابلًا للاستخدام بمستوى ثقة مُعلن؛ والفجوات الصعبة تتحول إلى طلبات بيانات صريحة ― لا تخمينات صامتة أبدًا، ولا «لا يمكن قياسه كميًا» جازمة أبدًا.</li>
+      </ul>
+    </div>
+    <div class="en">
+      <ul class="b">
+        <li><strong>Baseline as the "do nothing" path.</strong> Effects are measured against the projected no-intervention future (current anchor + growth scenarios), and all options in one comparison are measured against the same approved baseline version.</li>
+        <li><strong>Transparent decomposition instead of a single score.</strong> Results are presented across six dimensions with every number labeled as data, assumption, or calculation; a composite score exists only as an optional, client-configured view.</li>
+        <li><strong>Assumption-first when data is thin.</strong> Real data plus labeled assumptions produce a usable estimate with a stated confidence level; hard gaps become explicit data requests ― never silent guesses, and never a flat "cannot be quantified".</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="ar"><strong>الخطوة التالية بعد المواءمة:</strong> وثيقة المنهجية الكاملة (سير العمل، وقواعد العرض، ونموذج المراجعة البشرية، وخطة التجربة الاستطلاعية)، وتشغيل تجريبي على حالة الأكياس البلاستيكية ― مع مقارنته قسمًا بقسم بتقييم الأثر المنشور في المملكة المتحدة لرسم أكياس التسوق.</div>
+    <div class="en"><strong>Next step after alignment:</strong> the full methodology document (workflow, presentation rules, human review model, and pilot plan), and a pilot run on the plastic-bag case ― benchmarked section by section against the UK's published impact assessment of its carrier-bag charge.</div>
+  </div>
+</section>
+
+<footer>
+  <span>منهجية تقييم الأثر — نسخة تمهيدية — وثيقة ثنائية اللغة</span>
+  <span class="f-en">Impact Assessment Methodology — Preview — Bilingual Edition</span>
+</footer>
+
+</div>
+</body>
+</html>

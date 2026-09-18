@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورش الرصد الإسكاني — لوحة العرض</title>
+<style>
+:root{
+  --bg:#061E1A; --bg2:#0A2C26; --surf:#0F3830; --surf2:#134039;
+  --edge:#1C544A; --edge2:#256B5E;
+  --txt:#EAF3F0; --txt2:#A9C6BF; --txt3:#6E938B;
+  --lime:#B8DC2E; --limed:#96B824;
+  --gold:#E3A93C; --coral:#E0625F; --sky:#5AAFD6;
+  --fd:"SF Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --fb:"Noto Sans Arabic","SF Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--bg);color:var(--txt);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input{font-family:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--lime);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ══ التنقل العلوي ══ */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(6,30,26,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
+.topbar-in{max-width:1400px;margin:0 auto;padding:14px 30px;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:11px;flex:none}
+.logo-m{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--lime),var(--limed));display:grid;place-items:center;flex:none}
+.logo-m svg{width:19px;height:19px}
+.logo b{font-family:var(--fd);font-size:13px;font-weight:700;display:block;line-height:1.4}
+.logo span{font-size:10.5px;color:var(--txt3);display:block}
+.tabs{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font-size:13px;font-weight:600;padding:8px 15px;border-radius:8px;color:var(--txt2);white-space:nowrap;transition:.15s}
+.tab:hover{background:var(--surf);color:var(--txt)}
+.tab.on{background:var(--lime);color:#06251F}
+.tools{display:flex;gap:6px;align-items:center}
+.tool{font-size:12px;padding:7px 13px;border-radius:8px;border:1px solid var(--edge);color:var(--txt2)}
+.tool:hover{border-color:var(--edge2);color:var(--txt)}
+.tool.warn:hover{border-color:var(--coral);color:var(--coral)}
+
+.page{max-width:1400px;margin:0 auto;padding:30px}
+.view{display:none}
+.view.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ══ الغلاف ══ */
+.hero{background:linear-gradient(140deg,var(--surf) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:20px;padding:38px 40px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-90px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(184,220,46,.11),transparent 68%)}
+.hero-eye{font-size:11px;letter-spacing:.2em;color:var(--lime);margin-bottom:14px;position:relative}
+.hero h1{font-family:var(--fd);font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.25;letter-spacing:-.03em;max-width:22ch;position:relative}
+.hero p{font-size:15px;color:var(--txt2);margin-top:14px;max-width:56ch;position:relative}
+
+/* ══ الأرقام الكبيرة ══ */
+.bignums{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--edge);border:1px solid var(--edge);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.bn{background:var(--bg2);padding:24px 24px 22px;transition:background .2s}
+.bn:hover{background:var(--surf)}
+.bn .n{font-family:var(--fd);font-size:42px;font-weight:700;line-height:.95;letter-spacing:-.035em;color:var(--lime)}
+.bn .n small{font-size:16px;color:var(--txt3);font-weight:400;letter-spacing:0}
+.bn .l{font-size:12.5px;color:var(--txt2);margin-top:10px}
+.bn .s{font-size:11px;color:var(--txt3);margin-top:2px}
+.bn.hot .n{color:var(--coral)}
+.bn.good .n{color:var(--lime)}
+
+/* ══ العناوين ══ */
+.hd{display:flex;align-items:center;gap:14px;margin:32px 0 16px}
+.hd:first-child{margin-top:0}
+.hd h2{font-family:var(--fd);font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.hd .ln{flex:1;height:1px;background:var(--edge)}
+.hd .pill{font-size:11.5px;color:var(--txt3);border:1px solid var(--edge);padding:3px 11px;border-radius:20px;white-space:nowrap}
+
+/* ══ البطاقات ══ */
+.box{background:var(--bg2);border:1px solid var(--edge);border-radius:16px;padding:24px 26px}
+.box.tight{padding:18px 20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lead{font-size:15.5px;color:var(--txt2);line-height:1.85;max-width:74ch}
+
+/* ══ لوح اختيار المحاور ══ */
+.pickbar{background:linear-gradient(135deg,var(--surf),var(--surf2));border:1px solid var(--edge2);border-radius:18px;padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;position:sticky;top:70px;z-index:30}
+.pick-meter{display:flex;align-items:baseline;gap:9px}
+.pick-meter .v{font-family:var(--fd);font-size:38px;font-weight:700;line-height:1;color:var(--lime)}
+.pick-meter .u{font-size:13px;color:var(--txt2)}
+.pick-sep{width:1px;align-self:stretch;background:var(--edge2)}
+.pick-info{flex:1;min-width:180px}
+.pick-info .t{font-size:12px;color:var(--txt3);margin-bottom:4px}
+.pick-info .d{font-size:14px;font-weight:600}
+.pick-bar{width:100%;height:7px;background:rgba(0,0,0,.3);border-radius:5px;overflow:hidden;margin-top:8px}
+.pick-bar i{display:block;height:100%;background:var(--lime);border-radius:5px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.pick-bar.over i{background:var(--coral)}
+.pick-acts{display:flex;gap:7px}
+.pact{font-size:12.5px;padding:8px 14px;border-radius:9px;border:1px solid var(--edge2);color:var(--txt2)}
+.pact:hover{border-color:var(--lime);color:var(--lime)}
+.pact.solid{background:var(--lime);color:#06251F;border-color:var(--lime);font-weight:600}
+.pact.solid:hover{background:var(--limed);color:#06251F}
+
+/* ══ بطاقة المحور ══ */
+.axis{background:var(--bg2);border:1.5px solid var(--edge);border-radius:16px;overflow:hidden;margin-bottom:14px;transition:border-color .2s,background .2s}
+.axis.sel{border-color:var(--lime);background:var(--surf)}
+.axis-top{padding:20px 24px;display:flex;gap:18px;align-items:flex-start;cursor:pointer}
+.axis-check{width:26px;height:26px;border-radius:8px;border:2px solid var(--edge2);flex:none;display:grid;place-items:center;margin-top:2px;transition:.2s}
+.axis.sel .axis-check{background:var(--lime);border-color:var(--lime)}
+.axis-check svg{width:14px;height:14px;opacity:0;transition:opacity .15s}
+.axis.sel .axis-check svg{opacity:1}
+.axis-main{flex:1;min-width:0}
+.axis-tags{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.atag{font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:3px 10px;border-radius:6px;background:var(--edge);color:var(--txt2)}
+.atag.core{background:rgba(184,220,46,.16);color:var(--lime)}
+.atag.alt{background:rgba(90,175,214,.16);color:var(--sky)}
+.atag.time{background:transparent;border:1px solid var(--edge2);color:var(--txt3)}
+.axis-t{font-family:var(--fd);font-size:17px;font-weight:700;letter-spacing:-.015em;margin-bottom:7px}
+.axis-s{font-size:13.5px;color:var(--txt2);line-height:1.8;max-width:72ch}
+.axis-body{border-top:1px solid var(--edge);padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.axis.open .axis-body{max-height:900px;padding:20px 24px}
+.axis-items{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.aitem{background:rgba(0,0,0,.18);border:1px solid var(--edge);border-radius:11px;padding:15px 16px}
+.aitem .t{font-size:13px;font-weight:700;color:var(--lime);margin-bottom:6px}
+.aitem .d{font-size:12.5px;color:var(--txt2);line-height:1.75}
+.axis-more{background:transparent;font-size:12px;color:var(--txt3);padding:8px 24px 16px;display:flex;align-items:center;gap:6px}
+.axis-more:hover{color:var(--lime)}
+.axis-more svg{width:12px;height:12px;transition:transform .25s}
+.axis.open .axis-more svg{transform:rotate(180deg)}
+
+/* ══ ملخص الاختيار ══ */
+.recap{background:linear-gradient(135deg,rgba(184,220,46,.09),transparent);border:1px solid var(--edge2);border-radius:16px;padding:24px 26px;margin-top:18px}
+.recap h3{font-family:var(--fd);font-size:15px;font-weight:700;margin-bottom:14px;color:var(--lime)}
+.rlist{display:flex;flex-direction:column;gap:0}
+.rrow{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--edge)}
+.rrow:last-child{border-bottom:none}
+.rrow .rn{font-family:var(--fd);font-size:12px;font-weight:700;color:#06251F;background:var(--lime);border-radius:7px;height:24px;display:grid;place-items:center}
+.rrow .rt{font-size:13.5px;font-weight:600}
+.rrow .rm{font-size:12px;color:var(--txt3);white-space:nowrap}
+.rempty{font-size:13.5px;color:var(--txt3);padding:14px 0}
+
+/* ══ الرسالة ══ */
+.msgcard{background:linear-gradient(140deg,var(--surf),var(--bg2));border:1px solid var(--edge2);border-radius:18px;padding:32px 34px;margin-bottom:18px;position:relative;overflow:hidden}
+.msgcard::after{content:"";position:absolute;inset:0 0 auto auto;width:3px;height:100%;background:var(--lime)}
+.msgcard .k{font-size:11px;letter-spacing:.18em;color:var(--lime);margin-bottom:14px}
+.msgcard .q{font-family:var(--fd);font-size:clamp(19px,2.5vw,25px);font-weight:700;line-height:1.6;letter-spacing:-.02em;max-width:52ch}
+.msgcard .f{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--edge)}
+.msgcard .f div{font-size:12px;color:var(--txt3)}
+.msgcard .f b{display:block;font-size:14px;color:var(--txt);font-weight:600;margin-top:2px}
+
+/* ══ التصويت ══ */
+.vote{display:flex;align-items:center;gap:14px;margin-bottom:11px}
+.vote .n{font-size:13px;width:88px;flex:none;color:var(--txt2)}
+.vote .t{flex:1;height:28px;background:rgba(0,0,0,.28);border-radius:7px;overflow:hidden;position:relative}
+.vote .f{height:100%;background:var(--edge2);border-radius:7px;transition:width .6s}
+.vote .f.win{background:var(--lime)}
+.vote .v{font-family:var(--fd);font-weight:700;font-size:16px;width:20px;text-align:left;flex:none}
+
+/* ══ الرقائق ══ */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;background:var(--surf);border:1px solid var(--edge);color:var(--txt2);padding:5px 12px;border-radius:8px}
+.chip.lime{background:rgba(184,220,46,.13);border-color:rgba(184,220,46,.3);color:var(--lime)}
+.cgroup{margin-bottom:16px}
+.cgroup:last-child{margin-bottom:0}
+.cgroup .ct{font-size:11px;color:var(--txt3);letter-spacing:.08em;margin-bottom:8px}
+
+/* ══ الخط الزمني للورش ══ */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--edge);border:1px solid var(--edge);border-radius:16px;overflow:hidden}
+.tlc{background:var(--bg2);padding:22px 20px;transition:background .2s;cursor:pointer}
+.tlc:hover{background:var(--surf)}
+.tlc.now{background:var(--surf);position:relative}
+.tlc.now::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--lime)}
+.tlc .no{font-family:var(--fd);font-size:32px;font-weight:700;line-height:1;color:var(--edge2);letter-spacing:-.03em}
+.tlc.now .no{color:var(--lime)}
+.tlc .dt{font-size:11px;color:var(--txt3);margin-top:8px}
+.tlc .ms{font-size:12.5px;color:var(--txt2);margin-top:10px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ══ لوح الورشة الأرشيفية ══ */
+.wtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.wtab{padding:13px 22px;border-radius:12px;background:var(--bg2);border:1px solid var(--edge);color:var(--txt2);text-align:center;transition:.18s}
+.wtab:hover{border-color:var(--edge2);color:var(--txt)}
+.wtab.on{background:var(--lime);color:#06251F;border-color:var(--lime)}
+.wtab b{font-family:var(--fd);font-size:15px;font-weight:700;display:block}
+.wtab span{font-size:11px;opacity:.75;display:block;margin-top:1px}
+
+.wband{background:linear-gradient(140deg,var(--surf),var(--bg2));border:1px solid var(--edge2);border-radius:18px;padding:30px 32px;margin-bottom:18px}
+.wband-top{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.wband .big{font-family:var(--fd);font-size:64px;font-weight:700;line-height:.85;letter-spacing:-.05em;color:var(--lime)}
+.wband .big span{display:block;font-size:12px;font-weight:400;color:var(--txt3);letter-spacing:0;margin-top:10px}
+.wband .qq{flex:1;min-width:280px}
+.wband .qq .k{font-size:10.5px;letter-spacing:.16em;color:var(--txt3);margin-bottom:9px}
+.wband .qq p{font-family:var(--fd);font-size:18px;font-weight:700;line-height:1.65;max-width:54ch}
+.wmeta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--edge);border-radius:12px;overflow:hidden;margin-top:24px}
+.wmeta div{background:rgba(0,0,0,.2);padding:14px 17px}
+.wmeta .k{font-size:10.5px;color:var(--txt3);margin-bottom:3px}
+.wmeta .v{font-size:13px;font-weight:600;line-height:1.5}
+
+/* ══ الأرقام البارزة ══ */
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fig{background:var(--bg2);border:1px solid var(--edge);border-radius:14px;padding:20px 22px;position:relative;overflow:hidden}
+.fig::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--lime)}
+.fig .n{font-family:var(--fd);font-size:28px;font-weight:700;color:var(--lime);line-height:1.1;letter-spacing:-.025em}
+.fig .d{font-size:12.5px;color:var(--txt2);margin-top:8px;line-height:1.65}
+
+/* ══ النقاط ══ */
+.pcard{background:var(--bg2);border:1px solid var(--edge);border-radius:14px;padding:20px 22px}
+.pcard .ph{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--lime);padding-bottom:12px;border-bottom:1px solid var(--edge);margin-bottom:13px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.pcard .ph em{font-style:normal;font-size:11px;color:var(--txt3);font-weight:400}
+.pt{display:flex;gap:11px;padding:7px 0;font-size:13.5px;color:var(--txt2);line-height:1.75}
+.pt::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--lime);flex:none;margin-top:9px;opacity:.75}
+
+/* ══ الأسئلة ══ */
+.qs{columns:2;column-gap:26px}
+.qi{break-inside:avoid;display:grid;grid-template-columns:28px 1fr;gap:11px;padding:9px 0;font-size:13px;color:var(--txt2);line-height:1.75}
+.qi .qn{font-family:var(--fd);font-size:11.5px;font-weight:700;color:var(--lime);background:rgba(184,220,46,.12);border-radius:6px;height:22px;display:grid;place-items:center;margin-top:2px}
+
+/* ══ التوصيات ══ */
+.recs{display:grid;gap:11px}
+.rec{display:grid;grid-template-columns:36px 1fr;gap:15px;align-items:start;background:var(--bg2);border:1px solid var(--edge);border-radius:13px;padding:16px 18px}
+.rec .rn{font-family:var(--fd);font-size:15px;font-weight:700;color:#06251F;background:var(--lime);border-radius:9px;height:30px;display:grid;place-items:center}
+.rec .rt{font-size:13.5px;color:var(--txt2);line-height:1.8}
+
+/* ══ الخطوات ══ */
+.steps{position:relative;padding-right:30px}
+.steps::before{content:"";position:absolute;top:14px;bottom:14px;right:11px;width:1.5px;background:var(--edge)}
+.step{position:relative;padding:10px 0}
+.step::before{content:attr(data-n);position:absolute;right:-30px;top:10px;width:23px;height:23px;border-radius:50%;background:var(--surf);border:1.5px solid var(--edge2);color:var(--lime);font-size:11px;font-weight:700;display:grid;place-items:center;font-family:var(--fd)}
+.step .t{font-size:14px;font-weight:600}
+.step .d{font-size:12.5px;color:var(--txt3);margin-top:2px}
+
+/* ══ الأجندة ══ */
+.agr{display:grid;grid-template-columns:52px 1fr 100px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--edge)}
+.agr:last-child{border-bottom:none}
+.agt{font-family:var(--fd);font-size:12.5px;font-weight:700;color:var(--lime);background:rgba(184,220,46,.11);border-radius:7px;padding:6px 0;text-align:center}
+.agn{font-size:14px;font-weight:600}
+.agn span{display:block;font-size:12px;font-weight:400;color:var(--txt3);margin-top:1px}
+.agb{height:6px;background:rgba(0,0,0,.28);border-radius:4px;overflow:hidden}
+.agb i{display:block;height:100%;background:var(--edge2)}
+
+/* ══ الحالات ══ */
+.st{font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:7px;white-space:nowrap;border:1px solid transparent}
+.st-0{background:var(--surf);color:var(--txt3);border-color:var(--edge)}
+.st-1{background:rgba(227,169,60,.14);color:var(--gold);border-color:rgba(227,169,60,.32)}
+.st-2{background:rgba(184,220,46,.14);color:var(--lime);border-color:rgba(184,220,46,.32)}
+.st-3{background:rgba(90,175,214,.14);color:var(--sky);border-color:rgba(90,175,214,.32)}
+.st-4{background:rgba(224,98,95,.14);color:var(--coral);border-color:rgba(224,98,95,.32)}
+button.st:hover{filter:brightness(1.15)}
+.latetag{font-size:10.5px;font-weight:600;color:var(--coral);background:rgba(224,98,95,.13);border-radius:5px;padding:3px 8px}
+
+/* ══ الجاهزية ══ */
+.readyrow{display:grid;grid-template-columns:250px 1fr;gap:16px;margin-bottom:20px}
+.ringbox{background:linear-gradient(140deg,var(--surf),var(--bg2));border:1px solid var(--edge2);border-radius:16px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ringw{position:relative;width:136px;height:136px}
+.ringw svg{transform:rotate(-90deg)}
+.ringc{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ringc .p{font-family:var(--fd);font-size:36px;font-weight:700;line-height:1;color:var(--lime)}
+.ringc .p small{font-size:15px;color:var(--txt3)}
+.ringc .l{font-size:11px;color:var(--txt3);margin-top:3px}
+.ringn{font-size:12px;margin-top:16px;text-align:center;color:var(--txt2);line-height:1.6}
+.ringn b{color:var(--lime)}
+
+.sky{display:flex;gap:20px;align-items:flex-end;border-bottom:2px solid var(--lime);padding-bottom:0}
+.skp{flex:1;min-width:0}
+.skb{display:flex;gap:4px;align-items:flex-end;height:62px}
+.skbar{flex:1;min-height:8px;border-radius:3px 3px 0 0;background:var(--edge);transition:height .5s cubic-bezier(.4,0,.2,1),background .25s}
+.skbar.doing{background:var(--gold)} .skbar.done{background:var(--lime)} .skbar.late{background:var(--coral)}
+.skl{font-size:11.5px;color:var(--txt3);padding-top:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.skl b{color:var(--txt2);font-weight:600}
+.skp.cur .skl b{color:var(--lime)}
+
+/* ══ المخطط الزمني ══ */
+.gh{display:grid;grid-template-columns:1fr 4fr;gap:18px;padding-bottom:12px;border-bottom:1px solid var(--edge)}
+.gs{position:relative;height:16px}
+.gt{position:absolute;top:0;font-size:11px;color:var(--txt3);transform:translateX(50%)}
+.gr{display:grid;grid-template-columns:1fr 4fr;gap:18px;align-items:center;padding:11px 0;border-bottom:1px solid var(--edge)}
+.gr:last-child{border-bottom:none}
+.gl b{font-family:var(--fd);font-weight:700;font-size:13.5px;color:var(--txt);display:block}
+.gl span{font-size:11.5px;color:var(--txt3)}
+.gtr{position:relative;height:26px;background:rgba(0,0,0,.28);border-radius:7px;overflow:hidden}
+.gb{position:absolute;top:0;bottom:0;border-radius:7px;background:var(--edge);display:flex;align-items:center;justify-content:center}
+.gb i{position:absolute;inset:0 auto 0 0;background:var(--lime);border-radius:7px;opacity:.85}
+.gb span{position:relative;font-size:11px;font-weight:700;z-index:2;color:var(--txt)}
+.gb.cur{background:var(--edge2)}
+.gnow{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--coral);z-index:5}
+.gnow::after{content:"اليوم";position:absolute;top:-17px;right:50%;transform:translateX(50%);font-size:10px;color:var(--coral);font-weight:700;white-space:nowrap}
+
+/* ══ المهام ══ */
+.phh{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:6px}
+.phtag{font-family:var(--fd);font-size:11.5px;font-weight:700;background:var(--edge2);color:var(--txt);padding:4px 12px;border-radius:7px}
+.phtag.cur{background:var(--lime);color:#06251F}
+.phti{font-family:var(--fd);font-size:15.5px;font-weight:700;flex:1;min-width:120px}
+.phc{font-size:12px;color:var(--txt3)}
+.phm{width:78px;height:6px;background:rgba(0,0,0,.28);border-radius:4px;overflow:hidden}
+.phm i{display:block;height:100%;background:var(--lime)}
+.tsk{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--edge)}
+.tsk:last-child{border-bottom:none}
+.tskn{flex:1;font-size:14px;min-width:0}
+.tsk.done .tskn{color:var(--txt3);text-decoration:line-through}
+.tsko{font-size:11.5px;color:var(--txt3);white-space:nowrap}
+
+/* ══ الجداول ══ */
+.filts{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.filt{font-size:12.5px;padding:7px 14px;border-radius:9px;background:var(--surf);color:var(--txt2);border:1px solid var(--edge)}
+.filt:hover{border-color:var(--edge2);color:var(--txt)}
+.filt.on{background:var(--lime);color:#06251F;border-color:var(--lime);font-weight:600}
+.ent{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--edge)}
+.ent:last-child{border-bottom:none}
+.entn{flex:1;font-size:14px;min-width:0}
+.entc{font-size:11.5px;color:var(--txt3);white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:right;font-family:var(--fd);font-size:11.5px;font-weight:700;color:var(--lime);background:var(--surf);padding:11px 14px;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--edge);color:var(--txt2)}
+tr:last-child td{border-bottom:none}
+td.dim{color:var(--txt3);font-size:12px}
+.tw{overflow-x:auto;border:1px solid var(--edge);border-radius:12px}
+.search{width:100%;padding:11px 15px;border:1px solid var(--edge);border-radius:11px;font-size:14px;background:var(--surf);color:var(--txt);margin-bottom:14px}
+.search::placeholder{color:var(--txt3)}
+.search:focus{outline:none;border-color:var(--lime)}
+
+/* ══ الاقتباس ══ */
+.quote{background:var(--bg2);border:1px solid var(--edge);border-right:3px solid var(--lime);border-radius:14px;padding:22px 24px;margin-bottom:14px}
+.quote .who{display:flex;align-items:center;gap:10px;margin-bottom:13px;flex-wrap:wrap}
+.quote .who b{font-size:13px;font-weight:700;color:var(--lime)}
+.quote .who span{font-size:12px;color:var(--txt3)}
+.quote p{font-size:13.5px;color:var(--txt2);line-height:1.9}
+
+.kv{display:grid;grid-template-columns:130px 1fr;gap:11px 16px;font-size:13.5px}
+.kv dt{color:var(--txt3);font-size:12.5px}
+.kv dd{color:var(--txt2)}
+textarea{width:100%;min-height:130px;resize:vertical;font-family:inherit;font-size:14px;line-height:1.8;padding:14px 16px;border:1px solid var(--edge);border-radius:12px;background:var(--surf);color:var(--txt)}
+textarea::placeholder{color:var(--txt3)}
+textarea:focus{outline:none;border-color:var(--lime)}
+.saved{position:fixed;bottom:24px;left:24px;background:var(--lime);color:#06251F;font-size:12.5px;font-weight:600;padding:10px 18px;border-radius:9px;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none;z-index:70}
+.saved.show{opacity:1;transform:none}
+
+@media (max-width:1180px){.bignums,.grid4{grid-template-columns:repeat(2,1fr)}.axis-items,.figs,.grid3{grid-template-columns:1fr 1fr}.tl{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.readyrow{grid-template-columns:1fr}.grid2,.grid3,.axis-items,.figs{grid-template-columns:1fr}.qs{columns:1}.wmeta{grid-template-columns:1fr}.pickbar{position:static}}
+@media (max-width:640px){
+  .topbar-in,.page{padding-inline:16px}
+  .bignums,.grid4,.tl{grid-template-columns:1fr}
+  .gh,.gr{grid-template-columns:1fr}
+  .agb,.entc,.tsko{display:none}
+  .kv{grid-template-columns:1fr}
+  .wband .big{font-size:44px}
+  .hero{padding:26px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  body{background:#fff;color:#111;font-size:10.5pt}
+  .topbar,.tools,.saved,.wtabs,.pick-acts{display:none}
+  .view{display:block!important;page-break-after:always}
+  .box,.axis,.fig,.pcard,.rec,.hero,.wband,.msgcard,.pickbar,.ringbox{background:#fff!important;border-color:#ccc!important;color:#111!important}
+  .hero h1,.axis-t,.msgcard .q,.wband .qq p{color:#0C4F46!important}
+  .bn .n,.fig .n,.wband .big,.ringc .p,.pick-meter .v{color:#0C4F46!important}
+  .lead,.axis-s,.aitem .d,.pt,.rec .rt,.quote p{color:#333!important}
+  .axis:not(.sel){display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="logo">
+    <div class="logo-m"><svg viewBox="0 0 24 24" fill="none" stroke="#06251F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l4-3 4 3v12M13 21v-7h6v7"/></svg></div>
+    <div><b>الرصد الإسكاني</b><span>مركز ذكاء الأعمال ودعم القرار</span></div>
+  </div>
+  <nav class="tabs">
+    <button class="tab on" data-v="v-home">الرئيسية</button>
+    <button class="tab" data-v="v-axes">محاور الورشة 13</button>
+    <button class="tab" data-v="v-plan">خطة التنفيذ</button>
+    <button class="tab" data-v="v-arch">أرشيف الورش</button>
+    <button class="tab" data-v="v-dir">الدليل</button>
+    <button class="tab" data-v="v-log">اللوجستيات</button>
+  </nav>
+  <div class="tools">
+    <button class="tool" id="b-prn">طباعة</button>
+    <button class="tool" id="b-exp">تصدير</button>
+    <button class="tool warn" id="b-rst">تصفير</button>
+  </div>
+</div></div>
+
+<div class="page">
+
+<!-- ══════════ الرئيسية ══════════ -->
+<section class="view on" id="v-home">
+  <div class="hero">
+    <div class="hero-eye">ورشة الرصد الإسكاني — النسخة الثالثة عشرة</div>
+    <h1>تعزيز تكامل السياسات وتمكين الاستثمار</h1>
+    <p>الرسالة الاستراتيجية المعتمدة للنسخة الثالثة عشرة، امتداداً لمسار الرسائل منذ الورشة التاسعة.</p>
+  </div>
+
+  <div class="bignums">
+    <div class="bn"><div class="n num" id="h-days">—</div><div class="l">المتبقي على الورشة</div><div class="s" id="h-date">—</div></div>
+    <div class="bn"><div class="n num">4</div><div class="l">ورش منعقدة</div><div class="s">من 9 إلى 12</div></div>
+    <div class="bn"><div class="n num">135<small>+</small></div><div class="l">إجمالي الحضور</div><div class="s">عبر الورش الأربع</div></div>
+    <div class="bn good"><div class="n num" id="h-ready">0<small>٪</small></div><div class="l">جاهزية التنفيذ</div><div class="s" id="h-tasks">—</div></div>
+  </div>
+
+  <div class="msgcard">
+    <div class="k">الرسالة الاستراتيجية</div>
+    <div class="q">تعزيز تكامل السياسات والمنظومة التنظيمية والتمويلية لتمكين قطاع عقاري أكثر كفاءة واستدامة وجاذبية للاستثمار.</div>
+    <div class="f">
+      <div>المقترح<b>الأول — معتمد</b></div>
+      <div>التصويت<b>5 / 2 / 3</b></div>
+      <div>الجهات المستجيبة<b>جهتان</b></div>
+      <div>أُرسلت إلى<b>10 جهات</b></div>
+    </div>
+  </div>
+
+  <div class="hd"><h2>مسار الرسائل</h2><span class="ln"></span><span class="pill">اضغط أي ورشة لفتح أرشيفها</span></div>
+  <div class="tl" id="tl"></div>
+
+  <div class="hd"><h2>الردود الواردة على الرسالة</h2><span class="ln"></span><span class="pill">جهتان من أصل عشر</span></div>
+  <div class="grid2">
+    <div class="box">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+        <span style="font-family:var(--fd);font-size:40px;font-weight:700;color:var(--lime);line-height:1" class="num">2</span>
+        <span style="font-size:13px;color:var(--txt2)">جهتان استجابتا من أصل عشر جهات أُرسلت لها الرسالة</span>
+      </div>
+      <div class="pt">وكالة تحفيز المعروض السكني والتطوير العقاري — رجّحت المقترح الأول</div>
+      <div class="pt">وكالة الإسكان التنموي — قدّمت أربعة مقترحات لمواضيع تمويلية</div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--edge)">
+        <div class="cgroup"><div class="ct">الجهات التي استجابت</div><div class="chips" id="chips-sent"></div></div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="cgroup"><div class="ct">المقترح الأول — معتمد</div><div class="chips"><span class="chip lime">العقارات الشاغرة</span><span class="chip lime">الأراضي البيضاء</span><span class="chip lime">الرخص الإنشائية</span><span class="chip lime">وضوح الإجراءات</span><span class="chip lime">RCRC</span><span class="chip lime">تملك الأجانب</span></div></div>
+      <div class="cgroup"><div class="ct">المقترح الثاني — رفع كفاءة المنظومة العقارية</div><div class="chips"><span class="chip">تطوير السياسات</span><span class="chip">التكامل المؤسسي</span><span class="chip">بيئة تنظيمية داعمة</span></div></div>
+      <div class="cgroup"><div class="ct">المقترح الثالث — تعزيز استدامة القطاع</div><div class="chips"><span class="chip">SRC — REDF</span><span class="chip">التمويل البنكي</span><span class="chip">التمويل الجماعي</span><span class="chip">المبادرات</span></div></div>
+    </div>
+  </div>
+
+  <div class="hd"><h2>ملاحظات الجهات</h2><span class="ln"></span><span class="pill">واردة عبر البريد</span></div>
+  <div class="quote">
+    <div class="who"><b>وكالة تحفيز المعروض السكني والتطوير العقاري</b><span>— عبدالرحمن النافع</span></div>
+    <p>المقترح الأول «تعزيز تكامل السياسات وتمكين الاستثمار» هو الأنسب، على أن تكون الرسالة الاستراتيجية لهذه الورشة امتداداً للرسائل في الورش السابقة بما يحقق استمرارية الطرح ويربطها بأهم الأحداث والمتغيرات الحالية في القطاع العقاري. كما نقترح أهمية إضافة محور أو بند مستقل عن تملك العقار للأجانب باعتباره من أبرز المستجدات في المرحلة الحالية، على أن يغطي الأبعاد الاستثمارية والاقتصادية والتنظيمية وانعكاساته على القطاع العقاري. وأيضاً من المهم ربط الورشة بأحداث سيتي سكيب بحيث تكون مدخلاً للرسائل التي سيتم طرحها.</p>
+  </div>
+  <div class="quote">
+    <div class="who"><b>وكالة الإسكان التنموي</b><span>— سلطان الجريس</span></div>
+    <div class="recs">
+      <div class="rec"><span class="rn num">1</span><span class="rt">تطوير حلول ومنتجات تمويلية ملائمة للفئات المستهدفة من مستفيدي الإسكان التنموي، بما يوفر خيارات تمويل ميسرة من حيث الأقساط ونسب التمويل.</span></div>
+      <div class="rec"><span class="rn num">2</span><span class="rt">تعزيز الشراكة في المسؤولية الاجتماعية عبر المبادرات المجتمعية، وبحث أوجه التعاون المحتملة مع جود الإسكان.</span></div>
+      <div class="rec"><span class="rn num">3</span><span class="rt">تطوير حلول ادخارية وآليات تمويل مبتكرة بالشراكة مع البنوك لتعزيز الجاهزية المالية للمستفيدين.</span></div>
+      <div class="rec"><span class="rn num">4</span><span class="rt">إمكانية احتساب معاش الضمان الاجتماعي كأحد مصادر الدخل المنتظمة للمستفيد، وفق الضوابط الائتمانية المعتمدة.</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════ المحاور ══════════ -->
+<section class="view" id="v-axes">
+  <div class="hero" style="padding:30px 34px">
+    <div class="hero-eye">اختيار محاور الورشة</div>
+    <h1 style="font-size:clamp(24px,3.4vw,34px)">حدّد المحاور المناسبة للطرح</h1>
+    <p>ثلاثة محاور مشتقة من الرسالة الاستراتيجية المعتمدة. اختر ما يناسب الطرح، ويُحتسب الوقت والأجندة الناتجة تلقائياً.</p>
+  </div>
+
+  <div class="pickbar">
+    <div class="pick-meter"><span class="v num" id="pk-min">0</span><span class="u">دقيقة</span></div>
+    <div class="pick-sep"></div>
+    <div class="pick-info">
+      <div class="t">إجمالي زمن الورشة مع القسم الثابت والافتتاح والختام</div>
+      <div class="d" id="pk-total">—</div>
+      <div class="pick-bar" id="pk-barw"><i id="pk-bar" style="width:0%"></i></div>
+    </div>
+    <div class="pick-acts">
+      <button class="pact" id="pk-core">اختيار الأساسية</button>
+      <button class="pact" id="pk-clear">مسح الكل</button>
+      <button class="pact solid" id="pk-print">طباعة المختار</button>
+    </div>
+  </div>
+
+  <div class="hd"><h2>المحاور المطروحة</h2><span class="ln"></span><span class="pill">مشتقة من الرسالة المعتمدة</span></div>
+  <div id="axes-core"></div>
+
+  <div class="recap">
+    <h3>الأجندة الناتجة عن اختيارك</h3>
+    <div class="rlist" id="recap"></div>
+  </div>
+</section>
+
+<!-- ══════════ خطة التنفيذ ══════════ -->
+<section class="view" id="v-plan">
+  <div class="readyrow">
+    <div class="ringbox">
+      <div class="ringw">
+        <svg width="136" height="136" viewBox="0 0 136 136">
+          <circle cx="68" cy="68" r="57" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="11"/>
+          <circle id="ring" cx="68" cy="68" r="57" fill="none" stroke="#B8DC2E" stroke-width="11" stroke-linecap="round" stroke-dasharray="358" stroke-dashoffset="358" style="transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <div class="ringc"><div class="p num" id="ring-p">0<small>٪</small></div><div class="l">الجاهزية</div></div>
+      </div>
+      <div class="ringn" id="ring-n">—</div>
+    </div>
+    <div class="bignums" style="margin-bottom:0;grid-template-columns:repeat(2,1fr)">
+      <div class="bn" id="bn-late"><div class="n num" id="v-late">0</div><div class="l">مهام متأخرة</div><div class="s" id="s-late">—</div></div>
+      <div class="bn"><div class="n num" id="v-tasks">0</div><div class="l">مهام مكتملة</div><div class="s" id="s-tasks">—</div></div>
+      <div class="bn"><div class="n num" id="v-sel">0</div><div class="l">محاور مختارة</div><div class="s" id="s-sel">من ستة مطروحة</div></div>
+      <div class="bn"><div class="n num" id="v-mins">0</div><div class="l">زمن الورشة</div><div class="s" id="s-mins">دقيقة إجمالاً</div></div>
+    </div>
+  </div>
+
+  <div class="hd"><h2>أفق الجاهزية</h2><span class="ln"></span><span class="pill">كل عمود مهمة</span></div>
+  <div class="box"><div class="sky" id="sky"></div></div>
+
+  <div class="hd"><h2>المسار الزمني</h2><span class="ln"></span><span class="pill num" id="g-range">—</span></div>
+  <div class="box">
+    <div class="gh"><div></div><div class="gs" id="gs"></div></div>
+    <div id="gantt"></div>
+  </div>
+
+  <div class="hd"><h2>المهام</h2><span class="ln"></span><span class="pill">اضغط الحالة لتغييرها</span></div>
+  <div id="plan"></div>
+</section>
+
+<!-- ══════════ الأرشيف ══════════ -->
+<section class="view" id="v-arch">
+  <div class="wtabs" id="wtabs"></div>
+  <div id="warch"></div>
+</section>
+
+<!-- ══════════ الجهات ══════════ -->
+<!-- ══════════ الدليل ══════════ -->
+<section class="view" id="v-dir">
+  <div class="hd"><h2>دليل جهات الاتصال</h2><span class="ln"></span><span class="pill" id="dir-count">—</span></div>
+  <div class="box">
+    <input type="search" class="search" id="dir-q" placeholder="ابحث بالاسم أو الجهة أو البريد…">
+    <div class="filts" id="dir-filts"></div>
+    <div class="tw"><table id="tbl-dir"></table></div>
+  </div>
+</section>
+
+<!-- ══════════ اللوجستيات ══════════ -->
+<section class="view" id="v-log">
+  <div class="hd"><h2>مقترحات مقر الانعقاد</h2><span class="ln"></span><span class="pill">من ورشة 12</span></div>
+  <div class="grid3">
+    <div class="pcard"><div class="ph">المرافق<em>3 خيارات</em></div>
+      <div class="pt">قاعات مبنى الجامعة</div><div class="pt">قاعات مبنى الغدير</div><div class="pt">مركز الأعمال في العليا</div>
+      <div style="margin-top:14px;padding-top:13px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--txt3)"><b style="color:var(--txt2)">ناصر الشلفان</b><br><span class="num">0559902299</span><br><a href="mailto:TAOM@MOMAH.GOV.SA">TAOM@MOMAH.GOV.SA</a></div></div>
+    <div class="pcard"><div class="ph">الشركة الوطنية للإسكان</div>
+      <div class="pt">خزام — الفرسان</div>
+      <div style="margin-top:14px;padding-top:13px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--txt3)"><b style="color:var(--txt2)">هليل البقمي</b><br><span class="num">0565553399</span><br><a href="mailto:h.albgami@nhc.sa">h.albgami@nhc.sa</a></div></div>
+    <div class="pcard"><div class="ph">التغطية الإعلامية</div>
+      <div class="pt">الإدارة العامة للاتصال المؤسسي</div>
+      <div style="margin-top:14px;padding-top:13px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--txt3)"><b style="color:var(--txt2)">عبدالرحمن أبو شايع</b><br><span class="num">0559776667</span><br><a href="mailto:a.abushayi@momah.gov.sa">a.abushayi@momah.gov.sa</a></div></div>
+  </div>
+
+  <div class="hd"><h2>المتطلبات التشغيلية</h2><span class="ln"></span></div>
+  <div class="grid2">
+    <div class="box"><dl class="kv">
+      <dt>التاريخ والوقت</dt><dd>24/8/2026 — يُحدَّد بعد استطلاع الشركات · البداية 10:00 صباحاً</dd>
+      <dt>المكان</dt><dd>قاعة نائب الوزير / اللاونج / مركز الأعمال — حسب الحضور (30–40)</dd>
+      <dt>المحتوى</dt><dd>قسم ثابت: حالة السوق + قسم متخصص: المحاور المختارة</dd>
+      <dt>الجهات المدعوة</dt><dd>تُحدَّد بعد اعتماد المحاور</dd>
+    </dl></div>
+    <div class="box">
+      <div class="cgroup"><div class="ct">عناصر بطاقة الدعوة</div><div class="chips"><span class="chip">اسم الورشة ورقمها</span><span class="chip">محور التركيز</span><span class="chip">التاريخ والوقت</span><span class="chip">الموقع</span><span class="chip">رمز QR</span><span class="chip">تأكيد الحضور</span></div></div>
+      <div class="cgroup" style="margin-top:16px"><div class="ct">ملاحظة</div><div style="font-size:13px;color:var(--txt2);line-height:1.8">بطاقة ثنائية اللغة تحت رعاية معالي وزير البلديات والإسكان.</div></div>
+    </div>
+  </div>
+
+  <div class="hd"><h2>قائمة التحقق</h2><span class="ln"></span></div>
+  <div class="grid2">
+    <div class="pcard"><div class="ph">التنظيم</div>
+      <div class="pt">تثبيت الموعد بعد نتائج استطلاع الشركات</div><div class="pt">حجز القاعة وتحديد شكل الجلوس</div>
+      <div class="pt">تجهيز نموذج التسجيل ورمز QR</div><div class="pt">إرسال بطاقة الدعوة ومتابعة التأكيدات</div></div>
+    <div class="pcard"><div class="ph">التنفيذ</div>
+      <div class="pt">تأكيد التجهيزات التقنية والعرض</div><div class="pt">ترتيب الضيافة وتعليمات الدخول</div>
+      <div class="pt">تنسيق التغطية الإعلامية</div><div class="pt">تجهيز نموذج تقييم المشاركين</div></div>
+  </div>
+
+  <div class="hd"><h2>ملاحظات الفريق</h2><span class="ln"></span><span class="pill">تُحفظ تلقائياً</span></div>
+  <div class="box"><textarea id="notes" placeholder="ما يستجد من قرارات أو تنبيهات…"></textarea></div>
+</section>
+
+</div>
+<div class="saved" id="saved">تم الحفظ</div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const DAY=86400000;
+const fD=new Intl.DateTimeFormat("ar-EG-u-nu-latn",{day:"numeric",month:"short"});
+const fL=new Intl.DateTimeFormat("ar-EG-u-nu-latn",{day:"numeric",month:"long",year:"numeric"});
+const mid=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x;};
+const WDATE="2026-08-24";
+const FIXED=35; // افتتاح 5 + حالة السوق 20 + ختام 10
+
+/* ═══ المحاور ═══ */
+const AXES=[
+ {id:"a1",kind:"core",min:15,t:"تكامل السياسات والحوكمة",
+  s:"تعزيز تكامل السياسات والأدوار المؤسسية بما يسهم في رفع كفاءة الحوكمة وتحقيق مواءمة أكبر بين الجهات.",
+  items:[{t:"حزمة السياسات كمنظومة",d:"عرض قرارات 2024–2026 على محور واحد مصنّفة: تحفيز المعروض · تنظيم الطلب · انضباط السوق."},
+   {t:"نماذج الحوكمة والتنسيق",d:"إدارة الملفات المشتركة بين الوزارة والهيئة العامة للعقار والهيئات الملكية، والتجارب القابلة للبناء عليها."},
+   {t:"المواءمة مع المشاريع الكبرى",d:"الطلب السكني المصاحب للمشاريع والوجهات الكبرى وكيف يُخطط له ضمن خطط الإسكان."}]},
+ {id:"a2",kind:"core",min:15,t:"وضوح الإجراءات والبيئة التنظيمية",
+  s:"رفع وضوح الإجراءات وتطوير البيئة التنظيمية بما يدعم كفاءة تنفيذ المشاريع ويعزز شفافية المنظومة العقارية.",
+  items:[{t:"تطور منظومة التراخيص",d:"الرقمنة والتوحيد وما تحسّن في زمن الإصدار، وأثره على دورة المشروع."},
+   {t:"الأدلة الإرشادية وإتاحة المعلومة",d:"ما صدر من أدلة وضوابط تُبسّط الإجراء للمطوّر والمستثمر، وما هو قادم."},
+   {t:"شفافية السوق كأداة قرار",d:"السجل العقاري، بيانات الصفقات والإيجارات، ومؤشرات السوق المتاحة."}]},
+ {id:"a3",kind:"core",min:20,t:"البيئة الاستثمارية والتمويلية",
+  s:"تعزيز البيئة الاستثمارية والتمويلية من خلال تطوير منظومة التمويل، وتحفيز المبادرات، ودعم مشاركة أصحاب المصلحة بما يسهم في استدامة نمو القطاع.",
+  items:[{t:"تعميق السوق الثانوية",d:"أول إصدار للأوراق المالية المدعومة بالرهن العقاري السكني، وتوسّع نموذج «الإنشاء بغرض البيع» مع البنوك الشريكة."},
+   {t:"تنويع أدوات التمويل",d:"الصناديق العقارية، والتمويل الجماعي، ومنتجات تمويل المطوّرين لدى صندوق التنمية العقارية والبنوك."},
+   {t:"توسيع نطاق التمكين",d:"منتجات تمويلية للفئات المستهدفة · حلول ادخارية · احتساب معاش الضمان كمصدر دخل · شراكات جود الإسكان."}]}
+];
+
+const SENT=["وكالة تحفيز المعروض السكني والتطوير العقاري — عبدالرحمن النافع","وكالة الإسكان التنموي — سلطان الجريس"];
+
+const HISTORY=[
+ {id:"w9",no:"09",d:"أكتوبر 2024",m:"تظل المنظومة السكنية ملتزمة بضمان تحقيق توازن مستدام بين العرض والطلب على الإسكان."},
+ {id:"w10",no:"10",d:"فبراير 2025",m:"توازن مستدام بين العرض والطلب."},
+ {id:"w11",no:"11",d:"أغسطس 2025",m:"السوق العقاري المدفوع بسياسات معززة يحافظ على النمو، ويعزز ثقة المستثمرين، ويحافظ على القدرة على تحمل التكاليف."},
+ {id:"w12",no:"12",d:"فبراير 2026",m:"تعزيز كفاءة الإطار التنظيمي وتطوير منظومة السوق العقاري بما يدعم استقرار السوق ويرسخ كفاءته."},
+ {id:"w13",no:"13",d:"أغسطس 2026",m:"تعزيز تكامل السياسات والمنظومة التنظيمية والتمويلية لتمكين قطاع عقاري أكثر كفاءة واستدامة وجاذبية للاستثمار.",now:1}
+];
+
+const ARCHIVE=[
+ {id:"w9",n:"9",sub:"الثالثة لعام 2024",date:"2 أكتوبر 2024",place:"ضاحية خزام — استضافة NHC",count:"38 شخصاً",
+  msg:"تظل المنظومة السكنية ملتزمة بضمان تحقيق توازن مستدام بين العرض والطلب على الإسكان.",
+  ov:"سلّطت الورشة الضوء على الشركة الوطنية للإسكان وجهودها في تحقيق التوازن بين العرض والطلب، وضخ 300 ألف وحدة سكنية حتى نهاية 2025 ضمن مجمعات وضواحٍ سكنية متكاملة.",
+  figs:[["300 ألف","وحدة سكنية مستهدفة حتى نهاية 2025"],["38","مشاركاً"],["8","شركات بحثية وبيوت خبرة"]],
+  ag:[["جولة بمرافق ضاحية خزام",""],["نظرة عامة عن أداء سوق الإسكان",""],["مبادرات قطاعية مختارة","سكني — سياسات الدعم السكني"],["الهيئة العامة للعقار","الأنظمة والتشريعات"],["الشركة الوطنية للإسكان","المشاريع والمحفظة والبنية التحتية"],["نقاش مفتوح",""]],
+  ents:{"منظومة الإسكان":["NHC — مستضيف","برنامج الإسكان","الهيئة العامة للعقار"],"ديوان الوزارة":["مركز ذكاء الأعمال","الإعلام والاتصال المؤسسي","الدعم السكني","تحفيز المعروض","الإسكان التنموي"],"بيوت الخبرة":["جدوى","كوليرز","الفرنسي كابيتال","أوشن اكس","نايت فرانك","الجزيرة كابيتال","الإنماء","الأهلي كابيتال"]},
+  bl:[{t:"أبرز المواضيع",i:["إنجازات المنظومة في دعم السوق السكني من جانب الطلب، والقفزات الملحوظة في زيادة المعروض وحجم الاستثمارات المضخّة.","استعراض الرئيس التنفيذي لـNHC إنجازات الشركة ودورها في توفير وحدات جاهزة وتحت الإنشاء."]},
+   {t:"سؤال تفاعلي",i:["تفاعل الشركات البحثية مع سؤال توجهات أسعار الفائدة، وأبدوا أن السوق يتجه نحو الاستقرار في الإيجارات والبيع."]},
+   {t:"مقترحات",i:["إنشاء منصة معتمدة تكون المصدر الوحيد والموثوق للبيانات تحت إشراف الوزارة.","تشجيع الشركات البحثية على الانتظام في حضور السلسلة."]},
+   {t:"الخطوات القادمة",k:"n",i:["استمرار التواصل مع أعضاء اللجنة من الشركات البحثية والبنوك.","استمرار توفير البيانات المطلوبة من المركز.","استمرار الأعمال التشاركية من أبحاث ودراسات.","الإعداد للورشة العاشرة وتحديد أهدافها بالمواءمة مع قيادات المنظومة."]}]},
+
+ {id:"w10",n:"10",sub:"الأولى لعام 2025",date:"27 فبراير 2025",place:"مقر الوزارة — حي الغدير",count:"~40 شخصاً",
+  msg:"توازن مستدام بين العرض والطلب.",
+  ov:"سلّطت الورشة الضوء على اتجاهات سوق الإسكان وخيارات إعادة التمويل العقاري المقدمة من SRC، وناقشت نطاق مشاريع التجديد الحضري وفوائدها في تحسين البنية التحتية.",
+  figs:[["800 مليار","حجم سوق الرهن العقاري"],["95٪","من القروض بفائدة ثابتة"],["63٪","نسبة التملك بعد المبادرات"]],
+  ag:[["كلمة افتتاحية لمعالي الوزير",""],["نظرة عامة عن أداء سوق الإسكان",""],["المبادرات المالية",""],["التخطيط الحضري",""],["نقاش مفتوح",""]],
+  ents:{"جهات المنظومة":["الهيئة العامة للعقار","SRC"],"ديوان الوزارة":["مركز ذكاء الأعمال","التخطيط الحضري والأراضي","تحفيز المعروض","الإسكان التنموي","الدعم السكني"],"الشركات البحثية":["كوليرز","أوشن اكس","JLL","Knight Frank"],"ذات الصلة":["الجزيرة كابيتال","الأهلي كابيتال","سدكو","صندوق المناسبات","صندوق التنمية العقارية"]},
+  bl:[{t:"أبرز المواضيع",i:["تطورات سوق الإسكان مع التركيز على اتجاهات العرض والطلب والعوامل المحركة.","دور سياسات إعادة التمويل في تعزيز السوق واستعراض إنجازات SRC.","أثر مشاريع التجديد الحضري في تحسين جودة الحياة والتنمية المستدامة."]},
+   {t:"التجديد الحضري",i:["دوره في تعزيز التطوير المستدام وجذب الاستثمارات، مع نماذج مثل «كناري وارف».","استدامة المشاريع: توازن بين الاستخدامات السكنية والتجارية والتصميم البشري.","البنية التحتية الاجتماعية ودورها في دعم النمو الاقتصادي.","تحديات المشاريع الكبرى بسبب التركيز الأولي على الاستخدام التجاري."]},
+   {t:"العرض والطلب",i:["ارتفاع أسعار العقارات يعكس تأثير العوامل الاقتصادية الأوسع.","زيادة المعروض وتغيرات الطلب أسهمت في تراجع أسعار الإيجارات.","الهجرة الداخلية والنمو السكاني رفعا الحاجة السنوية للوحدات.","المبادرات الحكومية رفعت نسبة التملك إلى 63٪.","استثمارات NHC وصندوق الاستثمارات العامة دعمت توسّع المعروض."]},
+   {t:"التمويل والاستثمار",i:["السوق الثانوي للرهن العقاري عزز فرص التمويل عبر البنوك الاستثمارية.","توسع صناديق REITs والطلب على الوحدات الجاهزة دفعا نمو القطاع.","نمو سوق الرهن إلى 800 مليار ريال، 95٪ بفائدة ثابتة.","دعم SRC للسيولة عبر الأوراق المالية المضمونة."]},
+   {t:"توجهات السوق",i:["وعي المستهلكين دفع معايير اختيار السكن نحو المواقف والخدمات والجدوى.","التحول نحو المشاريع متعددة الاستخدامات ودمج السكن والأعمال والضيافة."]},
+   {t:"مقترحات الجهات الخارجية",i:["البنك الأهلي: إعداد تقرير مشترك لتقييم تأثير سياسات الوزارة.","جدوى: مشاركة مسودة تقرير الاقتصاد الكلي للحصول على ملاحظات المركز.","خطة المركز لعقد اجتماعات لمواصلة مناقشة المقترحات."]},
+   {t:"الخطوات القادمة",k:"n",i:["مشاركة العرض التقديمي والبيانات مع الحضور المعنيين.","مشاركة بيانات ورشة الربع الثاني (الورشة 11)."]}]},
+
+ {id:"w11",n:"11",sub:"الثانية لعام 2025",date:"6 أغسطس 2025",place:"مقر الوزارة — حي الغدير",count:"~20 شخصاً",
+  msg:"السوق العقاري المدفوع بسياسات معززة يحافظ على النمو، ويعزز ثقة المستثمرين، ويحافظ على القدرة على تحمل التكاليف.",
+  ov:"سلّطت الورشة الضوء على المساهمات الاجتماعية والاقتصادية للوزارة، وأحدث اتجاهات سوق الإسكان، بالإضافة إلى مقدمة عن نظام تملك غير السعوديين للعقار الذي قدمته الهيئة العامة للعقار.",
+  figs:[["18.5٪","مساهمة MOMAH+ من الناتج المحلي في 2024"],["4.1 مليون","وظيفة — نحو 32٪ من التوظيف"],["23.9 مليار","استثمارات أجنبية في 2023، 65٪ للعقار والبناء"],["263 ← 342","مليار ريال — نمو سوق البناء بحلول 2029"],["690 ألف","سعودي و300 ألف امرأة ضمن الوظائف"],["13","ممكّناً لتفعيل سياسة تملك غير السعوديين"]],
+  ag:[["مقدمة ترحيبية","نائب رئيس مركز دعم القرار"],["أداء سوق الإسكان",""],["القرارات الخمسة الداعمة لعقار الرياض",""],["نظام تملك غير السعوديين للعقار",""],["نقاش مفتوح",""]],
+  ents:{"جهات المنظومة":["الهيئة العامة للعقار","NHC"],"ديوان الوزارة":["مركز ذكاء الأعمال","تحفيز المعروض","الإسكان التنموي","الدعم السكني","الاتصال المؤسسي"],"الشركات البحثية":["أوشن اكس","CBRE"],"ذات الصلة":["الجزيرة كابيتال","الأهلي كابيتال","سدكو"]},
+  bl:[{t:"أداء MOMAH+",i:["مساهمة بـ18.5٪ من الناتج المحلي في 2024، مع توقع نمو سوق البناء من 263 إلى 342 مليار ريال بحلول 2029.","مساهمة بـ4.1 مليون وظيفة (~32٪ من التوظيف)، تشمل 690 ألف سعودي و300 ألف امرأة، وتحقيق ~17٪ من نسب التوطين.","جذب 23.9 مليار ريال استثمارات أجنبية في 2023، 65٪ منها للعقار والبناء، بتوليد 1.6 ريال إنفاق محلي لكل ريال مستثمر."]},
+   {t:"تحديثات سوق الإسكان",i:["الرياض واجهت أعلى من متوسط نمو أسعار العقار، متجاوزة باقي المدن الرئيسية في المملكة."]},
+   {t:"القرارات الخمسة ونظام التملك",i:["إصدار خمس قرارات تهدف إلى استقرار أسعار الأراضي والإيجارات.","إطار سياسات مرن يسمح بتملك غير السعوديين وفق ضوابط توازن بين جذب الاستثمار وحماية المصلحة الوطنية.","تصميم 13 ممكّناً لتفعيل السياسة، مع تحديد أولويات التنفيذ قبل فتح السوق حسب الجدول الزمني المستهدف."]},
+   {t:"أهم الأسئلة المطروحة",k:"q",i:["ما المنهجية المتّبعة في التنبؤ بفجوة العرض والطلب حتى 2030؟","ما التأثيرات المحتملة لنظام تملك غير السعوديين على مستويات الطلب وأسعار العقار؟","ما الضوابط المفروضة على تملك غير السعوديين، وكيف قُدّر أثرها على السوق؟","ما الانعكاسات المتوقعة للقرار الثاني (تطوير الأراضي السكنية المخططة) على الأسعار؟","ما المناطق المستهدفة لتوفير الأراضي السكنية المخططة؟","ما الإطار الزمني لتنفيذ القرار الثاني وكم يبلغ عدد الوحدات؟","ما الدور المتوقع للقرار الثالث في دعم النمو وتحفيز السوق؟"]},
+   {t:"مقترحات الجهات الخارجية",i:["استعراض المؤشرات الاقتصادية والاجتماعية والتأكيد على مشاركة أي بيانات إضافية.","طلب الحضور مشاركة بيانات تحليل فجوة العرض والطلب.","رغبة CBRE في معرفة المزيد عن القطاع، مع التنسيق مع فروعها عالمياً ولقاء ثنائي."]},
+   {t:"الخطوات القادمة",k:"n",i:["مشاركة العرض التقديمي والبيانات مع الحضور المعنيين.","مشاركة تفاصيل ورشة الربع الثالث (الورشة 12)."]}]},
+
+ {id:"w12",n:"12",sub:"الأولى لعام 2026",date:"16 فبراير 2026",place:"مقر الوزارة — حي العليا",count:"أكثر من 40 شخصاً",
+  msg:"تعزيز كفاءة الإطار التنظيمي وتطوير منظومة السوق العقاري بما يدعم استقرار السوق ويرسخ كفاءته ويعزز الشفافية وجاذبية الاستثمار.",
+  ov:"استعرضت الورشة أداء سوق الإسكان ومساهمته في الناتج المحلي غير النفطي، مع تسليط الضوء على محركات العرض والطلب. وناقشت السياسات التنظيمية المستحدثة، وعلى رأسها تجميد الإيجارات في الرياض ونظام رسوم الأراضي البيضاء والعقارات الشاغرة.",
+  figs:[["37","مشاركاً في قائمة الحضور"],["13","سؤالاً طُرح على ممثلي الوزارة"],["5","توصيات ناتجة"]],
+  ag:[["مقدمة ترحيبية","رئيس مركز ذكاء الأعمال ودعم القرار"],["أداء سوق الإسكان",""],["سياسة تجميد الإيجارات",""],["رسوم الأراضي البيضاء والعقارات الشاغرة",""],["نقاش مفتوح",""]],
+  ents:{"جهات المنظومة":["الهيئة العامة للعقار","برنامج الإسكان","NHC"],"ديوان الوزارة":["مركز ذكاء الأعمال","الإسكان التنموي","الدعم السكني","تحفيز المعروض","الاتصال المؤسسي"],"بيوت الخبرة":["Colliers","JLL","Knight Frank","CBRE","Mukatafa","Data Insights","Bayut KSA"],"الجهات التمويلية":["الراجحي المالية","الفرنسي كابيتال","SNB Capital","Aljazira Capital","الرياض المالية","Jadwa","SEDCO"]},
+  bl:[{t:"أداء السوق",i:["مساهمة أنشطة التشييد والعقار بنسبة مؤثرة من الناتج المحلي غير النفطي في الربع الثالث 2025.","نمو سكاني متسارع في المدن الرئيسية، وخصوصاً الرياض.","ارتفاع عدد الوظائف النشطة مدفوعاً بمبادرات التنويع والمشاريع الكبرى."]},
+   {t:"محركات العرض والتمويل",i:["نمو الائتمان العقاري وزيادة التمويل البنكي للقطاع.","ارتفاع واردات مواد البناء الممولة بنكياً.","نمو صناديق الاستثمار العقاري وتنويع قنوات التمويل."]},
+   {t:"تجميد الإيجارات — الرياض",i:["ضبط وتيرة نمو الإيجارات.","حماية المستأجرين وتعزيز استقرار السوق.","تنظيم العلاقة بين المالك والمستأجر وفق إطار نظامي واضح."]},
+   {t:"الأراضي البيضاء والعقارات الشاغرة",i:["تطوير النظام ورفع كفاءته.","فرض رسوم تحفيزية على الأراضي غير المطورة.","فرض رسوم على العقارات الشاغرة لإعادة المعروض للسوق.","آثار متوقعة تشمل زيادة المعروض وتعزيز المنافسة العادلة."]},
+   {t:"أهم الأسئلة المطروحة",k:"q",i:["ما تعريف «العقار الشاغر» المعتمد في النظام، وما نطاق تطبيقه (سكني/تجاري)؟","هل توجد عتبة أو مدة زمنية محددة لاعتبار العقار «شاغراً»، وكيف تُحتسب؟","متى يبدأ تطبيق رسوم العقار الشاغر على العقارات الجديدة؟ وهل توجد فترة سماح؟","ما آلية تسعير الإيجارات للعقارات الجديدة؟ وما المرجعية المعتمدة؟","كيف يتم تحديد السعر الجديد عند تجديد عقود الإيجار؟ وما حدود الزيادة المسموح بها؟","كيف يُحدد سقف الزيادة في العقود طويلة الأجل؟ وهل تتم مراجعته دورياً؟","ما معايير اعتبار أعمال الترميم أو التطوير «مؤثرة» على القيمة الإيجارية؟","إذا تجاوزت مدة البناء أو التطوير المدة المعتمدة، فما آلية التعامل؟","ما شروط تمديد مهلة التطوير عند تأخر التنفيذ لتجنب استحقاق الرسوم؟","عند بيع الأرض بعد صدور الفاتورة، من يتحمل السداد؟","ما أبرز مؤشرات قياس أثر التدخلات التنظيمية، وكيف تُحتسب؟","ما إطار تقييم السياسة في حال حدوث ظروف انكماشية أو انخفاض في الطلب؟","ما الأثر المتوقع لرسوم الأراضي البيضاء على التطوير العقاري؟"]},
+   {t:"مقترحات الشركات",i:["كتيّب تعريفي موجه للمستثمرين يوضح مستجدات التعديلات ويعزز الشفافية ووضوح الإطار التنظيمي.","تزويد الشركات والبنوك بالبيانات الداعمة."]},
+   {t:"التوصيات الناتجة",k:"n",i:["مشاركة نسخة العرض والبيانات مع الجهات المعنية والحضور لتعزيز الشفافية وتمكين التحليل.","عقد لقاءات ثنائية مع الشركات البحثية لحصر احتياجاتهم من البيانات بالتنسيق مع مكتب البيانات.","دراسة مقترح إعداد ونشر كتيب تعريفي موجه للمستثمرين.","الرفع بمخرجات دراسة طلبات البيانات والتوصيات لاعتمادها وفق الإجراءات النظامية.","الاستعداد المبكر لعقد الورشة الثالثة عشر والمستهدف انعقادها خلال مايو 2026، مع تطوير محاور الطرح."]}],
+  att:[["د. معاذ الخلف","مركز ذكاء الأعمال"],["ألاء الصنيع","مركز ذكاء الأعمال"],["عبد الملك الشبانات","مركز ذكاء الأعمال"],["د. بدر الزيد","مركز ذكاء الأعمال"],["جمال شرف","مركز ذكاء الأعمال"],["منصور دواس","مركز ذكاء الأعمال"],["روى الشيبان","مركز ذكاء الأعمال"],["نورة المنديل","مركز ذكاء الأعمال"],["أبرار العتيبي","مركز ذكاء الأعمال"],["سلطان الجريس","وكالة الإسكان التنموي"],["يوسف الدهش","وكالة الدعم السكني"],["أمجد العباسي","الاتصال المؤسسي"],["العنود الشويعر","الاتصال المؤسسي"],["عبدالمحسن الجماز","تحفيز المعروض"],["م. خالد آل طالع (عن بعد)","برنامج الإسكان"],["لطيفة الدويس","برنامج الإسكان"],["ألاء العقيل","برنامج الإسكان"],["عبدالرحمن الدهاسي","NHC"],["علي العبداني","NHC"],["م. عبدالله الحماد (عن بعد)","الهيئة العامة للعقار"],["وليد منشي","الهيئة العامة للعقار"],["عبدالرحمن البازعي","CBRE"],["ألاء الجاروشة","CBRE"],["سمو الأميرة العنود آل سعود","Mukatafa"],["سمو الأمير الوليد آل سعود","Mukatafa"],["خالد الزامل","Colliers"],["سعود السليماني","JLL"],["المها الغامدي","Knight Frank"],["د. محمد بن جامع","Data Insights"],["Benjamin Hough (عن بعد)","Bayut KSA"],["د. سلطان التويم","الراجحي المالية"],["Kaushic","الفرنسي كابيتال"],["إياد غلام","SNB Capital"],["جاسم الجبرين","Aljazira Capital"],["د. نايف الغيث","الرياض المالية"],["نوف الشريف","Jadwa"],["بشاير الهريش","سدكو"]]}
+];
+
+const DIR=[
+ ["عبدالرحمن الطويل","وكالة تحفيز المعروض","0504148204","A.Altawil@momah.gov.sa","داخلية"],["عبدالله الحماد","الهيئة العامة للعقار","","a.alhammad@rega.gov.sa","داخلية"],["محمد البطي","NHC","","m.buty@nhc.sa","داخلية"],["يوسف الدهش","وكالة الدعم السكني","0557555135","yaldahash@momah.gov.sa","داخلية"],["أحمد آل درويش","وزارة البلديات والإسكان","","a.aldarwish@momah.gov.sa","داخلية"],["ماجد المبدل","وزارة البلديات والإسكان","","mmubaddel@momah.gov.sa","داخلية"],["مصطفى الزعتري","وزارة البلديات والإسكان","","mzaatari-Contractor@momah.gov.sa","داخلية"],["سلطان الجريس","وكالة الإسكان التنموي","0505236630","s.aljorais@momah.gov.sa","داخلية"],["خالد آل طالع","برنامج الإسكان","","K.AlTala@housingvrp.gov.sa","داخلية"],["د. معاذ الخلف","مركز ذكاء الأعمال","0501650423","m.alkhalaf-contractor@momah.gov.sa","داخلية"],["محمد بوبشيت","وزارة البلديات والإسكان","","m.bubshait@momah.gov.sa","داخلية"],["عمار العمار","وزارة البلديات والإسكان","","a.Ammar@momah.gov.sa","داخلية"],["طارق الشهيب","برنامج سوم الأراضي البيضاء","","t.alshuhayeb@momah.gov.sa","داخلية"],["وليد منشي","الهيئة العامة للعقار","","wmunshi@rega.gov.sa","داخلية"],["تيسير مفرج","الهيئة العامة للعقار","","tmofarej@rega.gov.sa","داخلية"],["ألاء الصنيع","مركز ذكاء الأعمال","","a.elsanie@momah.gov.sa","داخلية"],["م. حمد العتيبي","وزارة البلديات والإسكان","","Hs.alotaibi@momah.gov.sa","داخلية"],["د. أماني السالم","وزارة البلديات والإسكان","","aialsalem@momah.gov.sa","داخلية"],["عبدالملك الشبانات","مركز ذكاء الأعمال","0543360487","a.shabanat@momah.gov.sa","داخلية"],["د. بدر بن زيد","مركز ذكاء الأعمال","","b.binzaid@momah.gov.sa","داخلية"],["روى الشيبان","مركز ذكاء الأعمال","0558139432","rbalshiban-Contractor@momah.gov.sa","داخلية"],["د. خالد النفاعي","وزارة البلديات والإسكان","0505269499","khnifiai@momah.gov.sa","داخلية"],["عبدالعزيز الثنيان","وزارة البلديات والإسكان","0552117849","A.thanayan@momah.gov.sa","داخلية"],["خالد القحطاني","وزارة البلديات والإسكان","0552233611","k.qahtani@momah.gov.sa","داخلية"],["فهد المناع","وزارة البلديات والإسكان","","falmanaa@momah.gov.sa","داخلية"],["جمال شرف","مركز ذكاء الأعمال","","gsharaf-Contractor@momah.gov.sa","داخلية"],["فهد التخيفي","وحدة مستشاري معالي الوزير","0504481611","","داخلية"],["سيف السويلم","الاتصال المؤسسي","","","داخلية"],["ناصر الشلفان","المرافق","0559902299","TAOM@MOMAH.GOV.SA","داخلية"],["عبدالرحمن أبو شايع","الاتصال المؤسسي","0559776667","a.abushayi@momah.gov.sa","داخلية"],["هليل البقمي","NHC","0565553399","h.albgami@nhc.sa","داخلية"],["فيصل الصويغ","NHC","","F.alsowaygh@nhc.sa","داخلية"],["ماجد الشميمري","NHC","0566446336","m.alshmimari@nhc.sa","داخلية"],["صالح العنزي","NHC","0500405005","ssanzipr@gmail.com","داخلية"],["زبير حسن","SRC","","zhasan@srco.com.sa","داخلية"],["صالح الحيدر","SRC","","salhaider@srco.com.sa","داخلية"],["أحمد الغامدي","SRC","","aalghamdi@srco.com.sa","داخلية"],["عبدالرحمن الذكير","SRC","","aalthukair@srco.com.sa","داخلية"],["ماجد العبدالجبار","SRC","","","داخلية"],["فهد الفهيد","الهيئة العامة للعقار","0501789241","fahadaziz86@hotmail.com","داخلية"],["محمد القحطاني","الهيئة العامة للعقار","0505333259","Malkahtany@rega.gov.sa","داخلية"],["علي المبارك","الهيئة العامة للعقار","0555460852","aalmubarak@rega.gov.sa","داخلية"],
+ ["Nouf Alsharif","Jadwa Investment","0505287504","Nalsharif@jadwa.com","خارجية"],["خالد الزيبق","Colliers","0533124999","Khalid.alzaibag@colliers.com","خارجية"],["Farah Chatila","Colliers","","farah.chatila@colliers.com","خارجية"],["خالد الزامل","Colliers","","","خارجية"],["Kaushic","الفرنسي كابيتال","","Kchaudhury@bsfcapital.sa","خارجية"],["فيصل العنقري","الفرنسي كابيتال","0566901238","Faisal.0022@outlook.com","خارجية"],["Mohamad Itani","Knight Frank","0506413473","Mohamad.itani@me.knightfrank.com","خارجية"],["المها الغامدي","Knight Frank","0556454092","almaha.alghamdi@me.knightfrank.com","خارجية"],["بشاير الهريش","سدكو القابضة","0553395101","bashayerh@sedco.com","خارجية"],["إياد غلام","SNB Capital","0504365448","i.ghulam@alahlicapital.com","خارجية"],["سعود السليماني","JLL","0558838883","saud.alsulaimani@jll.com","خارجية"],["د. محمد بن جامع","Data Insights","0505140909","mohammad@datainsight.com.sa","خارجية"],["Fahad Irfan","Aljazira Capital","","f.Irfan@aljaziracapital.com.sa","خارجية"],["Jassim Aljubran","Aljazira Capital","0553915525","j.aljubran@aljaziracapital.com.sa","خارجية"],["عبدالرحمن النافع","الإنماء للاستثمار","0550624768","abdulalnafia@gmail.com","خارجية"],["د. سلطان التويم","الراجحي المالية","0504433544","AltowaimS@alrajhi-capital.sa","خارجية"],["د. نايف الغيث","الرياض المالية","0599997951","naif.al-ghaith@riyadbank.com","خارجية"],["عبدالرحمن البازعي","CBRE","0558175231","Abdulrahman.Albazie@cbre.com","خارجية"],["Alaa Aljarousha","CBRE","0500453311","Alaa.aljarousha@cbre.com","خارجية"],["Davide Capitanio","OceanX","","davide@oceanx.sa","خارجية"],["Vmercurio Mercurio","OceanX","","Vmercurio@oceanx.sa","خارجية"],["أفنان الناجم","OceanX","0503388330","Anajem@oceanx.sa","خارجية"],["الأميرة العنود آل سعود","Mukatafa","","a.alsaud@mukatafa.com","خارجية"],["ناهد الغزاوي","صندوق الفعاليات الاستثماري","0500068555","nghazzawi@eif.gov.sa","خارجية"],["إدارة الأبحاث","البلاد المالية","0112906250","research@albilad-capital.com","خارجية"],["فارس القحطاني","صكوك","0530976522","","خارجية"],["د. ماجد المزيني","كابسارك","0594174042","majed.mozaini@kapsarc.org","خارجية"],["د. فهد التركي","مستشار مستقل","","","خارجية"]
+];
+
+const PHASES=[
+ {id:"p1",tag:"الأسبوع 1",title:"التخطيط والمواءمة",wk:0,tasks:[{id:"t1",n:"تعريف الورشة وسياقها",o:"مركز ذكاء الأعمال",s:2},{id:"t2",n:"تحديد الهدف الرئيسي",o:"مركز ذكاء الأعمال",s:2},{id:"t3",n:"صياغة الرسالة الاستراتيجية واعتمادها",o:"مركز ذكاء الأعمال",s:2},{id:"t4",n:"إرسال استطلاع تحديد التاريخ",o:"مركز ذكاء الأعمال",s:1},{id:"t5",n:"إعداد قائمة أصحاب المصلحة",o:"مركز ذكاء الأعمال",s:1},{id:"t6",n:"تثبيت موعد الورشة النهائي",o:"مركز ذكاء الأعمال",s:0}]},
+ {id:"p2",tag:"الأسبوع 2",title:"الإعداد والمحتوى",wk:1,tasks:[{id:"t7",n:"اعتماد المحاور من القيادة",o:"مركز ذكاء الأعمال",s:1},{id:"t8",n:"إعداد محتوى العرض",o:"مركز ذكاء الأعمال",s:1},{id:"t9",n:"تجهيز نموذج التسجيل (QR)",o:"مركز ذكاء الأعمال",s:0},{id:"t10",n:"إرسال الدعوات للجهات",o:"مركز ذكاء الأعمال",s:0}]},
+ {id:"p3",tag:"الأسبوع 3",title:"اللوجستيات",wk:2,tasks:[{id:"t11",n:"تحديد المكان وشكل القاعة",o:"المرافق",s:0},{id:"t12",n:"تأكيد التجهيزات التقنية",o:"تقنية المعلومات",s:0},{id:"t13",n:"الضيافة وتعليمات الدخول",o:"الشؤون الإدارية",s:0},{id:"t14",n:"تنسيق التغطية الإعلامية",o:"الاتصال المؤسسي",s:0}]},
+ {id:"p4",tag:"الأسبوع 4",title:"التنفيذ والتقييم",wk:3,tasks:[{id:"t15",n:"عقد الورشة",o:"مركز ذكاء الأعمال",s:0},{id:"t16",n:"جمع تقييمات المشاركين",o:"مركز ذكاء الأعمال",s:0},{id:"t17",n:"إعداد المحضر ومشاركة العرض",o:"مركز ذكاء الأعمال",s:0}]}
+];
+
+const S_TASK=[{l:"لم تبدأ",c:"st-0"},{l:"تحت التنفيذ",c:"st-1"},{l:"مكتملة",c:"st-2"}];
+
+/* ═══ الحالة ═══ */
+const DEF=()=>{const tasks={};
+ PHASES.forEach(p=>p.tasks.forEach(t=>tasks[t.id]=t.s));
+ return{tasks,sel:["a1","a2","a3"],open:[],notes:"",dirF:"الكل",arch:"w12",saved:null};};
+let S=DEF(); const KEY="rasd-v3";
+async function load(){try{const r=await window.storage.get(KEY);if(r&&r.value)S=Object.assign(DEF(),JSON.parse(r.value));}catch(e){}}
+let tm=null;
+function save(){S.saved=new Date().toISOString();clearTimeout(tm);
+ tm=setTimeout(async()=>{try{await window.storage.set(KEY,JSON.stringify(S));}catch(e){}
+ const el=$("#saved");el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1200);},300);}
+
+const wd=()=>mid(new Date(WDATE+"T00:00:00"));
+const td=()=>mid(new Date());
+function pr(wk){const e=new Date(wd().getTime()-(3-wk)*7*DAY);return{s:new Date(e.getTime()-7*DAY),e};}
+const isLate=(p,t)=>S.tasks[t]!==2&&td()>pr(p.wk).e;
+function curPh(){const t=td();for(const p of PHASES){const r=pr(p.wk);if(t>=r.s&&t<r.e)return p.id;}return null;}
+const btn=(k,id,i,set)=>`<button class="st ${set[i].c}" data-k="${k}" data-i="${id}">${set[i].l}</button>`;
+
+/* ═══ الرسم ═══ */
+function drawHome(){
+ const days=Math.max(0,Math.round((wd()-td())/DAY));
+ $("#h-days").innerHTML=days+'<small> يوم</small>';
+ $("#h-date").textContent=fL.format(wd());
+ const all=PHASES.flatMap(p=>p.tasks),done=all.filter(t=>S.tasks[t.id]===2).length,doing=all.filter(t=>S.tasks[t.id]===1).length;
+ const pct=Math.round((done+doing*.5)/all.length*100);
+ $("#h-ready").innerHTML=pct+'<small>٪</small>';
+ $("#h-tasks").textContent=done+" من "+all.length+" مهمة";
+ $("#tl").innerHTML=HISTORY.map(h=>`<div class="tlc ${h.now?"now":""}" data-go="${h.id}">
+  <div class="no num">${h.no}</div><div class="dt">${esc(h.d)}</div><div class="ms">${esc(h.m)}</div></div>`).join("");
+ $("#chips-sent").innerHTML=SENT.map(s=>`<span class="chip">${esc(s)}</span>`).join("");
+}
+
+function drawAxes(){
+ const render=k=>AXES.filter(a=>a.kind===k).map(a=>{
+  const sel=S.sel.includes(a.id),open=S.open.includes(a.id);
+  return `<div class="axis ${sel?"sel":""} ${open?"open":""}" data-ax="${a.id}">
+   <div class="axis-top" data-toggle="${a.id}">
+    <div class="axis-check"><svg viewBox="0 0 24 24" fill="none" stroke="#06251F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <div class="axis-main">
+     <div class="axis-tags">
+      <span class="atag ${a.kind==="core"?"core":"alt"}">${a.kind==="core"?"أساسي":"بديل"}</span>
+      <span class="atag time">${a.min} دقيقة</span>
+      ${a.note?`<span class="atag">${esc(a.note)}</span>`:""}
+     </div>
+     <div class="axis-t">${esc(a.t)}</div>
+     <div class="axis-s">${esc(a.s)}</div>
+    </div>
+   </div>
+   <button class="axis-more" data-more="${a.id}">${open?"إخفاء التفاصيل":"عرض التفاصيل"}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+   <div class="axis-body"><div class="axis-items">${a.items.map(i=>`<div class="aitem"><div class="t">${esc(i.t)}</div><div class="d">${esc(i.d)}</div></div>`).join("")}</div></div>
+  </div>`;}).join("");
+ $("#axes-core").innerHTML=render("core");
+
+ const picked=AXES.filter(a=>S.sel.includes(a.id));
+ const mins=picked.reduce((s,a)=>s+a.min,0), total=mins+FIXED;
+ $("#pk-min").textContent=total;
+ $("#pk-total").textContent=picked.length?`${picked.length} محاور مختارة · ${mins} دقيقة للمحاور + ${FIXED} دقيقة ثابتة`:"لم تُختر محاور بعد";
+ const cap=120, w=Math.min(100,total/cap*100);
+ $("#pk-bar").style.width=w+"%";
+ $("#pk-barw").classList.toggle("over",total>100);
+
+ $("#recap").innerHTML=picked.length
+  ? `<div class="rrow"><span class="rn num">—</span><span class="rt">افتتاح الورشة</span><span class="rm">5 دقائق</span></div>
+     <div class="rrow"><span class="rn num">—</span><span class="rt">نظرة عامة على أداء السوق — القسم الثابت</span><span class="rm">20 دقيقة</span></div>`
+   + picked.map((a,i)=>`<div class="rrow"><span class="rn num">${i+1}</span><span class="rt">${esc(a.t)}</span><span class="rm">${a.min} دقيقة</span></div>`).join("")
+   + `<div class="rrow"><span class="rn num">—</span><span class="rt">التوصيات والخطوات التالية</span><span class="rm">10 دقائق</span></div>`
+  : `<div class="rempty">اختر محوراً واحداً على الأقل لعرض الأجندة الناتجة.</div>`;
+
+ $("#v-sel").textContent=picked.length;
+ $("#s-sel").textContent=`من ${AXES.length} مطروحة · ${total} دقيقة`;
+}
+
+function drawPlan(){
+ const all=PHASES.flatMap(p=>p.tasks),done=all.filter(t=>S.tasks[t.id]===2).length,doing=all.filter(t=>S.tasks[t.id]===1).length;
+ const pct=Math.round((done+doing*.5)/all.length*100);
+ let late=0;PHASES.forEach(p=>p.tasks.forEach(t=>{if(isLate(p,t.id))late++;}));
+ $("#ring").style.strokeDashoffset=358*(1-pct/100);
+ $("#ring-p").innerHTML=pct+'<small>٪</small>';
+ const st=pr(0).s,en=wd();
+ const el=Math.min(100,Math.max(0,Math.round((td()-st)/(en-st)*100))),gap=pct-el;
+ $("#ring-n").innerHTML=el<=0?"لم تبدأ فترة التنفيذ بعد":`انقضى <b>${el}٪</b> من زمن الخطة<br>`+(gap>=5?"التنفيذ متقدّم":gap<=-5?"التنفيذ متأخر":"التنفيذ في المسار");
+ $("#v-late").textContent=late;$("#bn-late").className="bn"+(late?" hot":" good");
+ $("#s-late").textContent=late?"تحتاج معالجة":"لا يوجد تأخير";
+ $("#v-tasks").innerHTML=done+'<small> / '+all.length+'</small>';
+ $("#s-tasks").textContent=doing?doing+" تحت التنفيذ":"عبر أربع مراحل";
+ const mins=AXES.filter(a=>S.sel.includes(a.id)).reduce((x,a)=>x+a.min,0)+FIXED;
+ $("#v-mins").innerHTML=mins+'<small> د</small>';
+ $("#s-mins").textContent=S.sel.length+" محاور + القسم الثابت";
+
+ const cur=curPh();
+ $("#sky").innerHTML=PHASES.map(p=>`<div class="skp ${p.id===cur?"cur":""}"><div class="skb">${p.tasks.map(t=>{
+  const s=S.tasks[t.id],lt=isLate(p,t.id),h=s===2?100:s===1?55:16,c=s===2?"done":lt?"late":s===1?"doing":"";
+  return `<span class="skbar ${c}" style="height:${h}%" title="${esc(t.n)}"></span>`;}).join("")}</div>
+  <div class="skl"><b>${esc(p.tag)}</b> — ${esc(p.title)}${p.id===cur?" • الحالي":""}</div></div>`).join("");
+
+ const span=en-st;
+ let tk="";for(let i=0;i<=4;i++){const d=new Date(st.getTime()+i*7*DAY);tk+=`<span class="gt num" style="right:${i/4*100}%">${fD.format(d)}</span>`;}
+ $("#gs").innerHTML=tk;$("#g-range").textContent=fD.format(st)+" — "+fD.format(en);
+ const t=td(),np=t<st?null:t>en?100:(t-st)/span*100;
+ $("#gantt").innerHTML=PHASES.map(p=>{const r=pr(p.wk),off=(r.s-st)/span*100,w=(r.e-r.s)/span*100;
+  const d=p.tasks.filter(x=>S.tasks[x.id]===2).length,pc=Math.round(d/p.tasks.length*100);
+  return `<div class="gr"><div class="gl"><b>${esc(p.title)}</b><span class="num">${fD.format(r.s)} — ${fD.format(r.e)}</span></div>
+   <div class="gtr"><div class="gb ${p.id===cur?"cur":""}" style="right:${off}%;width:${w}%"><i style="width:${pc}%"></i><span class="num">${pc}٪</span></div>
+   ${np!==null&&p.wk===0?`<div class="gnow" style="right:${np}%"></div>`:""}</div></div>`;}).join("");
+
+ $("#plan").innerHTML=PHASES.map(p=>{const r=pr(p.wk),d=p.tasks.filter(t=>S.tasks[t.id]===2).length,pc=Math.round(d/p.tasks.length*100);
+  return `<div class="box" style="margin-bottom:14px"><div class="phh"><span class="phtag ${p.id===cur?"cur":""}">${esc(p.tag)}</span>
+   <span class="phti">${esc(p.title)}</span><span class="phc num">${fD.format(r.s)} — ${fD.format(r.e)}</span>
+   <span class="phc num">${d} من ${p.tasks.length}</span><span class="phm"><i style="width:${pc}%"></i></span></div>
+   ${p.tasks.map(t=>`<div class="tsk ${S.tasks[t.id]===2?"done":""}"><span class="tskn">${esc(t.n)}</span>
+    ${isLate(p,t.id)?'<span class="latetag">متأخرة</span>':""}<span class="tsko">${esc(t.o)}</span>
+    ${btn("task",t.id,S.tasks[t.id],S_TASK)}</div>`).join("")}</div>`;}).join("");
+}
+
+function blk(b){
+ if(b.k==="q")return `<div class="box"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><h3 style="font-family:var(--fd);font-size:15px;color:var(--lime)">${esc(b.t)}</h3><span style="font-size:11.5px;color:var(--txt3)" class="num">${b.i.length} سؤالاً</span></div>
+  <div class="qs">${b.i.map((q,n)=>`<div class="qi"><span class="qn num">${n+1}</span><span>${esc(q)}</span></div>`).join("")}</div></div>`;
+ if(b.k==="n")return `<div class="hd"><h2>${esc(b.t)}</h2><span class="ln"></span><span class="pill num">${b.i.length}</span></div>
+  <div class="recs">${b.i.map((x,n)=>`<div class="rec"><span class="rn num">${n+1}</span><span class="rt">${esc(x)}</span></div>`).join("")}</div>`;
+ return `<div class="pcard"><div class="ph">${esc(b.t)}<em>${b.i.length} نقاط</em></div>${b.i.map(x=>`<div class="pt">${esc(x)}</div>`).join("")}</div>`;
+}
+
+function drawArch(){
+ $("#wtabs").innerHTML=ARCHIVE.map(w=>`<button class="wtab ${S.arch===w.id?"on":""}" data-w="${w.id}"><b>الورشة ${esc(w.n)}</b><span>${esc(w.date)}</span></button>`).join("");
+ const w=ARCHIVE.find(x=>x.id===S.arch)||ARCHIVE[3];
+ let h=`<div class="wband"><div class="wband-top">
+  <div class="big num">${esc(w.n)}<span>${esc(w.sub)}</span></div>
+  <div class="qq"><div class="k">الرسالة الاستراتيجية</div><p>${esc(w.msg)}</p></div></div>
+  <div class="wmeta"><div><div class="k">التاريخ</div><div class="v">${esc(w.date)}</div></div>
+   <div><div class="k">المكان</div><div class="v">${esc(w.place)}</div></div>
+   <div><div class="k">الحضور</div><div class="v">${esc(w.count)}</div></div></div></div>`;
+ h+=`<div class="hd"><h2>أرقام بارزة</h2><span class="ln"></span></div><div class="figs">
+  ${w.figs.map(f=>`<div class="fig"><div class="n">${esc(f[0])}</div><div class="d">${esc(f[1])}</div></div>`).join("")}</div>`;
+ h+=`<div class="hd"><h2>الملخص العام</h2><span class="ln"></span></div><div class="box"><p class="lead">${esc(w.ov)}</p></div>`;
+ h+=`<div class="hd"><h2>الأجندة وجهات الحضور</h2><span class="ln"></span></div><div class="grid2">
+  <div class="box"><div class="steps">${w.ag.map((a,i)=>`<div class="step" data-n="${i+1}"><div class="t">${esc(a[0])}</div>${a[1]?`<div class="d">${esc(a[1])}</div>`:""}</div>`).join("")}</div></div>
+  <div class="box">${Object.entries(w.ents).map(([k,v])=>`<div class="cgroup"><div class="ct">${esc(k)}</div><div class="chips">${v.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div>`).join("")}</div></div>`;
+ const pl=w.bl.filter(b=>!b.k),sp=w.bl.filter(b=>b.k);
+ if(pl.length)h+=`<div class="hd"><h2>أبرز النقاشات</h2><span class="ln"></span><span class="pill num">${pl.length} محاور</span></div><div class="grid2">${pl.map(blk).join("")}</div>`;
+ sp.forEach(b=>{h+=`<div style="margin-top:18px">${blk(b)}</div>`;});
+ if(w.att)h+=`<div class="hd"><h2>أسماء الحضور</h2><span class="ln"></span><span class="pill num">${w.att.length} مشاركاً</span></div>
+  <div class="tw"><table><tr><th>الاسم</th><th>الجهة</th></tr>${w.att.map(a=>`<tr><td>${esc(a[0])}</td><td class="dim">${esc(a[1])}</td></tr>`).join("")}</table></div>`;
+ $("#warch").innerHTML=h;
+}
+
+function drawDir(){
+ const q=($("#dir-q").value||"").trim().toLowerCase();
+ const cats=["الكل","داخلية","خارجية"];
+ $("#dir-filts").innerHTML=cats.map(c=>{const n=c==="الكل"?DIR.length:DIR.filter(d=>d[4]===c).length;
+  return `<button class="filt ${S.dirF===c?"on":""}" data-df="${c}">${c} <span class="num">${n}</span></button>`;}).join("");
+ const l=DIR.filter(d=>(S.dirF==="الكل"||d[4]===S.dirF)&&(!q||(d[0]+d[1]+d[3]).toLowerCase().includes(q)));
+ $("#dir-count").textContent=l.length+" من "+DIR.length;
+ $("#tbl-dir").innerHTML=`<tr><th>الاسم</th><th>الجهة</th><th>الجوال</th><th>البريد</th></tr>`+
+  (l.length?l.map(d=>`<tr><td>${esc(d[0])}</td><td class="dim">${esc(d[1])}</td><td class="dim num">${esc(d[2])||"—"}</td>
+   <td>${d[3]?`<a href="mailto:${esc(d[3])}">${esc(d[3])}</a>`:'<span class="dim">—</span>'}</td></tr>`).join("")
+   :`<tr><td colspan="4" class="dim">لا توجد نتائج.</td></tr>`);
+}
+
+function drawAll(){drawHome();drawAxes();drawPlan();drawArch();drawDir();$("#notes").value=S.notes||"";}
+
+function go(v){
+ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.v===v));
+ document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id===v));
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ═══ التفاعل ═══ */
+document.addEventListener("click",e=>{
+ const tab=e.target.closest(".tab"); if(tab){go(tab.dataset.v);return;}
+ const tl=e.target.closest("[data-go]");
+ if(tl){const id=tl.dataset.go;if(id==="w13"){go("v-axes");}else{S.arch=id;drawArch();go("v-arch");save();}return;}
+ const more=e.target.closest("[data-more]");
+ if(more){const id=more.dataset.more;const i=S.open.indexOf(id);
+  if(i<0)S.open.push(id);else S.open.splice(i,1);drawAxes();save();return;}
+ const tog=e.target.closest("[data-toggle]");
+ if(tog){const id=tog.dataset.toggle;const i=S.sel.indexOf(id);
+  if(i<0)S.sel.push(id);else S.sel.splice(i,1);drawAxes();drawPlan();save();return;}
+ const w=e.target.closest(".wtab"); if(w){S.arch=w.dataset.w;drawArch();save();window.scrollTo({top:0,behavior:"smooth"});return;}
+ const st=e.target.closest(".st");
+ if(st){const{k,i}=st.dataset;
+  if(k==="task"){S.tasks[i]=(S.tasks[i]+1)%3;drawPlan();drawHome();}
+  save();return;}
+ const f=e.target.closest(".filt");
+ if(f&&f.dataset.df){S.dirF=f.dataset.df;drawDir();save();}
+});
+
+$("#pk-core").addEventListener("click",()=>{S.sel=["a1","a2","a3"];drawAxes();drawPlan();save();});
+$("#pk-clear").addEventListener("click",()=>{S.sel=[];drawAxes();drawPlan();save();});
+$("#pk-print").addEventListener("click",()=>{go("v-axes");setTimeout(()=>window.print(),120);});
+document.addEventListener("input",e=>{
+ if(e.target.id==="notes"){S.notes=e.target.value;save();}
+ if(e.target.id==="dir-q")drawDir();});
+$("#b-prn").addEventListener("click",()=>window.print());
+$("#b-exp").addEventListener("click",()=>{const b=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="rasd13-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(a.href);});
+$("#b-rst").addEventListener("click",()=>{if(!confirm("إعادة كل شيء إلى وضعه الأول؟"))return;S=DEF();drawAll();save();});
+setInterval(()=>{drawHome();drawPlan();},60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){drawHome();drawPlan();}});
+(async()=>{await load();drawAll();})();
+</script>
+</body>
+</html>

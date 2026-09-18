@@ -1,0 +1,729 @@
+<title>الأرشيف التنظيمي لوزارة البلديات والإسكان</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#eef1ee; --surface:#ffffff; --surface-2:#f6f8f5;
+  --ink:#182420; --muted:#5b6b62; --faint:#85938b;
+  --border:#dde4de; --border-strong:#c8d2ca;
+  --accent:#1f6f5c; --accent-strong:#134a3c; --accent-soft:#e3efe9;
+  --ok:#2f8f5b; --ok-bg:#e6f4ec;
+  --warn:#b7791f; --warn-bg:#faf0dd;
+  --bad:#c0453b; --bad-bg:#fbe6e4;
+  --info:#3a6ea5; --info-bg:#e6eef7;
+  --neutral:#6b7772; --neutral-bg:#eceeec;
+  --shadow:0 1px 2px rgba(20,40,30,.05),0 8px 24px -12px rgba(20,40,30,.12);
+  --radius:14px; --radius-sm:9px;
+  font-synthesis:none;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e1411; --surface:#161e1a; --surface-2:#1b2520;
+    --ink:#e8efea; --muted:#9caea4; --faint:#6f8078;
+    --border:#28332d; --border-strong:#33413a;
+    --accent:#54c19d; --accent-strong:#7ad3b3; --accent-soft:#193029;
+    --ok:#54b880; --ok-bg:#15291d; --warn:#d6a44a; --warn-bg:#2b2212;
+    --bad:#e2695f; --bad-bg:#2e1614; --info:#7aa8d6; --info-bg:#13202e;
+    --neutral:#8a968f; --neutral-bg:#202824;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#eef1ee; --surface:#ffffff; --surface-2:#f6f8f5;
+  --ink:#182420; --muted:#5b6b62; --faint:#85938b;
+  --border:#dde4de; --border-strong:#c8d2ca;
+  --accent:#1f6f5c; --accent-strong:#134a3c; --accent-soft:#e3efe9;
+  --ok:#2f8f5b; --ok-bg:#e6f4ec; --warn:#b7791f; --warn-bg:#faf0dd;
+  --bad:#c0453b; --bad-bg:#fbe6e4; --info:#3a6ea5; --info-bg:#e6eef7;
+  --neutral:#6b7772; --neutral-bg:#eceeec;
+  --shadow:0 1px 2px rgba(20,40,30,.05),0 8px 24px -12px rgba(20,40,30,.12);
+}
+:root[data-theme="dark"]{
+  --bg:#0e1411; --surface:#161e1a; --surface-2:#1b2520;
+  --ink:#e8efea; --muted:#9caea4; --faint:#6f8078;
+  --border:#28332d; --border-strong:#33413a;
+  --accent:#54c19d; --accent-strong:#7ad3b3; --accent-soft:#193029;
+  --ok:#54b880; --ok-bg:#15291d; --warn:#d6a44a; --warn-bg:#2b2212;
+  --bad:#e2695f; --bad-bg:#2e1614; --info:#7aa8d6; --info-bg:#13202e;
+  --neutral:#8a968f; --neutral-bg:#202824;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI","Noto Sans Arabic",Tahoma,"Geeza Pro","Helvetica Neue",system-ui,sans-serif;
+  direction:rtl;line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px 80px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+header{padding:44px 0 22px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;
+  color:var(--accent-strong);background:var(--accent-soft);padding:5px 12px;border-radius:999px;font-weight:600;margin-bottom:16px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(25px,4.3vw,38px);line-height:1.18;margin:0 0 12px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+.lede{font-size:16px;color:var(--muted);max-width:74ch;margin:0}
+.themebtn{position:absolute;inset-inline-start:20px;top:24px;background:var(--surface);border:1px solid var(--border-strong);
+  color:var(--muted);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:17px;display:grid;place-items:center;transition:.15s}
+.themebtn:hover{color:var(--ink);border-color:var(--accent)}
+.topbar{position:relative}
+.notice{display:flex;gap:12px;background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);
+  border-radius:var(--radius-sm);padding:13px 16px;margin:20px 0 4px;font-size:13.5px;color:var(--ink)}
+.notice b{color:var(--warn)}
+.notice .ic{flex:0 0 auto;font-size:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow)}
+.kpi .n{font-size:29px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .l{font-size:12.5px;color:var(--muted);margin-top:7px}
+.kpi.ok .n{color:var(--ok)}.kpi.warn .n{color:var(--warn)}.kpi.info .n{color:var(--info)}.kpi.accent .n{color:var(--accent)}
+.kpi .bar{height:3px;border-radius:2px;margin-top:10px;background:var(--border)}
+.controls{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(8px);padding:13px 0;margin-bottom:4px;border-bottom:1px solid var(--border)}
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1 1 260px;position:relative}
+.search input{width:100%;background:var(--surface);border:1px solid var(--border-strong);color:var(--ink);
+  border-radius:10px;padding:11px 40px 11px 14px;font:inherit;font-size:14.5px}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search .mag{position:absolute;inset-inline-start:13px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:15px}
+select.sort{background:var(--surface);border:1px solid var(--border-strong);color:var(--ink);border-radius:10px;
+  padding:11px 12px;font:inherit;font-size:14px;cursor:pointer}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.chip{background:var(--surface);border:1px solid var(--border-strong);color:var(--muted);border-radius:999px;
+  padding:6px 13px;font-size:13px;cursor:pointer;transition:.13s;white-space:nowrap;font-family:inherit}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.chip .c{opacity:.7;font-variant-numeric:tabular-nums;margin-inline-start:5px;font-size:11.5px}
+.grouplbl{font-size:11px;color:var(--faint);align-self:center;margin-inline-end:2px;letter-spacing:.04em}
+.resultline{font-size:13px;color:var(--muted);margin:15px 2px 12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.resultline b{color:var(--ink);font-variant-numeric:tabular-nums}
+.list{display:flex;flex-direction:column;gap:10px}
+.doc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.doc.hasv{border-inline-start:3px solid var(--warn)}
+.dhead{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;padding:15px 17px;cursor:pointer}
+.dhead:hover{background:var(--surface-2)}
+.dtitle{display:flex;flex-direction:column;gap:7px;min-width:0}
+.dtitle .nm{font-size:15.5px;font-weight:700;line-height:1.4}
+.dmeta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--muted)}
+.dmeta .dot{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.pill{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;line-height:1.5}
+.pill.type{background:var(--accent-soft);color:var(--accent-strong)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st.ok{background:var(--ok-bg);color:var(--ok)}.st.warn{background:var(--warn-bg);color:var(--warn)}
+.st.bad{background:var(--bad-bg);color:var(--bad)}.st.info{background:var(--info-bg);color:var(--info)}
+.dright{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:end}
+.chev{color:var(--faint);font-size:13px;transition:transform .2s;user-select:none}
+.doc.open .chev{transform:rotate(180deg)}
+.vcount{font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;display:inline-flex;gap:5px;align-items:center}
+.vbadge{background:var(--warn-bg);color:var(--warn);font-weight:700;padding:1px 7px;border-radius:5px;font-size:10.5px}
+.dbody{display:none;border-top:1px solid var(--border);padding:4px 17px 18px}
+.doc.open .dbody{display:block}
+.updrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:14px 0 4px;font-size:13.5px}
+.updrow .lbl{color:var(--muted)}
+.tl-h{font-size:12px;letter-spacing:.05em;color:var(--faint);font-weight:700;margin:18px 0 2px}
+.tl{position:relative;padding-inline-start:22px;margin:10px 0 2px}
+.tl::before{content:"";position:absolute;inset-inline-start:5px;top:8px;bottom:8px;width:2px;background:var(--border-strong)}
+.ev{position:relative;padding:7px 0 13px}
+.ev::before{content:"";position:absolute;inset-inline-start:-21px;top:10px;width:11px;height:11px;border-radius:50%;
+  background:var(--surface);border:2.5px solid var(--warn)}
+.ev.cur::before{border-color:var(--ok);background:var(--ok)}
+.ev .ed{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+.ev .edate{font-weight:700;font-size:13.5px;font-variant-numeric:tabular-nums}
+.ev .etag{font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:700}
+.ev.cur .etag{background:var(--ok-bg);color:var(--ok)}
+.ev:not(.cur) .etag{background:var(--bad-bg);color:var(--bad)}
+.ev .etxt{font-size:12.5px;color:var(--muted);margin-top:3px;max-width:78ch}
+.ev .evlink{margin-top:7px}
+.links{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--border)}
+.lk{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:9px;
+  border:1px solid var(--border-strong);color:var(--ink);background:var(--surface);transition:.13s}
+.lk:hover{text-decoration:none;border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.lk.pdf{border-color:color-mix(in srgb,var(--bad) 40%,transparent);color:var(--bad)}
+.lk.pdf:hover{background:var(--bad-bg);border-color:var(--bad)}
+.lk.old{border-style:dashed}
+.lk .i{font-size:14px}
+.notebox{font-size:12.5px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 13px;margin-top:12px;line-height:1.65}
+.diffbox{margin-top:14px;border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);background:var(--warn-bg);
+  border-radius:var(--radius-sm);padding:13px 15px}
+.diffbox .dh{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--warn);font-size:13.5px;margin-bottom:7px}
+.diffbox .ds{font-size:13.5px;color:var(--ink);margin-bottom:9px;font-weight:600}
+.diffbox ul{margin:0;padding-inline-start:20px}
+.diffbox li{font-size:13px;color:var(--ink);margin-bottom:5px;line-height:1.6}
+.diffbox .dn{font-size:12px;color:var(--muted);margin-top:9px;padding-top:8px;border-top:1px dashed color-mix(in srgb,var(--warn) 30%,transparent)}
+.diffbox .cf{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-inline-start:auto}
+.diffbox .cf.high{background:var(--ok-bg);color:var(--ok)}
+.diffbox .cf.struct{background:var(--info-bg);color:var(--info)}
+/* Assistant */
+.assistant{background:var(--surface);border:1px solid var(--accent);border-radius:var(--radius);padding:16px 18px;margin:22px 0;box-shadow:var(--shadow)}
+.as-head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.as-ic{font-size:22px;background:var(--accent-soft);width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto}
+.as-t{font-weight:800;font-size:15.5px}
+.as-s{font-size:12px;color:var(--muted);margin-top:2px}
+.as-inrow{display:flex;gap:9px}
+.as-inrow input{flex:1;background:var(--surface-2);border:1px solid var(--border-strong);color:var(--ink);
+  border-radius:10px;padding:11px 14px;font:inherit;font-size:14px}
+.as-inrow input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.as-inrow button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:0 20px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.13s}
+.as-inrow button:hover{background:var(--accent-strong)}
+.as-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.as-chip{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);border-radius:999px;
+  padding:5px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.13s}
+.as-chip:hover{border-color:var(--accent);color:var(--accent)}
+.as-ans{margin-top:14px;border-top:1px solid var(--border);padding-top:13px;font-size:14px;line-height:1.7;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.as-ans h4{margin:0 0 8px;font-size:15px;color:var(--accent-strong)}
+.as-ans .aitem{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;margin:8px 0;background:var(--surface-2)}
+.as-ans .aitem .an{font-weight:700;font-size:14px}
+.as-ans .aitem .am{font-size:12px;color:var(--muted);margin:3px 0 6px}
+.as-ans ul{margin:6px 0;padding-inline-start:20px}
+.as-ans li{margin-bottom:4px}
+.as-ans .albtn{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:8px;
+  border:1px solid var(--border-strong);color:var(--ink);background:var(--surface);cursor:pointer;margin:4px 4px 0 0;text-decoration:none}
+.as-ans .albtn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.as-ans .albtn.pdf{border-color:color-mix(in srgb,var(--bad) 40%,transparent);color:var(--bad)}
+.grouphdr{margin:28px 2px 6px;font-size:14px;font-weight:800;color:var(--accent-strong);display:flex;align-items:center;gap:10px}
+.grouphdr .gc{font-weight:600;color:var(--faint);font-size:12px}
+.grouphdr::after{content:"";height:1px;flex:1;background:var(--border)}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty .big{font-size:44px;margin-bottom:10px;opacity:.5}
+footer{margin-top:46px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+footer h3{font-size:14px;color:var(--ink);margin:0 0 10px}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+footer ul{margin:0;padding-inline-start:18px}footer li{margin-bottom:6px}
+.disclaim{margin-top:22px;font-size:12px;color:var(--faint);line-height:1.7}
+@media(max-width:640px){.dhead{grid-template-columns:1fr}.dright{flex-direction:row;align-items:center;justify-content:space-between}header{padding-top:64px}}
+</style>
+
+<div class="wrap">
+ <div class="topbar">
+  <button class="themebtn" id="themebtn" aria-label="تبديل الوضع">◐</button>
+  <header>
+   <span class="eyebrow">أرشيف تنظيمي · حصر كامل من البوابة الرسمية (21 صفحة)</span>
+   <h1>الأرشيف التنظيمي لوزارة البلديات والإسكان</h1>
+   <p class="lede">حصر شامل لكل الأنظمة واللوائح والاشتراطات والأدلة والقواعد والضوابط المنشورة على بوابة الوزارة، مع روابط PDF مباشرة، وتواريخ التحديث، وسلاسل الإصدارات (النسخة القديمة + النسخة المحدّثة للمقارنة) للوثائق التي صدر لها تحديث.</p>
+  </header>
+ </div>
+
+ <div class="notice">
+  <span class="ic">🔄</span>
+  <div><b>ميزة المقارنة بين الإصدارات:</b> الوثائق التي لها تحديث تظهر بشريط برتقالي جانبي ووسم «إصدارات». افتح البطاقة لترى <b>الخط الزمني</b> مع رابط PDF لكل نسخة (القديمة والمحدّثة) — النسخة السارية موسومة بنقطة خضراء. البوابة تعرض النسخة الحالية لكل وثيقة؛ وبعض النسخ القديمة متاحة من داخل البوابة نفسها، وبعضها سُحب (أرشيف الإنترنت محجوب آليًا هنا — موضّح عند كل حالة).</div>
+ </div>
+
+ <div class="assistant" id="assistant">
+  <div class="as-head"><span class="as-ic">🤖</span>
+   <div><div class="as-t">مساعد الأرشيف</div>
+    <div class="as-s">اسألني عن أي وثيقة أو عن الفرق بين النسخ — يجيب من بيانات الأرشيف مباشرةً (يعمل داخل الصفحة بلا إنترنت).</div></div></div>
+  <div class="as-inrow">
+   <input id="asq" placeholder="مثال: وش الفرق في اشتراطات المطاعم؟  ·  الوثائق التي لها تحديث  ·  اشتراطات المكاتب" autocomplete="off">
+   <button id="asbtn">اسأل</button>
+  </div>
+  <div class="as-chips">
+   <button class="as-chip" data-q="ما الفرق بين نسخ اشتراطات المطاعم؟">الفرق في المطاعم</button>
+   <button class="as-chip" data-q="ما الفرق في اشتراطات المباني السكنية؟">الفرق في المباني السكنية</button>
+   <button class="as-chip" data-q="ما الفرق في اشتراطات المكاتب؟">الفرق في المكاتب</button>
+   <button class="as-chip" data-q="الوثائق التي لها تحديث">الوثائق ذات التحديثات</button>
+   <button class="as-chip" data-q="كم عدد الوثائق؟">إحصائيات الأرشيف</button>
+  </div>
+  <div class="as-ans" id="asans" hidden></div>
+ </div>
+
+ <div class="kpis" id="kpis"></div>
+
+ <div class="controls">
+  <div class="searchrow">
+   <div class="search"><span class="mag">🔍</span>
+    <input id="q" type="search" placeholder="ابحث باسم الوثيقة أو النوع…" autocomplete="off"></div>
+   <select class="sort" id="sort">
+    <option value="cat">ترتيب: حسب الفئة</option>
+    <option value="date">الأحدث تحديثاً</option>
+    <option value="alpha">أبجدياً</option>
+    <option value="upd">ذات التحديثات أولاً</option>
+   </select>
+  </div>
+  <div class="filters" id="fcat"></div>
+ </div>
+
+ <div class="resultline"><span id="rcount"></span><span id="rhint">اضغط أي وثيقة لعرض التفاصيل وروابط الـ PDF</span></div>
+ <div class="list" id="list"></div>
+ <div class="empty" id="empty" hidden><div class="big">🗂️</div>لا توجد وثائق مطابقة.</div>
+
+ <footer>
+  <div class="foot-grid">
+   <div><h3>المصادر الرسمية</h3>
+    <ul>
+     <li><a href="https://momah.gov.sa/ar/regulations" target="_blank" rel="noopener">بوابة الأنظمة واللوائح — momah.gov.sa</a></li>
+     <li><a href="https://balady.gov.sa/ar/node/12026" target="_blank" rel="noopener">منصة بلدي</a></li>
+     <li><a href="https://istitlaa.ncc.gov.sa/ar/Municipality/momra/Pages/default.aspx" target="_blank" rel="noopener">منصة استطلاع</a></li>
+     <li><a href="https://www.spa.gov.sa" target="_blank" rel="noopener">وكالة الأنباء السعودية (واس)</a></li>
+     <li><a href="https://uqn.gov.sa/DecisionsAndSystems" target="_blank" rel="noopener">جريدة أم القرى</a></li>
+    </ul></div>
+   <div><h3>دلالات الحالة</h3>
+    <ul>
+     <li><b style="color:var(--ok)">سارية</b> — النسخة المنشورة المعمول بها.</li>
+     <li><b style="color:var(--warn)">لها تحديث</b> — صدرت لها نسخة أحدث (قارن في الخط الزمني).</li>
+     <li><b style="color:var(--bad)">مستبدَلة</b> — نسخة سابقة حلّت محلها أخرى.</li>
+    </ul></div>
+   <div><h3>ملاحظات المنهجية</h3>
+    <p>حُصرت الوثائق من صفحات البوابة الرسمية الـ21. روابط PDF مأخوذة حرفيًا من البوابة. سلاسل الإصدارات بُنيت حيث توفّرت النسختان (غالبًا من داخل البوابة: لوائح «الاشتراطات الصحية» 2020–2022 مقابل «الاشتراطات» المحدّثة 2024–2025).</p></div>
+  </div>
+  <p class="disclaim">
+   <b>قيود:</b> (1) البوابة تعرض النسخة الحالية لكل وثيقة؛ النسخ القديمة المسحوبة تحتاج أرشيف الإنترنت أو أم القرى — وأرشيف الإنترنت محجوب عن الجلب الآلي في هذه الجلسة، لذا يُشار إلى النسخ غير المتوفرة صراحةً. (2) تغيّر اسم الجهة عبر الزمن (الشؤون البلدية والقروية ← والإسكان ← البلديات والإسكان اعتبارًا من 15 محرم 1446هـ / 21 يوليو 2024). (3) تاريخ كل وثيقة مستنتج من مجلد ملف الـ PDF على الخادم ما لم يُذكر تاريخ اعتماد صريح. (4) بعض الروابط القليلة التي ظهرت مقتطعة من البوابة تشير إلى صفحة البوابة بدل الملف المباشر.
+  </p>
+ </footer>
+</div>
+
+<script>
+const BASE="https://momah.gov.sa";
+const PORTAL="https://momah.gov.sa/ar/regulations";
+// t: نوع للفلترة | cat: فئة البوابة | d: مجلد التاريخ YYYY-MM | p: مسار PDF (يُسبق بالنطاق) | v: سلسلة إصدارات
+const C={SYS:"أنظمة",REG:"لوائح",REQ:"اشتراطات",GUIDE:"أدلة",RULE:"قواعد",OTHER:"أخرى"};
+const RAW=[
+// ===== الأنظمة =====
+{n:"نظام البلديات والقرى",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20albldyat%20walqry.pdf"},
+{n:"نظام إجراءات التراخيص البلدية",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20ajraat%20altrakhys%20albldyt.pdf"},
+{n:"نظام تصنيف المقاولين",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20tsnyf%20almqawlyn.pdf"},
+{n:"نظام تطبيق كود البناء السعودي",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20ttbyq%20kwd%20albna%20als%60wdy1.pdf"},
+{n:"نظام الطرق والمباني",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20altrq%20walmbany.pdf"},
+{n:"نظام المجالس البلدية",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20almjals%20albldyt.pdf"},
+{n:"نظام رسوم الأراضي البيضاء والعقارات الشاغرة",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20rswm%20alarady%20albyda%20wal%60qarat%20alshaghrt.pdf"},
+{n:"نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/nzam%20nz%60%20mlkyt%20al%60qarat%20llmnf%60t%20al%60amt%20wwd%60%20alyd%20almwqt%20%60ly%20al%60qar.pdf"},
+{n:"نظام التصرف بالعقارات البلدية",t:"نظام",cat:C.SYS,d:"2025-11",p:"/sites/default/files/2025-11/nzam%20altsrf%20bal%60qarat%20albldyt_0.pdf"},
+{n:"نظام ملكية الوحدات العقارية وفرزها وإدارتها",t:"نظام",cat:C.SYS,d:"2025-01",p:"/sites/default/files/2025-01/nzam%20mlkyt%20alwhdat%20al%60qaryt%20wfrzha%20wa%27dartha.pdf"},
+{n:"نظام تنظيم الدعم السكني",t:"نظام",cat:C.SYS,d:"2025-10",p:"/sites/default/files/2025-10/tnzym%20ald%60m%20alskny.pdf"},
+// ===== اللوائح =====
+{n:"اللائحة التنفيذية لنظام إجراءات التراخيص البلدية",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20ajraat%20altrakhys%20albldyt.pdf"},
+{n:"اللائحة التنفيذية لنظام رسوم الأراضي البيضاء",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20rswm%20alarady%20albyda.pdf"},
+{n:"اللائحة التنفيذية لنظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20nz%60%20mlkyt%20al%60qarat%20llmnf%60t%20al%60amt%20wwd%60%20alyd%20almwqt%20%60ly%20al%60qar.pdf"},
+{n:"اللائحة التنفيذية لنظام تطبيق كود البناء السعودي",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20ttbyq%20kwd%20albna%20als%60wdy.pdf"},
+{n:"اللائحة التنفيذية لنظام تصنيف المقاولين",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20tsnyf%20almqawlyn.pdf"},
+{n:"اللائحة التنفيذية لنظام المجالس البلدية",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20lnzam%20almjals%20albldyt.pdf"},
+{n:"اللائحة المالية للمجالس البلدية",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20almalyt%20llmjals%20albldyt.pdf"},
+{n:"اللائحة التنفيذية لتنظيم الدعم السكني",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20ltnzym%20ald%60m%20alskny.pdf"},
+{n:"اللائحة التنظيمية لوحدات البيانات البلدية والإحصاء في القطاع البلدي",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnzymyt%20lwhdat%20albyanat%20albldyt%20walahsa%20fy%20alqta%60%20albldy.pdf"},
+{n:"اللائحة التنظيمية للمراصد الحضرية",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnzymyt%20llmrasd%20alhdryt.pdf"},
+{n:"لائحة الترخيص البلدي لمزاولة المهن والحرف",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20altrkhys%20albldy%20lmzawlt%20almhn%20walhrf.pdf"},
+{n:"لائحة انتخابات رؤساء الحرف والمهن ونوابهم",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20antkhabat%20rwsa%20alhrf%20walmhn%20wnwabhm.pdf"},
+{n:"لائحة المتطلبات العامة لتعيين جهات التفتيش والمفتشين لأعمال كود البناء السعودي",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20almttlbat%20al%60amt%20lt%60yyn%20jhat%20altftysh%20walmftshyn%20la%60mal%20kwd%20albna%20als%60wdy.pdf"},
+{n:"لائحة تصنيف مخالفات كود البناء السعودي",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20tsnyf%20mkhalfat%20kwd%20albna%20als%60wdy.pdf"},
+{n:"لائحة الجزاءات عن المخالفات البلدية",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20aljzaat%20%60n%20almkhalfat%20albldyt.pdf"},
+{n:"اللائحة التنفيذية المحدثة لقواعد النطاق العمراني حتى عام 1450هـ",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/allayht%20altnfydhyt%20almhdtht%20lqwa%60d%20alntaq%20al%60mrany%20hty%20%60am%201450%20h.pdf"},
+{n:"لائحة رسوم الخدمات البلدية",t:"لائحة",cat:C.REG,d:"2025-11",p:"/sites/default/files/2025-11/layht%20rswm%20alkhdmat%20albldyt.pdf"},
+{n:"لائحة رسوم تقديم منتجات التبغ",t:"لائحة",cat:C.REG,d:"2025-10",p:"/sites/default/files/2025-10/layht%20rswm%20tqdym%20mntjat%20altbgh.pdf"},
+{n:"لائحة تراخيص الحفريات",t:"لائحة",cat:C.REG,d:"2025-11",p:"/sites/default/files/2025-11/lay%27ht%20trakhys%20alhfryat.pdf"},
+{n:"لائحة التصرف بالعقارات البلدية",t:"لائحة",cat:C.REG,d:"2026-05",p:"/sites/default/files/2026-05/layht%20altsrf%20bal%60qarat%20albldyt.pdf"},
+{n:"اللائحة التنفيذية لنظام التصرف في العقارات البلدية",t:"لائحة",cat:C.REG,d:"2022-02",p:""},
+{n:"جدول الجزاءات عن المخالفات البلدية",t:"لائحة",cat:C.REG,d:"2026-03",p:"/sites/default/files/2026-03/jdwl%20aljzaat%20%60n%20almkhalfat%20albldyt%20-%20m%60dl4.pdf",
+  upd:"النسخة الحالية: مُعدَّل 4 (مارس 2026)",
+  v:[
+   {label:"مُعدَّل 1–3 (نسخ سابقة)",date:"2020–2024",cur:false,txt:"ثلاث دورات تعديل سابقة على الأقل يدل عليها الرقم «4». ملفاتها المنفصلة سُحبت من البوابة، وأرشيف الإنترنت محجوب آليًا هنا.",pdf:""},
+   {label:"مُعدَّل 4 — النسخة السارية",date:"مارس 2026",cur:true,txt:"النسخة المحدّثة الحالية، موثّقة عبر واس. رقم النسخة «4» مضمّن في اسم الملف.",pdf:"/sites/default/files/2026-03/jdwl%20aljzaat%20%60n%20almkhalfat%20albldyt%20-%20m%60dl4.pdf"}
+  ]},
+{n:"جدول عقوبات حوادث التسمم الغذائي",t:"لائحة",cat:C.REG,d:"2026-04",p:"/sites/default/files/2026-04/jdwl%20%60qwbat%20hwadth%20altsmm%20alghdhayy%20%281%29.pdf"},
+// ===== القواعد =====
+{n:"قواعد وإجراءات عمل لجنة النظر في مخالفات نظام كود البناء السعودي ومكافأة أعضائها",t:"قواعد",cat:C.RULE,d:"2025-11",p:"/sites/default/files/2025-11/qwa%60d%20ajraat%20ljnt%20alnzr%20.pdf"},
+{n:"القواعد التنفيذية لضوابط ممارسة نشاط التزيين النسائي",t:"قواعد",cat:C.RULE,d:"2024-12",p:"/sites/default/files/2024-12/alqwa%60d%20altnfy.pdf"},
+{n:"القواعد التنفيذية لنظام حماية المرافق العامة",t:"قواعد",cat:C.RULE,d:"2025-09",p:"/sites/default/files/2025-09/alqwa%60d%20altnfydhyt%20lnzam%20hmayt%20almrafq%20al%60amt%20-nskht%20nhayyt.pdf"},
+{n:"القواعد التنفيذية للائحة الجزاءات عن المخالفات البلدية",t:"قواعد",cat:C.RULE,d:"2025-08",p:"/sites/default/files/2025-08/alqwa%60d%20altnfydhyt.pdf"},
+{n:"قواعد تسمية الشوارع والميادين وترقيم العقارات في مدن وقرى المملكة",t:"قواعد",cat:C.RULE,d:"2022-02",p:"/sites/default/files/2022-02/%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%AA%D8%B3%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B4%D9%88%D8%A7%D8%B1%D8%B9%20%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D8%AF%D9%8A%D9%86%20%D9%88%D8%AA%D8%B1%D9%82%D9%8A%D9%85%20%D8%A7%D9%84%D8%B9%D9%82%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A8%D9%85%D8%AF%D9%86%20%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D9%88%D9%82%D8%B1%D8%A7%D9%87%D8%A7.pdf"},
+{n:"القواعد التنظيمية للوحات الدعاية والإعلان",t:"قواعد",cat:C.RULE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%AA%D9%86%D8%B8%D9%8A%D9%85%20%D9%84%D9%88%D8%AD%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AF%D8%B9%D8%A7%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D8%A5%D8%B9%D9%84%D8%A7%D9%86%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%AA%D8%B9%D8%AF%D9%8A%D9%84.pdf"},
+{n:"قواعد تحديد النطاق العمراني حتى عام 1450هـ",t:"قواعد",cat:C.RULE,d:"2022-02",p:"/sites/default/files/2022-02/%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%AA%D8%AD%D8%AF%D9%8A%D8%AF%20%D8%A7%D9%84%D9%86%D8%B7%D8%A7%D9%82%20%D8%A7%D9%84%D8%B9%D9%85%D8%B1%D8%A7%D9%86%D9%8A%20%D8%AD%D8%AA%D9%89%20%D8%B9%D8%A7%D9%85%201450%D9%87%D9%80.pdf"},
+{n:"قواعد تعزيز الثقة في سوق إيجار المساكن",t:"قواعد",cat:C.RULE,d:"2022-02",p:"/sites/default/files/2022-02/%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%AA%D8%B9%D8%B2%D9%8A%D8%B2%20%D8%A7%D9%84%D8%AB%D9%82%D8%A9%20%D9%81%D9%8A%20%D8%B3%D9%88%D9%82%20%D8%A5%D9%8A%D8%AC%D8%A7%D8%B1%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%83%D9%86.pdf"},
+{n:"قواعد إدارة الترجمة الرسمية بهيئة الخبراء بمجلس الوزراء",t:"قواعد",cat:C.RULE,d:"2025-01",p:"/sites/default/files/2025-01/Bureau%20of%20Experts%20at%20the%20Council.pdf"},
+// ===== الاشتراطات (مع سلاسل إصدارات حيث توفّرت) =====
+{n:"اشتراطات المطاعم",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20almta%60m.pdf",
+  upd:"ثلاثة أجيال موثّقة بروابط PDF — النسخة السارية: 1446هـ / 2025م",
+  diff:{conf:"high",sum:"تحوّلت الوثيقة من «لائحة اشتراطات صحية» ضيّقة إلى منظومة اشتراطات موحّدة للمنشآت الغذائية.",changes:["النسخة الصحية القديمة: ركّزت على الاشتراطات الصحية والنظافة وصحة العاملين فقط، تحت مسمّى وزارة الشؤون البلدية والقروية.","إصدار 1441هـ/2019: توسّعت لتشمل الجوانب الإنشائية والتشغيلية إلى جانب الصحية، مع إقرار دورية تحديث كل 3 سنوات وإلغاء ما يتعارض معها.","إصدار 1446هـ/2025 (قرار 1/4600653138): اشتراطات موحّدة تغطّي 5 فئات — المطاعم (مع خدمة/بدون خدمة)، والمقاهي، والمطابخ السحابية، والأكشاك الغذائية.","أُفردت اشتراطات للمطاعم الفاخرة: خدمة صفّ السيارات، حامل للحقائب ودولاب للمعاطف، وركن مشروبات مرئي للزوار.","الهدف المعلن: رفع جودة الخدمات وتعزيز امتثال المنشآت الغذائية وتحفيز الاستثمار."]},
+  v:[
+   {label:"لائحة الاشتراطات الصحية للمطاعم والمطابخ وما في حكمها (النسخة الصحية القديمة)",date:"ما قبل 1441هـ",cur:false,txt:"الجيل الأقدم ضمن سلسلة «الاشتراطات الصحية». PDF مباشر على موقع الوزارة (مجلد 2022-02)، وتتوفر نسخ إضافية على Scribd وقانونية. استُبدلت بإصدار 1441هـ.",pdf:"/sites/default/files/2022-02/أداة الاصدار + لائحة الاشتراطات الصحية للمطاعم والمطابخ وما في حكمها.pdf",src:"https://momah.gov.sa/ar/node/13076"},
+   {label:"اشتراطات المطاعم والمطابخ — إصدار 1441هـ / 2019م",date:"ديسمبر 2019",cur:false,txt:"صادرة عن وزارة الشؤون البلدية والقروية ضمن تحديث اشتراطات 12 نشاطاً. متاحة بنسختين: ملف الوزارة (مجلد 2022-02) ومنصة بلدي/إي‑بلدي. استُبدلت بنسخة 1446هـ.",pdf:"/sites/default/files/2022-02/أداة الاصدار + اشتراطات المطاعم والمطابخ.pdf",src:"https://ebalady.momra.gov.sa/activityapi/activities/attachments/87E0FB08BB9446CDBAF6F84363F68A3E/download"},
+   {label:"اشتراطات المطاعم — النسخة المحدّثة السارية",date:"1446هـ / 2025م (أبريل)",cur:true,txt:"النسخة الحالية المعتمدة بقرار وزاري رقم 1/4600653138 وتاريخ 1446/10/15هـ. منشورة على البوابة ضمن مجلد 2025-04.",pdf:"/sites/default/files/2025-04/ashtratat%20almta%60m.pdf"}
+  ]},
+{n:"اشتراطات المطابخ المركزية",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20almtabkh%20almrkzyt.pdf"},
+{n:"اشتراطات المطاعم الفاخرة",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/ashtratat%20almta%60m%20alfakhrt.pdf"},
+{n:"اشتراطات المخابز والحلويات",t:"اشتراطات",cat:C.REQ,d:"2025-12",p:"/sites/default/files/2025-12/ashtratat%20almkhabz%20walhlwyat.pdf",
+  upd:"النسخة السارية: ديسمبر 2025 (تُقابل لائحة الاشتراطات الصحية للمخابز 2022)",
+  diff:{conf:"struct",sum:"انتقال من «لائحة اشتراطات صحية» إلى «اشتراطات نشاط» موحّدة أحدث.",changes:["النسخة القديمة (2022): لائحة اشتراطات صحية تركّز على النظافة والسلامة الغذائية تحت المسمّى القديم.","النسخة المحدّثة (ديسمبر 2025): اشتراطات المخابز والحلويات بالنموذج الموحّد، تشمل الجوانب الإنشائية والتشغيلية إلى جانب الصحية."],note:"المقارنة الرقمية بندًا ببند تتطلب قراءة الملفين الممسوحين ضوئيًا — الملفان مرفقان أعلاه للمقارنة المباشرة."},
+  v:[
+   {label:"لائحة الاشتراطات الصحية للمخابز (النسخة القديمة)",date:"2022 (فبراير)",cur:false,txt:"الجيل الأقدم ضمن سلسلة «الاشتراطات الصحية»، ما زالت متاحة على البوابة.",pdf:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20+%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%84%D9%85%D8%AE%D8%A7%D8%A8%D8%B2.pdf"},
+   {label:"اشتراطات المخابز والحلويات — النسخة المحدّثة السارية",date:"ديسمبر 2025",cur:true,txt:"النسخة المعتمدة الحالية على البوابة.",pdf:"/sites/default/files/2025-12/ashtratat%20almkhabz%20walhlwyat.pdf"}
+  ]},
+{n:"اشتراطات محلات العصائر",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/ashtratat%20mhlat%20al%60sayr-bqrar%20ala%60tmad.pdf",
+  upd:"النسخة السارية: يوليو 2025 (تُقابل لائحة الاشتراطات الصحية للعصائر 2022)",
+  diff:{conf:"struct",sum:"انتقال من لائحة صحية (2022) إلى اشتراطات نشاط محدّثة معتمدة بقرار (2025).",changes:["القديمة: لائحة الاشتراطات الصحية لمحلات العصائر — تركيز صحي.","المحدّثة (يوليو 2025): اشتراطات محلات العصائر بقرار اعتماد، بالنموذج الموحّد الأشمل."],note:"التفاصيل الرقمية بندًا ببند تتطلب قراءة الملفين — وكلاهما مرفق أعلاه."},
+  v:[
+   {label:"لائحة الاشتراطات الصحية لمحلات إعداد وتجهيز وبيع العصائر (القديمة)",date:"2022 (فبراير)",cur:false,txt:"الجيل الأقدم، ما زال متاحًا على البوابة.",pdf:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20+%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%20%D9%88%D8%AA%D8%AC%D9%87%D9%8A%D8%B2%20%D9%88%D8%A8%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B9%D8%B5%D8%A7%D8%A6%D8%B1.pdf"},
+   {label:"اشتراطات محلات العصائر — النسخة المحدّثة السارية",date:"يوليو 2025",cur:true,txt:"النسخة المعتمدة الحالية بقرار الاعتماد.",pdf:"/sites/default/files/2025-07/ashtratat%20mhlat%20al%60sayr-bqrar%20ala%60tmad.pdf"}
+  ]},
+{n:"اشتراطات المكاتب",t:"اشتراطات",cat:C.REQ,d:"2024-12",p:"/sites/default/files/2024-12/office_rules.pdf",
+  upd:"النسخة السارية: ديسمبر 2024 (سبقها إصدار 1443هـ)",
+  diff:{conf:"high",sum:"النسخة المحدّثة 2024 أعادت ضبط المساحات والاشتراطات الفنية وربطتها بكود البناء.",changes:["حدّ أدنى لمساحة المكتب 18م²، ومكتب الاستشارات الهندسية 100م².","إلزام بتطبيق كود البناء السعودي (الإنشائي والكهربائي والميكانيكي والصحي وترشيد الطاقة).","منع استخدام مادة الأسبستوس أو أي مادة تدخل في تركيبها.","يجوز أن يكون المكتب أرضيًا فقط أو أرضيًا + ميزانين، ضمن مجمع تجاري أو مبنى مستقل.","صدرت بعد استطلاع عام (27/10 – 11/11/2024)، وآخر تحديث 16/12/2024."],note:"النسخة السابقة 1443هـ اعتُمدت بقرار 4300190793 بتاريخ 1443/5/4هـ."},
+  v:[
+   {label:"اشتراطات المكاتب — إصدار 1443هـ / 2022م",date:"2022 (يونيو)",cur:false,txt:"معتمدة بقرار وزاري رقم 4300190793 وتاريخ 1443/5/4هـ. متاحة على بلدي.",pdf:"https://balady.gov.sa/sites/default/files/2024-12/%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D9%83%D8%A7%D8%AA%D8%A8.pdf",abs:true},
+   {label:"اشتراطات المكاتب — النسخة المحدّثة السارية",date:"ديسمبر 2024",cur:true,txt:"النسخة الحالية المنشورة على البوابة.",pdf:"/sites/default/files/2024-12/office_rules.pdf"}
+  ]},
+{n:"اشتراطات إنشاء المباني السكنية",t:"اشتراطات",cat:C.REQ,d:"2024-11",p:"/sites/default/files/2025-11/ashtratat%20ansha%20almbany%20alsknyt9%20ywlyh%202024.pdf",
+  upd:"النسخة السارية: تحديث يوليو/نوفمبر 2024 (استبدلت نسخة سابقة)",
+  diff:{conf:"high",sum:"التحديث (1446هـ/2024، قرار 1/4500943139) وسّع حقوق البناء وقلّص القيود.",changes:["رفع ارتفاع الفيلا من 12م إلى 14م.","رفع ارتفاع الأسوار الجانبية من 3.5م إلى 4.5م.","زيادة نسب البناء لجميع الأدوار بما فيها الملحق العلوي.","تقليص الارتدادات مع السماح بالبناء بالارتدادات في الدور الأرضي على جميع الجهات.","تسهيلات إضافية في أعمال البناء لتلبية تطلعات المستفيدين."],note:"الأرقام من الإعلان الرسمي (واس). بعض المصادر الصحفية تربط الارتفاعات بعرض الشارع (نحو 13م لِعرض 8–12م، و16م لأكثر من 12م)."},
+  v:[
+   {label:"النسخة السابقة (قبل تحديث 2024)",date:"ما قبل 2024",cur:false,txt:"النسخة السابقة قبل التحديث الشامل. سُحبت من البوابة الحالية؛ يمكن طلبها من أرشيف الإنترنت (محجوب آليًا هنا).",pdf:""},
+   {label:"اشتراطات إنشاء المباني السكنية — المحدّثة السارية",date:"يوليو 2024",cur:true,txt:"مُعدّة بمشاركة جميع الأمانات، بقرار وزاري 1/4500943139 لعام 1446هـ، أُعلنت 15 يوليو 2024. أبرز التعديلات: رفع ارتفاع الفيلا إلى 14م، الأسوار إلى 4.5م، نسب بناء حتى 75%، وتقليص الارتدادات.",pdf:"/sites/default/files/2025-11/ashtratat%20ansha%20almbany%20alsknyt9%20ywlyh%202024.pdf"}
+  ]},
+{n:"اشتراطات البقالات والتموينات والأسواق المركزية",t:"اشتراطات",cat:C.REQ,d:"2025-06",p:"/sites/default/files/2025-06/%20ashtratat%20albqalat%20waltmwynat%20wala%27swaq%20almrkzyt%20.pdf"},
+{n:"اشتراطات الخدمات الاجتماعية",t:"اشتراطات",cat:C.REQ,d:"2025-01",p:"/sites/default/files/2025-01/ashtratat%20alkhdmat%20alajtma%60yt.pdf"},
+{n:"اشتراطات مواقع الباعة الجائلين (التاجر المتنقل)",t:"اشتراطات",cat:C.REQ,d:"2026-04",p:"/sites/default/files/2026-04/qrar%20a%60tmad%20mwaq%60%20alba%60t%20aljaylyn%20%28altajr%20almtnql%29%20%28002%29.pdf"},
+{n:"اشتراطات مغاسل الموتى",t:"اشتراطات",cat:C.REQ,d:"2026-06",p:"/sites/default/files/2026-06/%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D9%85%D8%BA%D8%A7%D8%B3%D9%84%20%D8%A7%D9%84%D9%85%D9%88%D8%AA%D9%89.pdf"},
+{n:"الاشتراطات البلدية لمراكز البيانات التجارية",t:"اشتراطات",cat:C.REQ,d:"2026-06",p:"/sites/default/files/2026-06/alashtratat%20albldyt%20lmrakz%20albyanat%20altjaryt%20%2B%20qrar%20ala%60tmad_0.pdf"},
+{n:"اشتراطات المخابز والحلويات (المباني التعليمية الخاصة)",t:"اشتراطات",cat:C.REQ,d:"2025-12",p:"/sites/default/files/2025-12/alnskht%20alm%60tmdt%20lashtratat%20almbany%20alt%60lymyt.pdf"},
+{n:"اشتراطات اللوحات التجارية",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D9%84%D9%88%D8%AD%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9.pdf"},
+{n:"اشتراطات أنشطة الطب البديل والتكميلي",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20anshtt%20altb%20albdyl%20waltkmyly%20balnmwdhj%20almwhd.pdf"},
+{n:"اشتراطات مدارس ومعاهد الطيران",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20mdars%20wm%60ahd%20altyran1.pdf"},
+{n:"اشتراطات مختبرات المواد العامة",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20mkhtbrat%20almwad%20al%60amt.pdf"},
+{n:"اشتراطات مختبرات المنتجات التجميلية والطبية",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20mkhtbrat%20almntjat%20altjmylyt%20waltbyt.pdf"},
+{n:"اشتراطات مختبرات فحص الأجهزة والمعدات والآليات",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20mkhtbrat%20fhs%20alajhzt%20walm%60dat%20walalyat.pdf"},
+{n:"الاشتراطات الفنية لشحن المركبات الكهربائية",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/alashtratat%20alfnyt%20lshhn%20almrkbat%20alkhrbayyt%20balnmwdhj%20aljdyd%20%28002%29.pdf"},
+{n:"المتطلبات البلدية لإقامة وحدة خلط الخرسانة الجاهزة داخل المشاريع الإنشائية",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/almttlbat%20albldyt%20laqamt%20whdt%20khlt%20alkhrsant%20dakhl%20almshary%60%20alanshayyt%20-nhayy.pdf"},
+{n:"اشتراطات مواقع الفعاليات والأسواق الموسمية المؤقتة",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20mwaq%60%20alf%60alyat%20walaswaq%20almwsmyt%20almwqtt%20%20%20%20%20%20%20%20b%60d%20t%60dyl%20alsh%60ar.pdf"},
+{n:"اشتراطات المباني الرياضية",t:"اشتراطات",cat:C.REQ,d:"2025-11",p:"/sites/default/files/2025-11/ashtratat%20almbany%20alryadytv21%20%20%20%20%20b%60d%20t%60dyl%20alsh%60ar_0.pdf"},
+{n:"اشتراطات النزل المؤقتة",t:"اشتراطات",cat:C.REQ,d:"2025-09",p:"/sites/default/files/2025-09/ashtratat%20alnzl%20almwqtt%20%20alm%60tmdt.pdf"},
+{n:"الاشتراطات البلدية لتصريح إشغال الرصيف",t:"اشتراطات",cat:C.REQ,d:"2025-08",p:"/sites/default/files/2025-08/ashtratat%20tsryh%20ashghal%20rsyf%20m%60tmd.pdf"},
+{n:"الاشتراطات البلدية للعربات المتنقلة",t:"اشتراطات",cat:C.REQ,d:"2025-08",p:"/sites/default/files/2025-08/alashtratat%20albldyt%20ll%60rbat%20almtnqlt%20%283%29.pdf"},
+{n:"اشتراطات ورش إصلاح وسائل النقل",t:"اشتراطات",cat:C.REQ,d:"2025-08",p:"/sites/default/files/2025-08/ashtratat%20wrsh%20aslah%20wsayl%20alnql%20%20.pdf"},
+{n:"اشتراطات تقديم منتجات التبغ",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/ashtratat%20tqdym%20mntjat%20altbgh.pdf"},
+{n:"الاشتراطات البلدية لمراكز خدمات النقل",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/alashtratat%20albldyt%20lmrakz%20khdmat%20alnql.pdf"},
+{n:"الاشتراطات البلدية للمصانع",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/alashtratat%20albldyt%20%20llmsan%60%2001.07.2025.pdf"},
+{n:"اشتراطات أنشطة مراكز الرعاية الطبية الصحية الأهلية",t:"اشتراطات",cat:C.REQ,d:"2025-07",p:"/sites/default/files/2025-07/ashtratat%20anshtt%20alr%60ayt%20altbyt%20alshyt%20alahlyt%20-%20v17%20a%60tmad_0.pdf"},
+{n:"اشتراطات منافذ البيع للمواد غير الغذائية",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20mnafdh%20alby%60%20llmwad%20alghyr%20ghdhay%27yt.pdf"},
+{n:"الاشتراطات البلدية للرعاية البيطرية",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/alashtratat%20albldyt%20llr%60ayt%20albytryt.pdf"},
+{n:"اشتراطات بيع أسطوانات غاز البترول السائل",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20by%60%20a%27stwanat%20ghaz%20albtrwl%20alsay%27l_0.pdf"},
+{n:"اشتراطات محلات بيع قطع الغيار",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20mhlat%20by%60%20qt%60%20alghyar.pdf"},
+{n:"اشتراطات مراكز ومنافذ البيع للمركبات الملغى تسجيلها",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20mrakz%20wmnafdh%20alby%60%20llmrkbat%20almlghy%20tsjylha.pdf"},
+{n:"اشتراطات مكائن الخدمة الذاتية",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20mkayn%20alkhdmamt%20aldhatyt.pdf"},
+{n:"اشتراطات معارض وسائل النقل",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20m%60ard%20wsayl%20alnql.pdf"},
+{n:"اشتراطات ركن المركبات",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/a%60tmad%20ashtratat%20rkn%20almrkbat.pdf"},
+{n:"اشتراطات مرافق الضيافة السياحي",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20mrafq%20aldyaft%20alsyahy%20m%60tmd.pdf"},
+{n:"الاشتراطات البلدية للمختبرات غير الطبية الغذائية",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/alashtratat%20albldyt%20llmkhtbrat%20ghyr%20tbyt%20alghdhayytV10%20%282%29.pdf"},
+{n:"اشتراطات مكاتب تأجير وسائل النقل",t:"اشتراطات",cat:C.REQ,d:"2025-03",p:"/sites/default/files/2025-03/ashtratat%20mkatb%20ta%27jyr%20wsay%27l%20alnql.pdf"},
+{n:"اشتراطات التخطيط المكاني لأنشطة تقديم خدمات المياه",t:"اشتراطات",cat:C.REQ,d:"2025-03",p:"/sites/default/files/2025-03/ashtratat%20altkhtyt%20almkany%20lanshtt%20tqdym%20khdmat%20almyah.pdf"},
+{n:"اشتراطات المراكز التدريبية",t:"اشتراطات",cat:C.REQ,d:"2025-03",p:"/sites/default/files/2025-03/almrakz%20altdrybyt.pdf"},
+{n:"اشتراطات محلات بيع الشتلات ونباتات الزينة",t:"اشتراطات",cat:C.REQ,d:"2025-03",p:"/sites/default/files/2025-03/ashtratat%20mhlat%20by%60%20alshtlat%20wnbatat%20alzynt.pdf"},
+{n:"اشتراطات حدائق الحيوان",t:"اشتراطات",cat:C.REQ,d:"2025-02",p:"/sites/default/files/2025-02/ashtratat%20hdayq%20alhywan.pdf"},
+{n:"اشتراطات اللوحات الدعائية والإعلانية",t:"اشتراطات",cat:C.REQ,d:"2025-02",p:"/sites/default/files/2025-02/ashtratat%20allwhat%20ald%60ay%27yt%20wala%27%60lanyt.pdf"},
+{n:"الاشتراطات البلدية لخدمة التوصيل المنزلي",t:"اشتراطات",cat:C.REQ,d:"2025-02",p:"/sites/default/files/2025-02/alashtratat%20albldyt%20lkhdmt%20altwsyl%20almnzly.pdf"},
+{n:"اشتراطات تأجير الدراجات والسكوترات",t:"اشتراطات",cat:C.REQ,d:"2024-12",p:"/sites/default/files/2024-12/ashtratat%20ta%27jyr%20aldrajat%20walskwtrat.pdf"},
+{n:"الاشتراطات البلدية للورش المهنية",t:"اشتراطات",cat:C.REQ,d:"2024-12",p:"/sites/default/files/2024-12/a%60tmad%20alashtrtat%20albldyt%20llwrsh%20almhnyt.pdf"},
+{n:"اشتراطات المجمعات التجارية والأسواق الشعبية",t:"اشتراطات",cat:C.REQ,d:"2024-12",p:"/sites/default/files/2024-12/ashtratat%20almjm%60at%20altjaryt%20walaswaq%20alsh%60byt.pdf"},
+{n:"اشتراطات المرافق الترفيهية",t:"اشتراطات",cat:C.REQ,d:"2024-11",p:"/sites/default/files/2024-11/ashtratat%20almrafq%20altrfyhyt.pdf"},
+{n:"اشتراطات المباني الثقافية ودور العرض",t:"اشتراطات",cat:C.REQ,d:"2024-11",p:"/sites/default/files/2024-11/ashtratat%20almbany%20althqafyt%20wdwr%20al%60rd.pdf"},
+{n:"اشتراطات مراكز الاسترخاء والعناية بالجسم",t:"اشتراطات",cat:C.REQ,d:"2024-11",p:"/sites/default/files/2024-11/ashtratat%20mrakz%20alastrkha%20wal%60nayt%20baljsm%20bqrar%20ala%60tmad.pdf"},
+{n:"اشتراطات محلات بيع وتأجير معدات البناء",t:"اشتراطات",cat:C.REQ,d:"2024-10",p:"/sites/default/files/2024-10/ashtratat%20mhlat%20by%60%20wta%27jyr%20m%60dat%20albna.pdf"},
+{n:"اشتراطات الحلاقة الرجالية",t:"اشتراطات",cat:C.REQ,d:"2024-09",p:"/sites/default/files/2024-09/ashtratat%20alhlaqt%20alrjalyt_1.pdf"},
+{n:"اشتراطات مغاسل الملابس والمفروشات",t:"اشتراطات",cat:C.REQ,d:"2024-09",p:"/sites/default/files/2024-09/ashtratat%20mghasl%20almlabs%20walmfrwshat_0.pdf"},
+{n:"اشتراطات محلات الخياطة المعتمدة",t:"اشتراطات",cat:C.REQ,d:"2024-09",p:"/sites/default/files/2024-09/ashtratat%20mhlat%20alkhyatt%20alm%60tmdt.pdf"},
+{n:"اشتراطات محلات بيع مواد البناء",t:"اشتراطات",cat:C.REQ,d:"2024-09",p:"/sites/default/files/2024-09/ashtratat%20mhlat%20by%60%20mwad%20albna.pdf"},
+{n:"اشتراطات محطات الوقود",t:"اشتراطات",cat:C.REQ,d:"2024-01",p:"/sites/default/files/2024-01/ashtratat-mhtat-alwqwd-1445h-.pdf"},
+{n:"اشتراطات التخلص من نفايات البناء والهدم والترميم",t:"اشتراطات",cat:C.REQ,d:"2024-01",p:"/sites/default/files/2024-01/mshrw-ashtratat-altkhls-mn-nfayat-albna-walhdm-waltrmym-.pdf"},
+{n:"اشتراطات مواقف السيارات المدفوعة",t:"اشتراطات",cat:C.REQ,d:"2023-11",p:"/sites/default/files/2023-11/ashtratat-mwaqf-alsyarat-almdfwt.pdf"},
+{n:"الاشتراطات الإنشائية والبلدية لأبراج وهوائيات الاتصالات",t:"اشتراطات",cat:C.REQ,d:"2023-08",p:"/sites/default/files/2023-08/alashtratat-alanshayyt-walbldyt-labraj-whwayyat-alatsalat-m-alqrar.pdf"},
+{n:"اشتراطات مرافق الإيواء السياحي",t:"اشتراطات",cat:C.REQ,d:"2022-12",p:"/sites/default/files/2022-12/qrar-washtratat-mrafq-alaywa-alsyahy.pdf"},
+{n:"اشتراطات مزادات السيارات والمعدات",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D9%85%D8%B2%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D8%B9%D8%AF%D8%A7%D8%AA.pdf"},
+{n:"اشتراطات المتاجر المغلقة",t:"اشتراطات",cat:C.REQ,d:"2022-03",p:"/sites/default/files/2022-03/%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AC%D8%B1%20%D8%A7%D9%84%D9%85%D8%BA%D9%84%D9%82%D8%A9.pdf"},
+{n:"اشتراطات محلات بيع التبغ",t:"اشتراطات",cat:C.REQ,d:"2025-05",p:"/sites/default/files/2025-05/ashtratat%20mhlat%20by%60%20altbgh.pdf"},
+{n:"اشتراطات منشآت الفحص الفني الدوري للمركبات",t:"اشتراطات",cat:C.REQ,d:"2025-05",p:"/sites/default/files/2025-05/ashtratat%20mnshat%20alfhs%20alfny%20aldwry%20llmrkbat.pdf"},
+{n:"اشتراطات قاعات المناسبات والمعارض",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20qa%60at%20almnasbat%20walm%60ard.pdf"},
+{n:"اشتراطات المستودعات والمخازن",t:"اشتراطات",cat:C.REQ,d:"2025-04",p:"/sites/default/files/2025-04/ashtratat%20almstwd%60at%20walmkhazn.pdf"},
+{n:"لائحة الاشتراطات الصحية للأسواق المركزية والبقالات وبيع التمور وعسل النحل",t:"اشتراطات",cat:C.REQ,d:"2020-02",p:""},
+{n:"لائحة الاشتراطات الصحية لمحلات إعداد وتجهيز وبيع اللحوم والدواجن ومنتجاتها",t:"اشتراطات",cat:C.REQ,d:"2020-02",p:""},
+{n:"لائحة الاشتراطات الصحية لمحلات العطارة",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D8%B7%D8%A7%D8%B1%D8%A9.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات المثلجات القشدية (الآيس كريم)",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AB%D9%84%D8%AC%D8%A7%D8%AA%20%D8%A7%D9%84%D9%82%D8%B4%D8%AF%D9%8A%D8%A9%20%28%D8%A7%D9%84%D8%A7%D9%8A%D8%B3%20%D9%83%D8%B1%D9%8A%D9%85%29.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات بيع الخضار والفواكه",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A8%D9%8A%D8%B9%20%D8%A7%D9%84%D8%AE%D8%B6%D8%A7%D8%B1%20%D9%88%D8%A7%D9%84%D9%81%D9%88%D8%A7%D9%83%D8%A9.pdf"},
+{n:"لائحة الاشتراطات الصحية لمعاصر زيت الزيتون والسمسم",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%B9%D8%A7%D8%B5%D8%B1%20%D8%B2%D9%8A%D8%AA%20%D8%A7%D9%84%D8%B2%D9%8A%D8%AA%D9%88%D9%86%20%D9%88%D8%A7%D9%84%D8%B3%D9%85%D8%B3%D9%85.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات تعبئة وتغليف المواد الغذائية الجافة",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%AA%D8%B9%D8%A8%D8%A6%D8%A9%20%D9%88%D8%AA%D8%BA%D9%84%D9%8A%D9%81%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%AF%20%D8%A7%D9%84%D8%BA%D8%B0%D8%A7%D8%A6%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%81%D8%A9.pdf"},
+{n:"لائحة الاشتراطات الصحية لمطاحن الحبوب",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%B7%D8%A7%D8%AD%D9%86%20%D8%A7%D9%84%D8%AD%D8%A8%D9%88%D8%A8.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات بيع الحيوانات والطيور والأسماك المنزلية",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A8%D9%8A%D8%B9%20%D8%A7%D9%84%D8%AD%D9%8A%D9%88%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B7%D9%8A%D9%88%D8%B1%20%D9%88%D8%A7%D9%84%D8%A3%D8%B3%D9%85%D8%A7%D9%83%20%D8%A7%D9%84%D9%85%D9%86%D8%B2%D9%84%D9%8A%D8%A9%20%D9%88%D9%85%D8%B3%D8%AA%D9%84%D8%B2%D9%85%D8%A7%D8%AA%D9%87%D8%A7.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات إعداد وتجهيز وبيع الحلويات",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%20%D9%88%D8%AA%D8%AC%D9%87%D9%8A%D8%B2%20%D9%88%D8%A8%D9%8A%D8%B9%20%D8%A7%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA.pdf"},
+{n:"لائحة الاشتراطات الصحية لتجميع زيوت الطعام المستخدمة",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D8%B9%20%D8%B2%D9%8A%D9%88%D8%AA%20%D8%A7%D9%84%D8%B7%D8%B9%D8%A7%D9%85%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85%D8%A9.pdf"},
+{n:"لائحة الاشتراطات الصحية العامة لمحلات إعداد وتجهيز وبيع المواد الغذائية",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%20%D9%88%D8%AA%D8%AC%D9%87%D9%8A%D8%B2%20%D9%88%D8%A8%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%AF%20%D8%A7%D9%84%D8%BA%D8%B0%D8%A7%D8%A6%D9%8A%D8%A9%20%D9%88%D8%B0%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D9%82%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B5%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9.pdf"},
+{n:"لائحة الاشتراطات الصحية لمحلات إعداد وتجهيز منتجات البيض",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D9%84%D8%A7%D8%A6%D8%AD%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%AD%D9%84%D8%A7%D8%AA%20%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%20%D9%88%D8%AA%D8%AC%D9%87%D9%8A%D8%B2%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A8%D9%8A%D8%B6.pdf"},
+{n:"اشتراطات المشاريع المميزة للمدن المتوسطة والصغرى التي ليس لها مخطط إرشادي",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%85%D9%8A%D8%B2%D8%A9%20%D9%84%D9%84%D9%85%D8%AF%D9%86%20%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D8%A9%20%D9%88%D8%A7%D9%84%D8%B5%D8%BA%D8%B1%D9%89%20%D8%A7%D9%84%D8%AA%D9%8A%20%D9%84%D9%8A%D8%B3%D8%AA%20%D9%84%D9%87%D8%A7%20%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A5%D8%B1%D8%B4%D8%A7%D8%AF%D9%8A%20%28%D9%85%D8%AD%D9%84%D9%8A%20%D8%AA%D9%81%D8%B5%D9%8A%D9%84%D9%8A%29.pdf"},
+{n:"المعايير التخطيطية للخدمات العامة والإقليمية والمحلية ومستوياتها المختلفة",t:"اشتراطات",cat:C.REQ,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AE%D8%B7%D9%8A%D8%B7%D9%8A%D8%A9%20%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D9%88%D8%A7%D9%84%D8%A7%D9%82%D9%84%D9%8A%D9%85%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D9%85%D8%AD%D9%84%D9%8A%D8%A9%20%D9%88%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%D9%87%D8%A7%20%D8%A7%D9%84%D9%85%D8%AE%D8%AA%D9%84%D9%81%D8%A9.pdf"},
+{n:"الدليل الشامل للأعمال المدنية للبنية التحتية",t:"دليل",cat:C.GUIDE,d:"2024-12",p:"/sites/default/files/2024-12/aldlyl%20alshaml%20lla%27%60mal%20almdnyt%20llbnyt%20althtyt.pdf"},
+// ===== الأدلة =====
+{n:"دليل الرقابة على التقسيم المخالف للوحدات السكنية",t:"دليل",cat:C.GUIDE,d:"2026-07",p:"/sites/default/files/2026-07/%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B2%D8%A7%D8%B1%D9%8A%20%D9%84%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D8%AA%D9%82%D8%B3%D9%8A%D9%85%20%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D9%84%D9%81%20%D9%84%D9%84%D9%88%D8%AD%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D9%83%D9%86%D9%8A%D8%A9.pdf"},
+{n:"الدليل الإجرائي الاسترشادي لإعداد مذكرات أو اتفاقيات التفاهم/التعاون",t:"دليل",cat:C.GUIDE,d:"2026-03",p:"/sites/default/files/2026-03/alnskht%20alnhayyt%20lldlyl%20ala%27jray%27y%20alastrshady%20la%27%60dad%20mdhkrat%20a%27w%20atfaqyat%20altfahm-alt%60awn%2019-9-1447.pdf"},
+{n:"دليل إجراءات شهادة امتثال المباني",t:"دليل",cat:C.GUIDE,d:"2026-02",p:"/sites/default/files/2026-02/dlyl_ajraat_shhadt_amtthal_almbany_.pdf",
+  upd:"النسخة السارية: فبراير 2026 (سبقتها نسخة 2023)",
+  diff:{conf:"struct",sum:"تحديث الدليل الإجرائي من نسخة 2023 إلى نسخة فبراير 2026.",changes:["حدّثت الوزارة إجراءات إصدار شهادة امتثال المباني في نسخة 2026.","تفاصيل التغييرات الإجرائية الدقيقة (المراحل والمدد) تتطلب مقارنة نصّ النسختين المرفقتين أعلاه."]},
+  v:[
+   {label:"دليل إجراءات شهادة امتثال المباني — نسخة 2023",date:"أبريل 2023",cur:false,txt:"نسخة سابقة متاحة على البوابة ضمن مجلد 2023-04.",pdf:"/sites/default/files/2023-04/dlyl-ajraat-shhadt-amtthal-almbany.pdf"},
+   {label:"دليل إجراءات شهادة امتثال المباني — النسخة المحدّثة",date:"فبراير 2026",cur:true,txt:"النسخة الحالية المنشورة على البوابة.",pdf:"/sites/default/files/2026-02/dlyl_ajraat_shhadt_amtthal_almbany_.pdf"}
+  ]},
+{n:"الدليل الإجرائي المعتمد لمبادرة ترميز المقاولين",t:"دليل",cat:C.GUIDE,d:"2026-01",p:"/sites/default/files/2026-01/aldlyl%20alajray%27y%20alm%60tmd%20lmbadrt%20trmyz%20almqawlyn_1.pdf"},
+{n:"دليل المداخن للأنشطة التجارية",t:"دليل",cat:C.GUIDE,d:"2024-01",p:""},
+{n:"الدليل الفني لإنشاء وترميم المقابر",t:"دليل",cat:C.GUIDE,d:"2024-02",p:""},
+{n:"دليل تسوير الأراضي الفضاء",t:"دليل",cat:C.GUIDE,d:"2025-11",p:""},
+{n:"دليل تقييم ومعالجة المباني الآيلة للسقوط",t:"دليل",cat:C.GUIDE,d:"2025-11",p:"/sites/default/files/2025-11/mswdt%20dlyl%20tqyym%20wm%60aljt%20almbany%20alaylt%20llsqwt%20%281%29.pdf"},
+{n:"دليل الحجز والتحفظ على المواد والأدوات",t:"دليل",cat:C.GUIDE,d:"2025-09",p:"/sites/default/files/2025-09/dlyl_alhjz_walthfz_%60ly_almwad_waladwat%20%20V%2017.1alnskht%20alnhayyt.pdf"},
+{n:"دليل الشروط الصحية والفنية والسلامة اللازم توافرها في المساكن الجماعية للأفراد",t:"دليل",cat:C.GUIDE,d:"2025-09",p:"/sites/default/files/2025-09/dlyl%20alshrwt%20alshyt%20walfnyt%20walslamt%20v3%2009.01.25.pdf"},
+{n:"الدليل الإجرائي لدراسات التأثير المروري للمشاريع العمرانية",t:"دليل",cat:C.GUIDE,d:"2025-08",p:"/sites/default/files/2025-08/aldlyl%20ala%27jray%27y%20ldrasat%20alta%27thyr%20almrwry%20llmshary%60%20al%60mranyt%20%282025-alnhayy%29.pdf"},
+{n:"الدليل الإجرائي لتأهيل المكاتب والشركات الاستشارية الهندسية",t:"دليل",cat:C.GUIDE,d:"2025-06",p:"/sites/default/files/2025-06/GetFileAttachment-17.pdf"},
+{n:"دليل متطلبات الشهادة الصحية",t:"دليل",cat:C.GUIDE,d:"2025-03",p:"/sites/default/files/2025-03/dlyl%20mttlbat%20alshhadt%20alshyt.pdf"},
+{n:"الدليل الاسترشادي لإجراءات الرقابة على السكن الجماعي للأفراد",t:"دليل",cat:C.GUIDE,d:"2025-02",p:"/sites/default/files/2025-02/%20aldlyl%20alastrshady%20lajraat%20alrqabt%20%60ly%20alskn%20aljma%60y%20llafrad_0.pdf"},
+{n:"دليل التشغيل والصيانة لدورات المياه العامة",t:"دليل",cat:C.GUIDE,d:"2025-01",p:"/sites/default/files/2025-01/nhayy%20dlyl%20altshghyl%20walsyant%20ldwrat%20almyah%20al%60amt%20altsmym%20alm%60dl%207-1-2025.pdf"},
+{n:"دليل اختيار مواقع الحاويات",t:"دليل",cat:C.GUIDE,d:"2025-04",p:"/sites/default/files/2025-04/V17.17122024%20dlyl%20akhtyar%20mwaq%60%20alhawyat%20.pdf"},
+{n:"دليل دورات المياه العامة المتنقلة",t:"دليل",cat:C.GUIDE,d:"2025-04",p:"/sites/default/files/2025-04/__V.17.17122024%20%20dlyl%20dwwrat%20almyah%20.pdf"},
+{n:"دليل أسطح المباني",t:"دليل",cat:C.GUIDE,d:"2025-04",p:""},
+{n:"الدليل الفني لمظلات السيارات داخل حد الملكية",t:"دليل",cat:C.GUIDE,d:"2025-07",p:"/sites/default/files/2025-07/aldlyl%20alfny%20lmzlat%20alsyarat%20dakhl%20hd%20almlkyt%20.pdf"},
+{n:"دليل العمل لمسؤولي النظافة",t:"دليل",cat:C.GUIDE,d:"2020-02",p:"/sites/default/files/2020-02/Action%20Guide%20for%20the%20Sanitrian.pdf"},
+{n:"دليل اشتراطات الألواح الشمسية بالمباني",t:"دليل",cat:C.GUIDE,d:"2024-10",p:"/sites/default/files/2024-10/ashtratat24_trkyb_a%27lwah_altaqt_alshmsyt_balmbany_walmnshat_mswdt_nskht_alakhyr1.3.pdf"},
+{n:"دليل المحددات التصميمية لتغطية الشرفات",t:"دليل",cat:C.GUIDE,d:"2024-05",p:"/sites/default/files/2024-05/dlyl-almhddat-altsmymyt-ltghtyt-alshrfat-20240519-.pdf"},
+{n:"معايير رسوم لوحات الدعاية والإعلان 1445هـ",t:"دليل",cat:C.GUIDE,d:"2024-05",p:"/sites/default/files/2024-05/mayyr-rswm-lwhat-aldayt-walalan-14451.pdf"},
+{n:"دليل الشروط الصحية والفنية والسلامة في المساكن الجماعية للأفراد",t:"دليل",cat:C.GUIDE,d:"2024-04",p:"/sites/default/files/2024-04/dlyl-alshrwt-alshyt-walfnyt-walslamt-allazm-twafrha-fy-almsakn-aljmayt-llafrad-.pdf"},
+{n:"الدليل الإجرائي لتعديل استخدام الأراضي المخصصة للمرافق العامة بالمخططات الخاصة",t:"دليل",cat:C.GUIDE,d:"2023-12",p:"/sites/default/files/2023-12/aldlyl-alajrayy-ltdyl-astkhdam-alarady-almkhsst-llmrafq-alamt-balmkhttat-alkhast-.pdf"},
+{n:"دليل إجراءات سحب وحجز المركبات المهملة والتالفة والمعطلة",t:"دليل",cat:C.GUIDE,d:"2023-10",p:"/sites/default/files/2023-10/dlyl-ajraat-shb-whjz-almrkbat-almhmlt-waltalft-walmtlt.pdf"},
+{n:"دليل تصميم مواقف السيارات",t:"دليل",cat:C.GUIDE,d:"2023-09",p:"/sites/default/files/2023-09/dlyl-tsmym-mwaqf-alsyarat.pdf"},
+{n:"دليل استخدام الحواجز المؤقتة في مناطق العمل",t:"دليل",cat:C.GUIDE,d:"2023-05",p:"/sites/default/files/2023-05/dlyl-astkhdam-alhwajz-almwqtt-fy-mnatq-alml_0.pdf"},
+{n:"دليل تسوير مواقع الأعمال الإنشائية",t:"دليل",cat:C.GUIDE,d:"2023-03",p:"/sites/default/files/2023-03/dlyl-tswyr-mwaq-alamal-alanshayyt.pdf"},
+{n:"دليل تغطية المباني تحت الإنشاء",t:"دليل",cat:C.GUIDE,d:"2023-03",p:"/sites/default/files/2023-03/qrar-dlyl-tghtyt-almbany_1.pdf"},
+{n:"الدليل التفصيلي للمخالفات البلدية وحالاتها وفق اللائحة الجديدة",t:"دليل",cat:C.GUIDE,d:"2022-05",p:"/sites/default/files/2022-05/aldlyl-altfsyly-ljdwl-almkhalfat-albldyt-almhdtht-balqym.pdf"},
+{n:"الدليل المبسط لمعايير الوصول الشامل للمنشآت",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%A8%D8%B3%D8%B7.pdf"},
+{n:"دليل الاشتراطات الصحية لدهون وزيوت القلي",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D8%AF%D9%87%D9%88%D9%86%20%D9%88%D8%B2%D9%8A%D9%88%D8%AA%20%D8%A7%D9%84%D9%82%D9%84%D9%8A.pdf"},
+{n:"الدليل الفني لإرشادات وضوابط الدفن الصحي للنفايات",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%81%D9%86%D9%8A%20%D9%84%D8%A5%D8%B1%D8%B4%D8%A7%D8%AF%D8%A7%D8%AA%20%D9%88%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%A7%D9%84%D8%AF%D9%81%D9%86%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%20%D9%84%D9%84%D9%86%D9%81%D8%A7%D9%8A%D8%A7%D8%AA.pdf"},
+{n:"دليل تصميم منشآت الطرق",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%86%D8%B4%D8%A2%D8%AA%20%D8%A7%D9%84%D8%B7%D8%B1%D9%82.pdf"},
+{n:"دليل تقييم طبقات رصف الطرق ومنشآتها",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%AA%D9%82%D9%8A%D9%8A%D9%85%20%D8%B7%D8%A8%D9%82%D8%A7%D8%AA%20%D8%B1%D8%B5%D9%81%20%D8%A7%D9%84%D8%B7%D8%B1%D9%82%20%D9%88%D9%85%D9%86%D8%B4%D8%A2%D8%AA%D9%87%D8%A7.pdf"},
+{n:"دليل تدقيق تصاميم مشاريع الطرق",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%AA%D8%AF%D9%82%D9%8A%D9%82%20%D8%AA%D8%B5%D8%A7%D9%85%D9%8A%D9%85%20%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B7%D8%B1%D9%82.pdf"},
+{n:"دليل تصميم المصاعد والسلالم الكهربائية",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D9%85%D8%B5%D8%A7%D8%B9%D8%AF%20%D9%88%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D9%8A%D9%94%D9%8A%D8%A9.pdf"},
+{n:"دليل عقود تنفيذ الطرق والحدائق",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%B9%D9%82%D9%88%D8%AF%20%D8%AA%D9%86%D9%81%D9%8A%D8%B0%20%D8%A7%D9%84%D8%B7%D8%B1%D9%82%20%D9%88%D8%A7%D9%84%D8%AD%D8%AF%D8%A7%D9%8A%D9%94%D9%82.pdf"},
+{n:"دليل المستهلك في التعامل مع الأسواق المركزية والمطاعم",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%87%D9%84%D9%83%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%85%D9%84%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D9%85%D8%B7%D8%A7%D8%B9%D9%85%20%D9%88%D9%85%D8%A7%20%D9%81%D9%8A%20%D8%AD%D9%83%D9%85%D9%87%D8%A7.pdf"},
+{n:"دليل خطة عمل الرقابة الصحية",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%D8%AF%D9%84%D9%8A%D9%84%20%D8%AE%D8%B7%D8%A9%20%D8%B9%D9%85%D9%84%20%D8%A7%D9%84%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9.pdf"},
+{n:"دليل التصميم الهندسي للطرق",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D9%8A%20%D9%84%D9%84%D8%B7%D8%B1%D9%82.pdf"},
+{n:"دليل المواصفات العامة لإنشاء الطرق ومنشآتها",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D9%84%D8%A5%D9%86%D8%B4%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B7%D8%B1%D9%82%20%D9%88%D9%85%D9%86%D8%B4%D8%A2%D8%AA%D9%87%D8%A7.pdf"},
+{n:"دليل المواصفات العامة للأعمال المدنية في مشاريع تمديد المرافق العامة",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D9%84%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%85%D8%AF%D9%86%D9%8A%D8%A9%20%D9%81%D9%8A%20%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9%20%20%D8%AA%D9%85%D8%AF%D9%8A%D8%AF%20%D8%A7%D9%84%D9%85%D8%B1%D8%A7%D9%81%D9%82%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9.pdf"},
+{n:"دليل إنارة الشوارع والميادين",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%95%D9%86%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B4%D9%88%D8%A7%D8%B1%D8%B9%20%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D8%AF%D9%8A%D9%86.pdf"},
+{n:"دليل المفتش الفني للمباني",t:"دليل",cat:C.GUIDE,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D9%81%D8%AA%D8%B4%20%D8%A7%D9%84%D9%81%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%A8%D8%A7%D9%86%D9%8A.pdf"},
+{n:"الشروط الصحية لمساكن العمال",t:"دليل",cat:C.GUIDE,d:"2020-03",p:"/sites/default/files/2020-03/%D8%A7%D9%84%D8%B4%D8%B1%D9%88%D8%B7%20%D8%A7%D9%84%D8%B5%D8%AD%D9%8A%D8%A9%20%D9%84%D9%85%D8%B3%D8%A7%D9%83%D9%86%20%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D9%84.pdf"},
+{n:"الشروط والمواصفات الموحدة لمشاريع الإصحاح البيئي",t:"دليل",cat:C.GUIDE,d:"2020-02",p:"/sites/default/files/2020-02/%D8%A7%D9%84%D8%B4%D8%B1%D9%88%D8%B7%20%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D9%88%D8%AD%D8%AF%D8%A9%20%D9%84%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AD%D8%A7%D8%AD%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A6%D9%8A%20%D9%84%D9%85%D9%83%D8%A7%D9%81%D8%AD%D8%A9%20%D8%A2%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B5%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A3%D9%85%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D9%8A%D8%A7%D8%AA%20.pdf"},
+{n:"مشروع الإصحاح البيئي لتقليل كثافة الكلاب الضالة",t:"دليل",cat:C.GUIDE,d:"2020-02",p:"/sites/default/files/2020-02/%E2%80%AB%E2%80%AB%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AD%D8%A7%D8%AD%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A6%D9%8A%20%D9%84%D8%AA%D9%82%D9%84%D9%8A%D9%84%20%20%D9%83%D8%AB%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D9%83%D9%84%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B6%D8%A7%D9%84%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A3%D9%85%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D9%8A%D8%A7%D8%AA%20.pdf"},
+// ===== أخرى / ضوابط / تعليمات =====
+{n:"ضوابط تصريح 24 ساعة",t:"ضوابط",cat:C.OTHER,d:"2026-01",p:"/sites/default/files/2026-06/%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%AA%D8%B5%D8%B1%D9%8A%D8%AD%2024%20%D8%B3%D8%A7%D8%B9%D8%A9%2026-01-2026%20-%20%D9%85%D8%B9%D8%AA%D9%85%D8%AF%20%D9%85%D8%B9%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1.pdf"},
+{n:"ضوابط ممارسة نشاط التزيين النسائي",t:"ضوابط",cat:C.OTHER,d:"2025-11",p:"/sites/default/files/2025-11/dwabt%20mmarst%20nshat%20altzyyn%20alnsayy%20%281%29.pdf"},
+{n:"جدول تصنيف المخالفات والعقوبات (نظام الغذاء)",t:"ضوابط",cat:C.OTHER,d:"2025-08",p:"/sites/default/files/2025-08/jdwl%20almkhalfat%201447h%20alnhay%27y-2.pdf"},
+{n:"مخالفة تقسيم المبنى إلى وحدات مخالفة",t:"ضوابط",cat:C.OTHER,d:"2025-11",p:"/sites/default/files/2025-11/alnmwdhj%20alnhayy..1.pdf"},
+{n:"جدول تصنيف المخالفات وتحديد العقوبات لنظام تصنيف المقاولين",t:"ضوابط",cat:C.OTHER,d:"2023-07",p:"/sites/default/files/2023-07/jdwl-tsnyf-almkhalfat-wthdyd-alqwbat-lnzam-tsnyf-almqawlyn.pdf"},
+{n:"قرار مجلس الوزراء رقم (550) بالموافقة على جدول تصنيف مخالفات استخدام المواقف",t:"ضوابط",cat:C.OTHER,d:"2022-04",p:"/sites/default/files/2022-04/qrar-mjls-alwzra-rqm-550-alqady-balmwafqt-ly-jdwl-tsnyf-mkhalfat-astkhdam-almwaqf-fy-almwaq-altjaryt-walamakn-alamt_0.pdf"},
+{n:"قرار إطلاق المرحلة الأولى من برنامج رسوم الأراضي البيضاء",t:"ضوابط",cat:C.OTHER,d:"2022-09",p:"/sites/default/files/2022-09/wzart_alshwwn_albldyt_walqrwyt_walaskan_brnamj_rswm_alarady_albyda_17-1-1444_12-2-41.pdf"},
+{n:"ضوابط تأجير العقارات البلدية لغرض إقامة الأنشطة والفعاليات المؤقتة",t:"ضوابط",cat:C.OTHER,d:"2023-11",p:"/sites/default/files/2023-11/dwabt-tajyr-alqarat-albldyt-lghrd-aqamt-alanshtt-walfalyat-almwqtt.pdf"},
+{n:"الضوابط التخطيطية الخاصة بمواقع المخازن والمستودعات",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%A7%D9%84%D8%AA%D8%AE%D8%B7%D9%8A%D8%B7%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D8%A8%D9%85%D9%88%D8%A7%D9%82%D8%B9%20%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86%20%D9%88%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%88%D8%AF%D8%B9%D8%A7%D8%AA.pdf"},
+{n:"الضوابط والشروط المتعلقة بإفراغ الشوارع والممرات (الطرق الداخلية) إلى الملكيات المجاورة",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D9%88%D8%A7%D9%84%D8%B4%D8%B1%D9%88%D8%B7%20%D8%A7%D9%84%D9%85%D8%AA%D8%B9%D9%84%D9%82%D8%A9%20%D8%A8%D8%A5%D9%81%D8%B1%D8%A7%D8%BA%20%D8%A7%D9%84%D8%B4%D9%88%D8%A7%D8%B1%D8%B9%20%D9%88%D8%A7%D9%84%D9%85%D9%85%D8%B1%D8%A7%D8%AA%20%28%D8%A7%D9%84%D8%B7%D8%B1%D9%82%20%D8%A7%D9%84%D8%AF%D8%A7%D8%AE%D9%84%D9%8A%D8%A9%29%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%88%D8%B1%D8%A9%20%D9%84%D9%87%D8%A7.pdf"},
+{n:"ضوابط تعديل استخدام الأراضي المخصصة للمرافق العامة بالمخططات الخاصة وآليته التنفيذية",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%AA%D8%B9%D8%AF%D9%8A%D9%84%20%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D8%B1%D8%A7%D8%B6%D9%8A%20%D8%A7%D9%84%D9%85%D8%AE%D8%B5%D8%B5%D8%A9%20%D9%84%D9%84%D9%85%D8%B1%D8%A7%D9%81%D9%82%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%20%D8%A8%D8%A7%D9%84%D9%85%D8%AE%D8%B7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D9%88%D8%A2%D9%84%D9%8A%D8%AA%D9%87%20%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9.pdf"},
+{n:"قرار مجلس الوزراء رقم (131) بشأن إنشاء الشبكة الإلكترونية لخدمات إيجار",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D9%82%D8%B1%D8%A7%D8%B1%20%D9%85%D8%AC%D9%84%D8%B3%20%D8%A7%D9%84%D9%88%D8%B2%D8%B1%D8%A7%D8%A1%20%D8%B1%D9%82%D9%85%20%28%20131%20%29%20%D8%A8%D8%B4%D8%A3%D9%86%20%D8%A5%D9%86%D8%B4%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9%20%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A5%D9%8A%D8%AC%D8%A7%D8%B1.pdf"},
+{n:"قرار مجلس الوزراء بإلزام الوسطاء العقاريين بتسجيل عقود الإيجار على الشبكة",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D9%82%D8%B1%D8%A7%D8%B1%20%D9%85%D8%AC%D9%84%D8%B3%20%D8%A7%D9%84%D9%88%D8%B2%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D9%82%D8%A7%D8%B6%D9%8A%20%D8%A8%D8%A5%D9%84%D8%B2%D8%A7%D9%85%20%D8%A7%D9%84%D9%88%D8%B3%D8%B7%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B9%D9%82%D8%A7%D8%B1%D9%8A%D9%8A%D9%86%20%D8%A8%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D8%B9%D9%82%D9%88%D8%AF%20%D8%A7%D9%84%D8%A5%D9%8A%D8%AC%D8%A7%D8%B1%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D8%B4%D8%A8%D9%83%D8%A9.pdf"},
+{n:"تنظيم العلاقة بين المستأجر (المستثمر) والجهات الحكومية في عقود الاستثمار العقاري طويلة الأمد",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%AA%D9%86%D8%B8%D9%8A%D9%85%20%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D9%82%D8%A9%20%D8%A8%D9%8A%D9%86%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%A3%D8%AC%D8%B1%20%D9%88%D8%A7%D9%84%D8%AC%D9%87%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D9%8A%D8%A9%20%D9%81%D9%8A%D9%85%D8%A7%20%D9%8A%D8%AA%D8%B9%D9%84%D9%82%20%D8%A8%D8%B9%D9%82%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B9%D9%82%D8%A7%D8%B1%D9%8A%20%D8%B7%D9%88%D9%8A%D9%84%D8%A9%20%D8%A7%D9%84%D8%A3%D9%85%D8%AF.pdf"},
+{n:"الآلية التنفيذية بشأن عدم إصدار رخص البناء للأراضي التي ليست ضمن مخطط معتمد",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D8%A2%D9%84%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9%20%D8%A8%D8%B4%D8%A3%D9%86%20%D8%B9%D8%AF%D9%85%20%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%D8%B1%D8%AE%D8%B5%20%D8%A7%D9%84%D8%A8%D9%86%D8%A7%D8%A1%20%D9%84%D9%84%D8%A3%D8%B1%D8%A7%D8%B6%D9%8A%20%D8%A7%D9%84%D8%AA%D9%8A%20%D9%84%D9%8A%D8%B3%D8%AA%20%D8%B6%D9%85%D9%86%20%D9%85%D8%AE%D8%B7%D8%B7%20%D9%85%D8%B9%D8%AA%D9%85%D8%AF.pdf"},
+{n:"التعليمات الخاصة بإعداد تقارير دراسات التربة قبل اعتماد المخططات التنظيمية",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D8%A8%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%20%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1%20%D8%AF%D8%B1%D8%A7%D8%B3%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D8%A9%20%D9%82%D8%A8%D9%84%20%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF%20%D8%A7%D9%84%D9%85%D8%AE%D8%B7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D9%86%D8%B8%D9%8A%D9%85%D9%8A%D8%A9.pdf"},
+{n:"التعليمات التنفيذية لتحديد المقابل المالي للسماح للأنشطة التجارية بالعمل (24) ساعة",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9%20%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AF%20%D8%A7%D9%84%D9%85%D9%82%D8%A7%D8%A8%D9%84%20%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%20%D9%84%D9%84%D8%B3%D9%85%D8%A7%D8%AD%20%D9%84%D9%84%D8%A7%D9%86%D8%B4%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B9%D9%85%D9%84%20%2824%29%20%D8%B3%D8%A7%D8%B9%D8%A9.pdf"},
+{n:"المسارات المحدثة لاعتماد مخططات تقسيمات الأراضي السكنية الخاصة خلال 60 يوم",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D8%A9%20%D9%84%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF%20%D8%A7%D9%84%D9%85%D8%AE%D8%B7%D8%B7%D8%A7%D8%AA%20%D8%AA%D9%82%D8%B3%D9%8A%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B1%D8%A7%D8%B6%D9%8A%20%D8%A7%D9%84%D8%B3%D9%83%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D8%AE%D9%84%D8%A7%D9%84%2060%20%D9%8A%D9%88%D9%85.pdf"},
+{n:"ضوابط اعتماد تقسيمات الأراضي الحكومية والخاصة لكافة الاستعمالات",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%AA%D9%82%D8%B3%D9%8A%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A7%D8%B1%D8%A7%D8%B6%D9%8A%20%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D9%84%D9%83%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B9%D9%85%D8%A7%D9%84%D8%A7%D8%AA%20%D9%88%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF%20%D9%85%D8%AE%D8%B7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B2%D8%A6%D8%A9%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%81%D8%B1%D8%B2%20%D9%84%D9%84%D8%A3%D8%B1%D8%A7%D8%B6%D9%8A%20%D8%A7%D9%84%D8%B2%D8%B1%D8%A7%D8%B9%D9%8A%D8%A9.pdf"},
+{n:"الضوابط البلدية والفنية والاشتراطات الخاصة بإقامة محطات التحويل الكهربائية",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D9%8A%D8%A9%20%D9%88%20%D8%A7%D9%84%D9%81%D9%86%D9%8A%D9%87%20%D9%88%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%D8%A9%20%D8%A8%D8%A5%D9%82%D8%A7%D9%85%D8%A9%20%D9%85%D8%AD%D8%B7%D8%A7%D8%AA%20%D8%AA%D8%AD%D9%88%D9%8A%D9%84%20%D8%A7%D9%84%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A6%D9%8A%D8%A9.pdf"},
+{n:"ضوابط المنافسة العلنية المفتوحة",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%D8%A3%D8%AF%D8%A7%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%20%2B%20%D8%B6%D9%88%D8%A7%D8%A8%D8%B7%20%D8%A7%D9%84%D9%85%D9%86%D8%A7%D9%81%D8%B3%D8%A9%20%D8%A7%D9%84%D8%B9%D9%84%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D9%81%D8%AA%D9%88%D8%AD%D8%A9.pdf"},
+{n:"آلية تصنيف الشركات والمكاتب الاستشارية الهندسية",t:"ضوابط",cat:C.OTHER,d:"2022-02",p:"/sites/default/files/2022-02/%E2%80%8F%E2%80%8F%E2%80%AB%D8%A2%D9%84%D9%8A%D8%A9%20%D8%AA%D8%B5%D9%86%D9%8A%D9%81%20%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%83%D8%A7%D8%AA%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D9%8A%D8%A9%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D9%8A%D8%A9.pdf"},
+{n:"اللائحة الصحية لفحوصات كورونا",t:"ضوابط",cat:C.OTHER,d:"",p:""}
+];
+</script>
+<script>
+const RENAME_NOTE="ملاحظة: يظهر أحيانًا مسمّى جهة سابق على الوثيقة (وزارة الشؤون البلدية والقروية / والإسكان) بحسب سنة إصدارها.";
+function fmtDate(d){
+  if(!d) return "غير مؤرخ";
+  const [y,m]=d.split("-"); const M=["","يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  return (M[+m]||"")+" "+y;
+}
+const DOCS=RAW.map((r,i)=>({...r,id:"d"+i,hasv:!!(r.v&&r.v.length>1),status:r.v?(r.v.length>1?"لها تحديث":"سارية"):"سارية"}));
+function url(p,abs){
+  if(!p) return "";
+  var full = (abs||/^https?:/.test(p)) ? p : BASE + p;
+  /* المسار مُرمَّز مسبقًا (%D8..) => يُستخدم كما هو. إعادة ترميزه تحوّل % إلى %25 وتكسر الرابط */
+  return /%[0-9A-Fa-f]{2}/.test(full) ? full : encodeURI(full);
+}
+const norm=s=>(s||"").replace(/[إأآا]/g,"ا").replace(/[ًٌٍَُِّْ]/g,"").replace(/ة/g,"ه").replace(/ى/g,"ي").toLowerCase();
+const CATS=[C.SYS,C.REG,C.REQ,C.GUIDE,C.RULE,C.OTHER];
+let fCat=null,q="";
+
+function kpis(){
+  const total=DOCS.length;
+  const upd=DOCS.filter(d=>d.hasv).length;
+  const withPdf=DOCS.filter(d=>d.p||(d.v&&d.v.some(x=>x.pdf))).length;
+  const req=DOCS.filter(d=>d.cat===C.REQ).length;
+  const guide=DOCS.filter(d=>d.cat===C.GUIDE).length;
+  const K=[
+    {n:total,l:"إجمالي الوثائق المحصورة",c:"accent"},
+    {n:withPdf,l:"وثيقة برابط PDF مباشر",c:"ok"},
+    {n:upd,l:"وثيقة لها إصدارات للمقارنة",c:"warn"},
+    {n:req,l:"اشتراطات (أنشطة وبناء)",c:"info"},
+    {n:guide,l:"أدلة فنية وإجرائية",c:""}
+  ];
+  document.getElementById("kpis").innerHTML=K.map(k=>
+    `<div class="kpi ${k.c}"><div class="n">${k.n}</div><div class="l">${k.l}</div><div class="bar"></div></div>`).join("");
+}
+function chips(){
+  const c=CATS.map(cat=>{
+    const n=DOCS.filter(d=>d.cat===cat).length;
+    return `<button class="chip${fCat===cat?' on':''}" data-cat="${cat}">${cat}<span class="c">${n}</span></button>`;
+  }).join("");
+  document.getElementById("fcat").innerHTML=
+    `<span class="grouplbl">الفئة:</span><button class="chip${!fCat?' on':''}" data-cat="">الكل</button>`+c;
+}
+function match(d){
+  if(fCat && d.cat!==fCat) return false;
+  if(q){ return norm(d.n+" "+d.t+" "+d.cat+" "+(d.upd||"")).includes(norm(q)); }
+  return true;
+}
+function sortDocs(a){
+  const v=document.getElementById("sort").value;
+  const co={}; CATS.forEach((c,i)=>co[c]=i);
+  const arr=[...a];
+  if(v==="alpha") arr.sort((x,y)=>x.n.localeCompare(y.n,"ar"));
+  else if(v==="date") arr.sort((x,y)=>(y.d||"").localeCompare(x.d||""));
+  else if(v==="upd") arr.sort((x,y)=>(y.hasv-x.hasv)||(y.d||"").localeCompare(x.d||""));
+  else arr.sort((x,y)=>(co[x.cat]-co[y.cat])||(y.d||"").localeCompare(x.d||""));
+  return arr;
+}
+function card(d){
+  const sc=d.hasv?"warn":"ok";
+  const links=[];
+  if(d.p) links.push(`<a class="lk pdf" href="${url(d.p)}" target="_blank" rel="noopener"><span class="i">📄</span>فتح النسخة الحالية (PDF)</a>`);
+  else links.push(`<a class="lk" href="${PORTAL}" target="_blank" rel="noopener"><span class="i">🔗</span>عرض على بوابة الوزارة</a>`);
+  let body=`<div class="updrow"><span class="lbl">الفئة:</span><span class="pill type">${d.cat}</span>`+
+    `<span class="lbl">آخر تحديث:</span><b>${fmtDate(d.d)}</b></div>`;
+  if(d.diff){
+    body+=`<div class="diffbox"><div class="dh">🔍 أبرز الفروقات بين النسخ (تحليل)<span class="cf ${d.diff.conf}">${d.diff.conf==="high"?"موثّق من المصدر":"مقارنة بنيوية"}</span></div>`+
+      `<div class="ds">${d.diff.sum}</div><ul>${d.diff.changes.map(c=>`<li>${c}</li>`).join("")}</ul>`+
+      (d.diff.note?`<div class="dn">ℹ️ ${d.diff.note}</div>`:"")+`</div>`;
+  }
+  if(d.hasv){
+    body+=`<div class="tl-h">الخط الزمني للإصدارات — القديمة والمحدّثة</div><div class="tl">`;
+    d.v.forEach(ev=>{
+      body+=`<div class="ev ${ev.cur?'cur':''}">
+        <div class="ed"><span class="edate">${ev.date}</span><span class="etag">${ev.cur?'النسخة السارية':'نسخة سابقة'}</span></div>
+        <div class="etxt"><b>${ev.label}</b><br>${ev.txt}</div>`;
+      const bits=[];
+      if(ev.pdf) bits.push(`<a class="lk pdf ${ev.cur?'':'old'}" href="${url(ev.pdf,ev.abs)}" target="_blank" rel="noopener"><span class="i">📄</span>${ev.cur?'PDF النسخة المحدّثة':'PDF النسخة القديمة'}</a>`);
+      if(ev.src) bits.push(`<a class="lk old" href="${url(ev.src,true)}" target="_blank" rel="noopener"><span class="i">🔗</span>المصدر</a>`);
+      if(!ev.pdf && !ev.src) bits.push(`<span class="etxt" style="color:var(--bad)">⚠️ ملف هذه النسخة غير متوفر حاليًا (سُحب من البوابة / أرشيف الإنترنت محجوب آليًا).</span>`);
+      if(bits.length) body+=`<div class="links" style="border:0;padding:6px 0 0;margin:6px 0 0">${bits.join("")}</div>`;
+      body+=`</div>`;
+    });
+    body+=`</div>`;
+  }
+  body+=`<div class="links">${links.join("")}<a class="lk" href="${PORTAL}" target="_blank" rel="noopener"><span class="i">🏛️</span>البوابة الرسمية</a></div>`;
+  body+=`<div class="notebox">${RENAME_NOTE}</div>`;
+  return `<div class="doc ${d.hasv?'hasv':''}" data-id="${d.id}">
+   <div class="dhead" role="button" tabindex="0" aria-expanded="false">
+    <div class="dtitle"><span class="nm">${d.n}</span>
+     <div class="dmeta"><span class="pill type">${d.t}</span><span class="dot"></span><span>${fmtDate(d.d)}</span></div></div>
+    <div class="dright"><span class="st ${sc}">${d.status}</span>
+     <span class="vcount">${d.hasv?`<span class="vbadge">${d.v.length} إصدارات</span>`:''}<span class="chev">▾</span></span></div>
+   </div>
+   <div class="dbody">${body}</div>
+  </div>`;
+}
+function render(){
+  const arr=sortDocs(DOCS.filter(match));
+  const byCat=document.getElementById("sort").value==="cat";
+  let html="";
+  if(byCat){
+    const g={}; arr.forEach(d=>{(g[d.cat]=g[d.cat]||[]).push(d);});
+    CATS.forEach(cat=>{ if(!g[cat]) return;
+      html+=`<div class="grouphdr">${cat} <span class="gc">${g[cat].length} وثيقة</span></div>`;
+      html+=g[cat].map(card).join("");
+    });
+  } else html=arr.map(card).join("");
+  document.getElementById("list").innerHTML=html;
+  document.getElementById("empty").hidden=arr.length>0;
+  document.getElementById("rcount").innerHTML=`عرض <b>${arr.length}</b> من <b>${DOCS.length}</b> وثيقة`;
+  bind();
+}
+function bind(){
+  document.querySelectorAll(".dhead").forEach(h=>{
+    const t=()=>{const c=h.closest(".doc");c.classList.toggle("open");h.setAttribute("aria-expanded",c.classList.contains("open"));};
+    h.onclick=t; h.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();t();}};
+  });
+}
+document.getElementById("fcat").onclick=e=>{const b=e.target.closest("[data-cat]");if(!b)return;fCat=b.dataset.cat||null;chips();render();};
+document.getElementById("q").oninput=e=>{q=e.target.value;render();};
+document.getElementById("sort").onchange=render;
+const tb=document.getElementById("themebtn");
+tb.onclick=()=>{const cur=document.documentElement.getAttribute("data-theme");
+  const sys=matchMedia("(prefers-color-scheme:dark)").matches;const now=cur||(sys?"dark":"light");
+  document.documentElement.setAttribute("data-theme",now==="dark"?"light":"dark");};
+// ===== مساعد الأرشيف (يعمل داخل الصفحة بلا إنترنت) =====
+function docLinks(d){
+  let h="";
+  if(d.p) h+=`<a class="albtn pdf" href="${url(d.p)}" target="_blank" rel="noopener">📄 النسخة الحالية</a>`;
+  if(d.v) d.v.forEach(ev=>{ if(ev.pdf) h+=`<a class="albtn pdf" href="${url(ev.pdf,ev.abs)}" target="_blank" rel="noopener">📄 ${ev.cur?'المحدّثة':'القديمة'} (${ev.date})</a>`; });
+  h+=`<button class="albtn" onclick="openDoc('${d.id}')">↧ افتح البطاقة</button>`;
+  return h;
+}
+function diffHtml(d){
+  let h=`<div class="aitem"><div class="an">${d.n}</div><div class="am">${d.cat} · ${fmtDate(d.d)}</div>`;
+  h+=`<b>${d.diff.sum}</b><ul>${d.diff.changes.map(c=>`<li>${c}</li>`).join("")}</ul>`;
+  if(d.diff.note) h+=`<div class="am">ℹ️ ${d.diff.note}</div>`;
+  h+=`<div>${docLinks(d)}</div></div>`;
+  return h;
+}
+function findDocs(nq){
+  const stop=new Set(["ما","وش","ايش","اي","هو","هي","في","الفرق","الفروق","الفروقات","بين","نسخ","النسخ","النسخه","اصدار","الاصدار","اصدارات","على","عن","اشتراطات","لائحه","دليل","نظام","قواعد","ضوابط","التي","الي","لها","كم","عدد","و","ال","من","هذه","وثيقه","الوثيقه","تحديث","الجديد","القديم","صار","تغير","وثائق","الوثائق","اعرض","قائمه"]);
+  const toks=nq.split(/\s+/).filter(t=>t.length>2&&!stop.has(t));
+  if(!toks.length) return [];
+  return DOCS.map(d=>{const hay=norm(d.n);let s=0;toks.forEach(t=>{if(hay.includes(t))s+=2;});if(d.diff)s+=0.1;return{d,s};})
+    .filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>x.d);
+}
+function answer(query){
+  const nq=norm(query);
+  const isDiff=/(فرق|فروق|تغير|تغيير|اختلاف|الجديد|القديم|تعديل)/.test(nq);
+  const isCount=/(كم|عدد|احصا|احصائ|اجمالي)/.test(nq);
+  const matched=findDocs(nq);
+  const isUpd=(/لها تحديث|ذات تحديث|لها نسخ|لها اصدار|المحدثه|تحديثات/.test(nq))||(/تحديث/.test(nq)&&!matched.length);
+  if(isCount && !matched.length){
+    const per=CATS.map(c=>`<li>${c}: <b>${DOCS.filter(d=>d.cat===c).length}</b></li>`).join("");
+    return `<h4>إحصائيات الأرشيف</h4><p>إجمالي الوثائق المحصورة من البوابة الرسمية: <b>${DOCS.length}</b> — منها <b>${DOCS.filter(d=>d.hasv).length}</b> وثائق لها إصدارات متعددة للمقارنة، و<b>${DOCS.filter(d=>d.diff).length}</b> يتوفر لها تحليل فروقات.</p><ul>${per}</ul>`;
+  }
+  if(isUpd && !matched.length){
+    const ups=DOCS.filter(d=>d.hasv);
+    return `<h4>الوثائق التي لها تحديث (${ups.length})</h4>`+ups.map(d=>
+      `<div class="aitem"><div class="an">${d.n}</div><div class="am">${d.upd||''}</div>`+
+      (d.diff?`<b>${d.diff.sum}</b>`:'')+`<div>${docLinks(d)}</div></div>`).join("");
+  }
+  if(matched.length){
+    const top=matched.slice(0,4);
+    if(isDiff || top[0].diff){
+      const withDiff=top.filter(d=>d.diff);
+      if(withDiff.length) return `<h4>أبرز الفروقات بين النسخ</h4>`+withDiff.map(diffHtml).join("");
+    }
+    return `<h4>وثائق مطابقة (${matched.length})</h4>`+top.map(d=>
+      `<div class="aitem"><div class="an">${d.n}</div><div class="am">${d.t} · ${d.cat} · ${fmtDate(d.d)} · ${d.status}</div>`+
+      (d.diff?`<b>${d.diff.sum}</b>`:'')+`<div>${docLinks(d)}</div></div>`).join("")+
+      (matched.length>4?`<p class="am">+ ${matched.length-4} وثيقة أخرى — استخدم مربّع البحث بالأسفل لعرضها.</p>`:'');
+  }
+  if(isDiff){
+    const ups=DOCS.filter(d=>d.diff);
+    return `<h4>الوثائق التي يتوفر لها تحليل فروقات (${ups.length})</h4><p>اختر إحداها:</p>`+
+      ups.map(d=>`<button class="albtn" onclick="askQ('ما الفرق في ${d.n}')">${d.n}</button>`).join(" ");
+  }
+  return `<p>لم أجد وثيقة مطابقة. جرّب اسمًا أدق (مثل «المطاعم»، «المكاتب»، «المباني السكنية»)، أو اسأل: «الوثائق التي لها تحديث» أو «كم عدد الوثائق؟».</p>`;
+}
+window.askQ=function(q){document.getElementById("asq").value=q;runAsk();document.getElementById("assistant").scrollIntoView({behavior:"smooth",block:"start"});};
+window.openDoc=function(id){
+  q="";fCat=null;document.getElementById("q").value="";chips();
+  document.getElementById("sort").value="cat";render();
+  setTimeout(()=>{const el=document.querySelector('.doc[data-id="'+id+'"]');if(el){el.classList.add("open");
+    el.querySelector(".dhead").setAttribute("aria-expanded","true");el.scrollIntoView({behavior:"smooth",block:"center"});}},60);
+};
+function runAsk(){
+  const v=document.getElementById("asq").value.trim();const box=document.getElementById("asans");
+  if(!v){box.hidden=true;return;} box.hidden=false;box.innerHTML=answer(v);
+}
+document.getElementById("asbtn").onclick=runAsk;
+document.getElementById("asq").addEventListener("keydown",e=>{if(e.key==="Enter")runAsk();});
+document.querySelectorAll(".as-chip").forEach(c=>c.onclick=()=>{document.getElementById("asq").value=c.dataset.q;runAsk();});
+
+kpis();chips();render();
+</script>

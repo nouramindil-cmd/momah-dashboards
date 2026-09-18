@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مختبر السياسات — مواءمة منهجية تطوير التشريعات مع BRD v2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-900:#004d4d; --teal:#006666; --teal-mid:#008080; --teal-accent:#00a896;
+  --green:#7cb342; --green-dark:#558b2f;
+  --bg:#f5f5f5; --card:#ffffff; --ink:#15302e; --muted:#5a706e;
+  --line:#dde5e4;
+  --ok:#558b2f; --ok-bg:#eef5e3;
+  --partial:#b07d10; --partial-bg:#faf3df;
+  --gap:#b04a35; --gap-bg:#f9e9e5;
+  --add:#0b6e8a; --add-bg:#e4f2f6;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px}
+.en{font-family:'IBM Plex Mono',monospace;font-size:.82em;direction:ltr;unicode-bidi:embed;color:var(--teal-mid)}
+.en.dim{color:var(--muted)}
+
+/* ===== Header ===== */
+header{background:linear-gradient(135deg,var(--teal-900) 0%,var(--teal) 55%,var(--teal-mid) 100%);color:#fff;padding:34px 28px 26px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset-inline-start:0;bottom:0;width:100%;height:4px;background:linear-gradient(90deg,var(--green),var(--green-dark))}
+.hd-wrap{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+.hd-title h1{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.2px}
+.hd-title .sub{color:#bfe3dd;font-weight:300;font-size:14.5px;margin-top:6px}
+.hd-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 16px;font-size:12.5px;color:#d8efeb;text-align:center}
+.hd-badge b{display:block;color:#fff;font-size:14px}
+
+/* ===== Tabs ===== */
+nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,77,77,.06)}
+.tabs{max-width:1240px;margin:0 auto;display:flex;overflow-x:auto}
+.tab{border:0;background:none;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:500;color:var(--muted);padding:15px 20px;border-bottom:3px solid transparent;white-space:nowrap;transition:.18s}
+.tab:hover{color:var(--teal)}
+.tab.active{color:var(--teal);border-bottom-color:var(--green);font-weight:700}
+.tab:focus-visible{outline:2px solid var(--teal-accent);outline-offset:-2px}
+
+main{max-width:1240px;margin:0 auto;padding:30px 24px 70px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h2.sec{font-size:21px;font-weight:700;color:var(--teal-900);margin:6px 0 4px}
+p.lead{color:var(--muted);max-width:900px;margin-bottom:22px;font-size:14.5px}
+
+/* ===== Cards / stats ===== */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.stat{border-top:4px solid var(--teal-accent)}
+.stat .num{font-size:30px;font-weight:700;color:var(--teal)}
+.stat .lbl{font-size:13px;color:var(--muted)}
+.stat.green{border-top-color:var(--green)}
+.stat.green .num{color:var(--green-dark)}
+
+/* ===== Callout ===== */
+.callout{background:linear-gradient(135deg,#eef7ee,#e6f2ef);border:1px solid #cfe3d2;border-inline-start:5px solid var(--green-dark);border-radius:var(--r);padding:20px 24px;margin:22px 0}
+.callout h3{color:var(--green-dark);font-size:16.5px;margin-bottom:8px}
+.callout p{font-size:14.5px}
+
+/* ===== Phase bands & stage cards ===== */
+.phase{margin:26px 0 14px;display:flex;align-items:center;gap:12px}
+.phase .ph-tag{background:var(--teal);color:#fff;font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:999px}
+.phase.p2 .ph-tag{background:var(--teal-mid)}
+.phase.p3 .ph-tag{background:var(--teal-accent)}
+.phase.p4 .ph-tag{background:#7a8a89}
+.phase.p5 .ph-tag{background:var(--green-dark)}
+.phase h3{font-size:16.5px;color:var(--teal-900)}
+.phase .ph-en{font-size:11.5px;color:var(--muted)}
+
+details.stage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;overflow:hidden;transition:.2s}
+details.stage[open]{box-shadow:0 4px 18px rgba(0,102,102,.08);border-color:#bcd6d3}
+details.stage summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 18px}
+details.stage summary::-webkit-details-marker{display:none}
+.stg-no{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--teal);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+details.stage.study .stg-no{background:var(--green-dark)}
+details.stage.brd .stg-no{background:var(--teal-mid)}
+.stg-head{flex:1}
+.stg-head h4{font-size:15.5px;color:var(--teal-900)}
+.stg-head .stg-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.chev{flex:0 0 auto;color:var(--muted);transition:.25s;margin-top:8px;font-size:12px}
+details[open] .chev{transform:rotate(180deg)}
+.stg-body{margin:0;border-top:1px dashed var(--line);padding:14px 18px 18px;font-size:14px}
+.stg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.mini h5{font-size:12.5px;color:var(--teal);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mini ul{padding-inline-start:18px}
+.mini li{margin-bottom:4px;font-size:13.5px}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 10px;border-radius:999px;margin:2px 2px 2px 0}
+.pR{background:#e0f0ee;color:var(--teal)}
+.pA{background:#fbe9d9;color:#a35a00}
+.pC{background:#eef0f0;color:#5c6b6a}
+.gate{background:#f2f8f0;border:1px solid #d8e8d2;border-radius:10px;padding:10px 14px;margin-top:12px;font-size:13.5px}
+.gate b{color:var(--green-dark)}
+.study-flag{background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;margin-inline-start:8px;vertical-align:2px}
+
+/* ===== Comparative workflow ===== */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 20px}
+.lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+.dot{width:12px;height:12px;border-radius:4px}
+.map-head{display:grid;grid-template-columns:1fr 140px 1fr;gap:12px;margin-bottom:10px}
+.map-head div{font-weight:700;font-size:14px;color:#fff;border-radius:10px;padding:10px 14px;text-align:center}
+.map-head .h-off{background:var(--teal)}
+.map-head .h-mid{background:#7a8a89;font-size:12.5px}
+.map-head .h-brd{background:var(--teal-mid)}
+.map-row{display:grid;grid-template-columns:1fr 140px 1fr;gap:12px;margin-bottom:12px;align-items:stretch}
+.map-cell{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:13.5px}
+.map-cell b{display:block;color:var(--teal-900);font-size:14px;margin-bottom:3px}
+.map-cell .en{font-size:11px}
+.map-cell.empty{background:repeating-linear-gradient(45deg,#fafafa,#fafafa 8px,#f1f1f1 8px,#f1f1f1 16px);border-style:dashed;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:12.5px}
+.map-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.st{font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:999px;white-space:nowrap}
+.st-ok{background:var(--ok-bg);color:var(--ok);border:1px solid #cfe0b8}
+.st-pa{background:var(--partial-bg);color:var(--partial);border:1px solid #ecd9a8}
+.st-gp{background:var(--gap-bg);color:var(--gap);border:1px solid #eccabf}
+.st-ad{background:var(--add-bg);color:var(--add);border:1px solid #bcdde8}
+.map-link .ln{width:2px;flex:1;background:var(--line);min-height:8px}
+
+/* ===== Gap tables ===== */
+.filterbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
+.fbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 18px;font-family:inherit;font-size:13.5px;cursor:pointer;color:var(--muted);font-weight:500;transition:.15s}
+.fbtn:hover{border-color:var(--teal-accent);color:var(--teal)}
+.fbtn.active{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
+.gwrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+thead th{background:var(--teal);color:#fff;font-weight:600;padding:11px 14px;text-align:right;font-size:13px}
+thead th:first-child{border-start-start-radius:var(--r)}
+thead th:last-child{border-start-end-radius:var(--r)}
+tbody td{padding:11px 14px;border-top:1px solid #edf1f0;vertical-align:top}
+tbody tr:nth-child(even){background:#fafcfb}
+tbody tr:hover{background:#f0f7f5}
+td b{color:var(--teal-900)}
+.gsec h3{font-size:17px;color:var(--teal-900);margin:26px 0 4px;display:flex;align-items:center;gap:10px}
+.gsec h3 .cnt{font-size:12px;background:#e6efee;color:var(--teal);border-radius:999px;padding:2px 12px;font-weight:600}
+.gsec p.note{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+
+/* ===== Summary ===== */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0}
+.sum{border-radius:var(--r);padding:18px 20px;border:1px solid}
+.sum .n{font-size:30px;font-weight:700}
+.sum .l{font-size:13px}
+.sum.ok{background:var(--ok-bg);border-color:#cfe0b8;color:var(--ok)}
+.sum.pa{background:var(--partial-bg);border-color:#ecd9a8;color:var(--partial)}
+.sum.gp{background:var(--gap-bg);border-color:#eccabf;color:var(--gap)}
+.sum.ad{background:var(--add-bg);border-color:#bcdde8;color:var(--add)}
+
+footer{background:var(--teal-900);color:#a9cfc9;font-size:12.5px;padding:18px 28px;position:relative}
+footer::before{content:"";position:absolute;top:0;inset-inline-start:0;width:100%;height:3px;background:linear-gradient(90deg,var(--green),var(--green-dark))}
+.ft{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+
+@media (max-width:820px){
+  .map-head,.map-row{grid-template-columns:1fr}
+  .map-head .h-mid{display:none}
+  .map-link{flex-direction:row;justify-content:flex-start;padding:0 4px}
+  .map-link .ln{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-wrap">
+    <div class="hd-title">
+      <h1>مختبر السياسات المدعوم بالذكاء الاصطناعي <span class="en" style="color:#9fd8cf">Policy AI Lab</span></h1>
+      <div class="sub">دورة تطوير السياسات داخل المنتج: البناء وفق منهجية تطوير التشريعات المعتمدة، والمقارنة مع <span class="en" style="color:#9fd8cf">BRD v2.0</span></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div class="hd-badge">المرجع الأول<b>منهجية تطوير التشريعات — مارس 2026</b></div>
+      <div class="hd-badge">المرجع الثاني<b><span class="en" style="color:#fff">Policy_AI_Lab_BRD v2.0</span></b></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-p="p-overview">نظرة عامة</button>
+    <button class="tab" data-p="p-official">المنهجية أ: وفق منهجية التشريعات</button>
+    <button class="tab" data-p="p-brd">المنهجية ب: وفق BRD v2.0</button>
+    <button class="tab" data-p="p-workflow">الووركفلو المقارن</button>
+    <button class="tab" data-p="p-gaps">تحليل الفجوات</button>
+  </div>
+</nav>
+
+<main>
+<!-- ============ TAB 1: OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2 class="sec">نظرة عامة</h2>
+  <p class="lead">تعرض هذه الوثيقة التفاعلية دورة تطوير السياسات داخل منتج مختبر السياسات وفق مسارين: الأول مشتق مباشرة من منهجية تطوير التشريعات المعتمدة بالوزارة ومن سياسة حوكمة التشريعات، والثاني كما ورد في وثيقة متطلبات الأعمال <span class="en">BRD v2.0</span>، مع تحليل فجوات شامل على أربعة محاور: المراحل، الأدوار، البوابات، والمستندات.</p>
+
+  <div class="grid g4">
+    <div class="card stat"><div class="num">5 / 9</div><div class="lbl">مراحل رئيسية / خطوات في المنهجية المعتمدة</div></div>
+    <div class="card stat"><div class="num">39</div><div class="lbl">بندًا في القائمة الموحدة للتحقق + 10 مستندات داعمة</div></div>
+    <div class="card stat green"><div class="num">15 / 11</div><div class="lbl">متطلبًا وظيفيًا / حالة استخدام في <span class="en dim">BRD v2.0</span></div></div>
+    <div class="card stat green"><div class="num">7</div><div class="lbl">بوابات كمية آلية يقترحها <span class="en dim">BRD</span> (تعارض، محاكاة، أثر مالي...)</div></div>
+  </div>
+
+  <div class="callout">
+    <h3>مرحلة الدراسة قبل كتابة المسودة — الفارق الجوهري</h3>
+    <p>تشترط المنهجية المعتمدة اكتمال دراسة السياسة قبل الشروع في الصياغة: المقارنات المعيارية ودراسات التجارب المحلية والدولية بالتنسيق مع مركز ذكاء الأعمال ودعم القرار، وتحليل الأثر الاقتصادي والمالي والوظيفي والاجتماعي، وتفصيل الميزانية مع وكالة الشؤون المالية والميزانية، وحصر أصحاب المصلحة، ومناقشة التصور المبدئي عبر منصة سند — وكلها بوابة إلزامية تسبق المسودة. في المقابل، يبدأ <span class="en">BRD v2.0</span> بتوليد المسودة خلال 60 ثانية فور إدخال الأهداف والقيود، وتأتي المقارنات والمحاكاة كمخرجات لاحقة للتوليد لا كشرط مسبق له. هذا الاختلاف في ترتيب الدراسة هو أوسع فجوة بين المسارين، وقد عولج جزئيًا لاحقًا في <span class="en">HLSD V1.1</span> عبر مكوّن <span class="en">Policy Concept Builder</span>.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="color:var(--teal);font-size:16px;margin-bottom:8px">المسار أ — المشتق من المنهجية المعتمدة</h3>
+      <p style="font-size:14px">يعامل السياسة داخل المنتج كما يعامَل التشريع في الوزارة: رصد الحالة، فالتصور المبدئي، فمرحلة دراسة كاملة، ثم المسودة وقائمة التحقق الموحدة، فمرئيات سبع جهات ولجنة السياسات والتنظيم، فمنصة استطلاع، فالاعتماد بحسب مصفوفة الصلاحيات، فالنشر والتعميم والأرشفة، وأخيرًا قياس الجودة بأربعة مؤشرات تشغيلية.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--teal-mid);font-size:16px;margin-bottom:8px">المسار ب — كما ورد في <span class="en">BRD v2.0</span></h3>
+      <p style="font-size:14px">دورة قوامها السرعة والتحقق الكمي: إنشاء السجل، فالتوليد الآلي المسند بالمصادر <span class="en">XAI</span>، فكشف التعارض، فالمحاكاة متعددة المتغيرات واختبارات <span class="en">Black Swan</span> والتقييم التنبؤي، فتوليف التشاور، فسلسلة اعتماد بشرية <span class="en">HITL</span> بثلاث طبقات (محلل ← مدير ← وزير)، فالنفاذ والرصد المستمر للمخاطر والتعلم الآلي المتواصل.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: OFFICIAL METHODOLOGY ============ -->
+<section class="panel" id="p-official">
+  <h2 class="sec">المنهجية أ — دورة السياسات داخل المنتج وفق منهجية تطوير التشريعات</h2>
+  <p class="lead">إسقاط الخطوات التسع والمراحل الخمس للمنهجية المعتمدة على مختبر السياسات، بحيث يصبح كل نشاط في المنتج انعكاسًا رقميًا لخطوة نظامية، مع إبراز مرحلة الدراسة كبوابة إلزامية قبل الصياغة. انقر أي مرحلة لعرض الأنشطة والأدوار والبوابة والمستندات.</p>
+
+  <div class="phase p1"><span class="ph-tag">المرحلة 1</span><h3>التهيئة والتخطيط <span class="ph-en en dim">Preparation &amp; Planning</span></h3></div>
+
+  <details class="stage" open>
+    <summary><span class="stg-no">1</span><span class="stg-head"><h4>رصد الحالات التي تستدعي تطوير سياسة</h4><span class="stg-sub">وحدة رصد الحالات في المنتج: فراغ تشريعي، تطورات تقنية، ارتفاع الحوادث أو المخالفات، تغيّر الاختصاصات</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>تسجيل مبررات التطوير وفق التصنيف الرباعي المعتمد في قائمة التحقق</li><li>تحليل الفجوات <span class="en">Gap Analysis</span> لتحديد المجالات غير المغطاة</li><li>تعيين فريق العمل ووضع خطة العمل وتحديد الأهداف</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: الوحدة التنظيمية مالكة التشريع</span><span class="pill pC">C: وكالة الأنظمة والشؤون القانونية</span><span class="pill pC">C: مركز ذكاء الأعمال ودعم القرار</span><span class="pill pC">C: الأمانات والجهات الخارجية</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>سجل الحالة ومبررات التطوير</li><li>السند النظامي للاختصاصات ذات الصلة</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> اعتماد مالك الأعمال لمبرر التطوير ونطاقه قبل الانتقال للتصور المبدئي.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="stg-no">2</span><span class="stg-head"><h4>إعداد التصور المبدئي للسياسة</h4><span class="stg-sub">بناء التصور آخذًا بالاعتبار العناصر التسعة المنصوص عليها في المنهجية</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>صياغة التصور: الفجوات، الاختصاصات والسند النظامي، التوافق مع الرؤى والاستراتيجيات</li><li>عرض التصور المبدئي على أصحاب المصلحة من خلال منصة سند وجمع المرئيات</li><li>عند تضمّن فكرة جديدة: إعداد مذكرة ترفع عبر مكتب معالي الوزير لمجلس الشؤون السياسية والأمنية أو مجلس الشؤون الاقتصادية والتنمية بحسب الاختصاص</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: الوحدة مالكة التشريع</span><span class="pill pR">R: مكتب معالي الوزير (المجالس)</span><span class="pill pC">C: وكالة الأنظمة والشؤون القانونية</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>وثيقة التصور المبدئي</li><li>مذكرة السياسة (عند الفكرة الجديدة)</li><li>محاضر مناقشة التصور مع أصحاب المصلحة</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> مراجعة المذكرة والتصور المبدئي وأخذ توجيه المجالس المعنية إن وجد قبل بدء الدراسة التفصيلية.</div></div>
+  </details>
+
+  <details class="stage study" open>
+    <summary><span class="stg-no">3</span><span class="stg-head"><h4>الدراسة والتحليل قبل الصياغة<span class="study-flag">بوابة إلزامية قبل المسودة</span></h4><span class="stg-sub">استيفاء متطلبات الدراسة المنصوص عليها في التصور المبدئي وقائمة التحقق قبل كتابة أي مسودة</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>تنفيذ المقارنات المعيارية ودراسات التجارب المحلية والدولية <span class="en">Benchmarking</span></li><li>تحليل وقياس الآثار الاقتصادية والمالية والوظيفية والاجتماعية المتوقعة <span class="en">Impact Assessment</span></li><li>توضيح سلسلة القيمة والأدوار والمسؤوليات لكل مرحلة</li><li>تفصيل الميزانية المطلوبة لتفعيل السياسة مع كراسة الشروط والمواصفات إن وجدت</li><li>حصر أصحاب المصلحة الداخليين والخارجيين وآلية إشراكهم</li><li>وضع جدول بالتشريعات والتنظيمات التي سيترتب على الصدور إلغاؤها أو تعديلها، ومراجعة الاتفاقيات الدولية المرتبطة</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: مركز ذكاء الأعمال ودعم القرار (المقارنات وتقييم الأثر)</span><span class="pill pR">R: وكالة الشؤون المالية والميزانية (الميزانية)</span><span class="pill pR">R: الوحدة مالكة التشريع</span><span class="pill pR">R: الإدارة العامة للاستراتيجية وتطوير الأعمال</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>تقرير المقارنات المعيارية ودراسات التجارب</li><li>تقرير تحليل وقياس أثر السياسة</li><li>وثيقة سلسلة القيمة</li><li>الميزانية المطلوبة بالتفصيل</li><li>قائمة أصحاب المصلحة ونموذج الحوكمة</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> لا تبدأ الصياغة إلا باكتمال مخرجات الدراسة الخمسة وعكس نتائجها لاحقًا على مواد السياسة — وهو ما تتحقق منه البنود 4 و5 و8 من القائمة الموحدة.</div></div>
+  </details>
+
+  <div class="phase p2"><span class="ph-tag">المرحلة 2</span><h3>التطوير <span class="ph-en en dim">Development</span></h3></div>
+
+  <details class="stage">
+    <summary><span class="stg-no">4</span><span class="stg-head"><h4>صياغة المسودة وتعبئة القائمة الموحدة للتحقق</h4><span class="stg-sub">إعداد مسودة السياسة مستندة إلى مخرجات الدراسة، وتعبئة القائمة (39 بندًا) وإرفاق المستندات الداعمة</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>صياغة المسودة وعكس نتائج المقارنات وتقييم الأثر على المواد</li><li>تطوير خطة نشر السياسة: الفئات المستهدفة، جدول النفاذية، التوعية والتدريب، مؤشرات التزام المستفيدين، جاهزية المنصات الرقمية</li><li>تعبئة القائمة الموحدة (13 محورًا / 39 بندًا) وإرفاق المستندات العشرة الداعمة</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: الوحدة مالكة التشريع</span><span class="pill pC">C: وكالة التحول الرقمي (جاهزية المنصات)</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>مسودة السياسة</li><li>القائمة الموحدة معبأة</li><li>خطة نشر السياسة</li><li>قائمة المواد المحدثة ومقارنتها (عند تحديث سياسة قائمة)</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> اكتمال تعبئة القائمة وإرفاق المستندات شرط لرفع المسودة للمراجعة.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="stg-no">5</span><span class="stg-head"><h4>المراجعة متعددة الجهات والمصادقة النهائية</h4><span class="stg-sub">مراجعة تتابعية تعكس مرئيات سبع جهات ثم موافقة لجنة السياسات والتنظيم</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>إتاحة المسودة والقائمة لمرئيات: الشؤون المالية، ذكاء الأعمال، الأنظمة والشؤون القانونية، الحوكمة والمخاطر والالتزام، التحول الرقمي، الاستراتيجية، أمانة مجلس القطاع</li><li>عكس المرئيات وتحديث المسودة والحصول على موافقة كل جهة (سجل المراجعة بالتوقيعات)</li><li>الرفع للجنة السياسات والتنظيم للمصادقة النهائية</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pA">A: لجنة السياسات والتنظيم</span><span class="pill pR">R: الوحدة مالكة التشريع</span><span class="pill pR">R: الجهات السبع المراجعة</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>سجل المراجعة (الاسم، المنصب، التاريخ، التوقيع)</li><li>المسودة المحدثة بعد المرئيات</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> الموافقات النهائية للجهات السبع (البند 13 من القائمة) شرط الرفع للجنة؛ ولا يمرر أي بند حرج دون معالجة.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="stg-no">6</span><span class="stg-head"><h4>النشر على منصة استطلاع وتحديث المسودة</h4><span class="stg-sub">استطلاع مرئيات العموم وتحديث السياسة بناءً عليها ورفعها للاعتماد</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>نشر المسودة على منصة استطلاع <span class="en">Estitlaa</span> عبر وكالة الأنظمة والشؤون القانونية</li><li>جمع مرئيات العموم وتحليلها ونشر ملخص المرئيات على المنصة</li><li>تحديث السياسة إن دعت الحاجة وتنفيذ المراجعة النهائية ورفعها للاعتماد</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pA">A: وكالة الأنظمة والشؤون القانونية (النشر)</span><span class="pill pR">R: الوحدة مالكة التشريع</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>ملخص مرئيات العموم</li><li>المسودة النهائية</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> اكتمال نافذة الاستطلاع ومعالجة المرئيات قبل مسار الاعتماد.</div></div>
+  </details>
+
+  <div class="phase p3"><span class="ph-tag">المرحلة 3</span><h3>الاعتماد <span class="ph-en en dim">Approval</span></h3></div>
+
+  <details class="stage">
+    <summary><span class="stg-no">7</span><span class="stg-head"><h4>الاعتماد وفق مصفوفة الصلاحيات والترجمة</h4><span class="stg-sub">مساران بحسب نوع السياسة: قرار وزاري أو اعتماد مركز الحكومة، مع الترجمة الإنجليزية النظامية</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>توجيه السياسة آليًا: ما يعتمد بقرار وزاري يصدر باعتماد معالي الوزير وفق مصفوفة الصلاحيات؛ وما يخص الأنظمة واللوائح يرفعه مكتب معالي الوزير إلى مركز الحكومة بعد موافقته</li><li>ترجمة السياسة إلى الإنجليزية ومراجعتها والتنسيق مع شعبة الترجمة الرسمية وفق تعليمات قرار مجلس الوزراء رقم (483) وتاريخ 1445/06/20هـ</li><li>مشاركة السياسات المعتمدة مع الوحدات المعنية</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pA">A: معالي الوزير</span><span class="pill pA">A: مركز الحكومة (بحسب النوع)</span><span class="pill pR">R: مكتب معالي الوزير</span><span class="pill pR">R: وكالة الأنظمة والشؤون القانونية (الترجمة)</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>قرار الاعتماد الموقع</li><li>النسخة الإنجليزية المراجعة</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> التوقيع والاعتماد النظامي بحسب المسار، واعتماد النسخة المترجمة.</div></div>
+  </details>
+
+  <div class="phase p4"><span class="ph-tag">المرحلة 4</span><h3>التعميم والحفظ <span class="ph-en en dim">Publication &amp; Archiving</span></h3></div>
+
+  <details class="stage">
+    <summary><span class="stg-no">8</span><span class="stg-head"><h4>النشر الرسمي والتعميم والأرشفة</h4><span class="stg-sub">الجريدة الرسمية، موقع الوزارة، الترميز والتعميم، مكتبة الالتزام والمنصة القانونية الموحدة</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>تجهيز حزمة النشر: التنسيق لنشر السياسة في الجريدة الرسمية ومع التحول الرقمي للنشر على موقع الوزارة</li><li>ترميز السياسة وتعميمها على مستوى الوزارة والأمانات والجهات التابعة عبر مكتب معالي الوزير</li><li>حفظ السياسة في مكتبة الالتزام (GRC) وضمن المنصة القانونية الموحدة (الشؤون القانونية)</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: الإدارة العامة للاتصال المؤسسي</span><span class="pill pR">R: مكتب معالي الوزير (التعميم)</span><span class="pill pR">R: الإدارة العامة للحوكمة والمخاطر والالتزام</span><span class="pill pR">R: وكالة الأنظمة والشؤون القانونية</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>حزمة النشر الرسمية وإثباتاته</li><li>سجل الأرشفة والترميز</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> اكتمال النشر في القنوات النظامية والأرشفة المزدوجة قبل مرحلة القياس.</div></div>
+  </details>
+
+  <div class="phase p5"><span class="ph-tag">المرحلة 5</span><h3>التنفيذ وقياس الجودة <span class="ph-en en dim">Implementation &amp; Quality Measurement</span></h3></div>
+
+  <details class="stage">
+    <summary><span class="stg-no">9</span><span class="stg-head"><h4>تنفيذ خطة النشر وقياس جودة السياسة</h4><span class="stg-sub">لوحة قياس تشغيلية بأربعة مؤشرات كحد أدنى مع قياس الالتزام</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة داخل المنتج</h5><ul><li>تنفيذ خطة النشر ومتطلبات التوعية والتدريب</li><li>قياس مدى تحقيق السياسة لأهدافها عبر المؤشرات: نسبة الالتزام بالسياسة، العبء التنظيمي (الجهد والوقت والتكلفة)، الأثر المحقق، حجم التظلمات والاعتراضات</li><li>قياس الالتزام بالسياسة من قبل الإدارة العامة للحوكمة والمخاطر والالتزام</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">R: الوحدات التنظيمية المعنية</span><span class="pill pR">R: الإدارة العامة للحوكمة والمخاطر والالتزام (الالتزام)</span></div></div>
+      <div class="mini"><h5>المستندات</h5><ul><li>تقارير قياس الجودة الدورية</li><li>تقرير الأثر الفعلي مقابل المتوقع</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> دورة تغذية راجعة: نتائج القياس ترفد الخطوة 1 لرصد الحاجة إلى تحديث السياسة.</div></div>
+  </details>
+</section>
+
+<!-- ============ TAB 3: BRD METHODOLOGY ============ -->
+<section class="panel" id="p-brd">
+  <h2 class="sec">المنهجية ب — دورة السياسات داخل المنتج كما وردت في <span class="en">BRD v2.0</span></h2>
+  <p class="lead">دورة الحياة كما يحددها <span class="en">FR-13 Policy Lifecycle Orchestrator</span> وحالات الاستخدام <span class="en">UC-01 — UC-11</span>: مسار متسلسل تحكمه بوابات كمية آلية وسلسلة اعتماد بشرية <span class="en">HITL</span> ثلاثية الطبقات.</p>
+
+  <details class="stage brd" open>
+    <summary><span class="stg-no">1</span><span class="stg-head"><h4>إنشاء السياسة في السجل المركزي <span class="en dim">Policy Initiation — Registry</span></h4><span class="stg-sub">تسجيل كائن السياسة وفق المخطط الإلزامي <span class="en">Policy Object — Artifact 1.0</span></span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>إدخال البيانات الوصفية: الاسم، القطاع، الهدف، ركيزة رؤية 2030، الغلاف المالي، القيود</li><li>فرض المخطط <span class="en">Schema Enforcement</span> والتحقق من فرادة الاسم في السجل</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">Policy Analyst</span><span class="pill pC">System / Registry</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Policy Object (JSON)</span> في السجل الموحد</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> رفض الحفظ عند نقص أي حقل إلزامي في المخطط.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">2</span><span class="stg-head"><h4>التوليد الآلي للمسودة <span class="en dim">AI-Assisted Drafting — UC-01 / FR-02</span></h4><span class="stg-sub">مسودة مهيكلة خلال 60 ثانية مسندة إلى المراسيم والسوابق والمعايير الدولية</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>استعلام دلالي عبر <span class="en">Knowledge Graph</span> عن السوابق والمراسيم والمقارنات الدولية</li><li>توليد مسودة تشمل السند القانوني والأحكام وملخص الأثر، مع تقرير قابلية التفسير <span class="en">Explainability Report</span> لكل بند</li><li>احتساب درجة التوافق مع رؤية 2030 (0-100) ودرجة مخاطر أولية، ثم الحفظ <span class="en">v0.1</span> في <span class="en">Institutional Memory Vault</span></li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">Policy Analyst</span><span class="pill pC">Legal Officer</span><span class="pill pC">Housing Economist</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Structured Draft + Explainability Report</span></li><li><span class="en dim">Vision 2030 Alignment Score / Initial Risk Score</span></li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> <span class="en">Explainability Gateway</span> — أقل من 3 سوابق تاريخية أو تعميمين قانونيين يوسم المخرج بـ<span class="en">Insufficient Grounding</span> ويمنع التصعيد.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">3</span><span class="stg-head"><h4>كشف التعارض والازدواجية <span class="en dim">Conflict Detection — UC-02 / FR-03</span></h4><span class="stg-sub">مسح آلي مقابل السجل الكامل والمنظومة التشريعية خلال 30 ثانية</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>مسح المسودة مقابل السياسات النافذة وتصنيف الأعلام: منخفض / متوسط / عالٍ / حرج</li><li>قرار المراجع القانوني لكل علم: معالج / مرفوض بمسوغ / يتطلب تعديلًا</li><li>التعارضات العابرة للوزارات تولد تقرير <span class="en">Ripple Effect</span> وإشعارًا عبر <span class="en">Yesser GSB</span></li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">Legal &amp; Compliance Officer</span><span class="pill pC">Policy Analyst</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Conflict Report + Severity Scores</span></li><li><span class="en dim">Cross-Sector Ripple Effect Map</span></li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> قفل المسودة عن التقدم ما دام أي علم حرج غير معالج.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">4</span><span class="stg-head"><h4>المحاكاة والاختبار والتقييم التنبؤي <span class="en dim">Simulation &amp; Scoring — UC-03 / 09 / 10 / 11</span></h4><span class="stg-sub">نمذجة قائمة على الوكلاء <span class="en">ABM</span> مع <span class="en">Monte Carlo</span> واختبارات <span class="en">Black Swan</span></span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>تهيئة مصفوفة المتغيرات: الاقتصاد الكلي، الديموغرافيا، العرض، السوق والتمويل</li><li>محاكاة السيناريوهات ومقارنة حتى ثلاثة سيناريوهات، مع تحليل الحساسية <span class="en">Tornado</span></li><li>احتساب درجة النجاح التنبؤية؛ أقل من 80% يولد تفسير إخفاق مهيكلًا <span class="en">Failure Explanation</span></li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">Housing Economist</span><span class="pill pR">Data Scientist / AI Unit</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Impact Brief PDF / Stress Test Report</span></li><li><span class="en dim">Predictive Success Score + Confidence Band</span></li></ul></div>
+    </div><div class="gate"><b>البوابات:</b> <span class="en">Success ≥ 80%</span> — <span class="en">Monte Carlo</span> فشل &gt; 30% يوسم "غير مستقر" ويحجب — <span class="en">Fiscal Hard-Stop</span>: صافي قيمة حالية سالب لـ15 عامًا يستلزم <span class="en">Strategic Waiver</span> من وزارة المالية — بيانات أقدم من 30 يومًا توسم <span class="en">Low Confidence</span>.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">5</span><span class="stg-head"><h4>توليف مرئيات التشاور <span class="en dim">Consultation Synthesis — UC-05</span></h4><span class="stg-sub">استيعاب مرئيات العموم والجهات وتجميعها موضوعيًا واقتراح تعديلات مهيكلة</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>استيعاب المرئيات عبر بوابة أبشر والقنوات البينية مع حجب البيانات الشخصية <span class="en">PDPL</span></li><li>تجميع الموضوعات وتقدير أوزانها ومشاعرها؛ موضوع يتجاوز 25% يوسم جوهريًا ويصعد</li><li>اقتراح تعديلات مرتبطة بالبند المتأثر؛ لا يطبق أي تعديل دون موافقة المحلل الصريحة</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">Policy Analyst</span><span class="pill pC">Stakeholders</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Consultation Report + Amendment Proposals</span></li><li>نسخة مسودة جديدة</li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> اجتياز فحص <span class="en">PDPL</span> على خط الاستيعاب، وتتبع كل تعديل إلى مرئياته المصدرية.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">6</span><span class="stg-head"><h4>سلسلة الاعتماد البشرية <span class="en dim">HITL Review &amp; Approval — UC-06 / FR-14</span></h4><span class="stg-sub">محلل ← مدير السياسات ← معالي الوزير عبر <span class="en">Executive Intelligence Cockpit</span></span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>موجز الطبقة الثانية للمدير: ملخص صفحة واحدة بالمخاطر ومقارنة السيناريوهات</li><li>مراجعة الوزير للملخص التنفيذي وخريطة الأثر الإقليمي وسيناريوهات التعافي إن وجدت</li><li>القرار: اعتماد / رفض / طلب تعديل / طلب محاكاة إضافية، بتوقيع رقمي عبر نفاذ وتسجيل غير قابل للتغيير</li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pA">Minister</span><span class="pill pR">Director of Policy</span><span class="pill pR">Policy Analyst</span><span class="pill pC">MoF (عند الاستثناء المالي)</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Decision Record + Digital Signature</span></li><li><span class="en dim">Decision Justification (one-pager)</span></li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> لا يصل أي مخرج للاعتماد دون اجتياز جميع الحواجز <span class="en">Guardrails</span>؛ تجاوز أي حاجز يستلزم مسوغ تجاوز موثقًا.</div></div>
+  </details>
+
+  <details class="stage brd">
+    <summary><span class="stg-no">7</span><span class="stg-head"><h4>النفاذ والرصد المستمر والتعلم <span class="en dim">Enactment &amp; Monitoring — UC-04 / FR-12 / FR-15</span></h4><span class="stg-sub">أرشفة آلية، رصد صحي مستمر للسياسات، وتصعيد متدرج بثلاث طبقات</span></span><span class="chev">▼</span></summary>
+    <div class="stg-body"><div class="stg-grid">
+      <div class="mini"><h5>الأنشطة</h5><ul><li>تغيير الحالة إلى "نافذة" وأرشفة الوثائق والقرارات في <span class="en">DMS</span></li><li>مسح صحي مستمر مقابل عتبات المخاطر الخمس (انحراف القدرة على التملك، فجوة العرض، التباين المالي...) مع تصعيد <span class="en">Tier 1-3</span></li><li>إعادة تدريب النماذج على بيانات النتائج الفعلية <span class="en">Continuous Learning Loop</span></li></ul></div>
+      <div class="mini"><h5>الأدوار</h5><div><span class="pill pR">System (الرصد)</span><span class="pill pR">Data Scientist</span><span class="pill pC">Analyst / Director / Minister بحسب الطبقة</span></div></div>
+      <div class="mini"><h5>المخرجات</h5><ul><li><span class="en dim">Tiered Alerts + Policy Optimization Memo</span></li><li><span class="en dim">Recovery Scenarios Decision Deck (Tier 3)</span></li></ul></div>
+    </div><div class="gate"><b>البوابة:</b> لا يُهمل تنبيه حرج دون مسوغ موثق، والتنبيه غير المستجاب له خلال 48 ساعة يصعد آليًا.</div></div>
+  </details>
+</section>
+
+<!-- ============ TAB 4: COMPARATIVE WORKFLOW ============ -->
+<section class="panel" id="p-workflow">
+  <h2 class="sec">الووركفلو المقارن بين المسارين</h2>
+  <p class="lead">مواءمة مرحلة بمرحلة: كل صف يقابل بين خطوة في المنهجية المعتمدة وما يناظرها في <span class="en">BRD v2.0</span>، وتوضح شارة الوسط حالة المواءمة. الخانات المخططة تعني غياب المقابل في ذلك المسار.</p>
+
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--ok)"></span>متوافق</span>
+    <span class="lg"><span class="dot" style="background:var(--partial)"></span>تطابق جزئي</span>
+    <span class="lg"><span class="dot" style="background:var(--gap)"></span>فجوة في BRD</span>
+    <span class="lg"><span class="dot" style="background:var(--add)"></span>إضافة يقدمها BRD</span>
+  </div>
+
+  <div class="map-head"><div class="h-off">المسار أ — المنهجية المعتمدة</div><div class="h-mid">حالة المواءمة</div><div class="h-brd">المسار ب — BRD v2.0</div></div>
+
+  <div class="map-row"><div class="map-cell"><b>1. رصد الحالات وتحديد الأهداف</b>فراغ تشريعي، تطورات، حوادث، اختصاصات</div><div class="map-link"><span class="ln"></span><span class="st st-ok">متوافق</span><span class="ln"></span></div><div class="map-cell"><b>إنشاء السياسة + تحليل الفجوات</b><span class="en">Registry Initiation + Gap &amp; Opportunity Analysis (FR-04)</span></div></div>
+
+  <div class="map-row"><div class="map-cell"><b>2. التصور المبدئي وعرضه على أصحاب المصلحة (سند) ومذكرة المجالس</b>تشاور مسبق قبل أي صياغة</div><div class="map-link"><span class="ln"></span><span class="st st-gp">فجوة</span><span class="ln"></span></div><div class="map-cell empty">لا مرحلة تصور مستقلة؛ التشاور مؤجل لما بعد المسودة، ولا مسار لمذكرة المجالس عبر مكتب الوزير</div></div>
+
+  <div class="map-row"><div class="map-cell" style="border-inline-start:4px solid var(--green-dark)"><b>3. الدراسة والتحليل قبل الصياغة</b>مقارنات معيارية، تقييم أثر، ميزانية، سلسلة قيمة، أصحاب مصلحة — بوابة إلزامية</div><div class="map-link"><span class="ln"></span><span class="st st-gp">فجوة</span><span class="ln"></span></div><div class="map-cell"><b>الدراسة مخرج لاحق لا شرط مسبق</b>المقارنات والأثر تتولد أثناء وبعد التوليد الآلي (<span class="en">UC-01 / UC-03</span>)؛ الميزانية حقل رقمي واحد <span class="en">Budget Envelope</span></div></div>
+
+  <div class="map-row"><div class="map-cell"><b>4. صياغة المسودة + خطة النشر + تعبئة القائمة الموحدة (39 بندًا)</b></div><div class="map-link"><span class="ln"></span><span class="st st-pa">جزئي</span><span class="ln"></span></div><div class="map-cell"><b>التوليد الآلي خلال 60 ثانية</b><span class="en">UC-01: Draft + Explainability + Alignment Score</span> — دون قائمة الـ39 بندًا ودون خطة نشر</div></div>
+
+  <div class="map-row"><div class="map-cell empty">لا مقابل آلي — التحقق من التعارض ضمن مراجعة الشؤون القانونية اليدوية والبند 2 من القائمة</div><div class="map-link"><span class="ln"></span><span class="st st-ad">إضافة BRD</span><span class="ln"></span></div><div class="map-cell"><b>كشف التعارض والازدواجية الآلي</b><span class="en">UC-02: Conflict Report ≤ 30s + Ripple Effect</span></div></div>
+
+  <div class="map-row"><div class="map-cell empty">لا مقابل — تقييم الأثر دراسة مسبقة ثابتة لا محاكاة تفاعلية</div><div class="map-link"><span class="ln"></span><span class="st st-ad">إضافة BRD</span><span class="ln"></span></div><div class="map-cell"><b>المحاكاة والتقييم التنبؤي واختبارات الإجهاد</b><span class="en">UC-03/09/10/11: ABM + Monte Carlo + Black Swan + Success Score</span></div></div>
+
+  <div class="map-row"><div class="map-cell"><b>5. مراجعة سبع جهات + مصادقة لجنة السياسات والتنظيم</b>سجل مراجعة موقع وموافقات نهائية (البند 13)</div><div class="map-link"><span class="ln"></span><span class="st st-gp">فجوة</span><span class="ln"></span></div><div class="map-cell"><b>سلسلة محلل ← مدير ← وزير</b><span class="en">HITL Tiers</span> — لا تمثيل للجنة السياسات والتنظيم ولا لموافقات الجهات السبع</div></div>
+
+  <div class="map-row"><div class="map-cell"><b>6. النشر على منصة استطلاع وتحديث المسودة بمرئيات العموم</b></div><div class="map-link"><span class="ln"></span><span class="st st-pa">جزئي</span><span class="ln"></span></div><div class="map-cell"><b>توليف مرئيات التشاور</b><span class="en">UC-05</span> عبر أبشر والقنوات البينية — منصة استطلاع تحديدًا أضيفت لاحقًا في <span class="en">HLSD (CAP-08)</span></div></div>
+
+  <div class="map-row"><div class="map-cell"><b>7. الاعتماد وفق مصفوفة الصلاحيات (وزاري / مركز الحكومة) + الترجمة النظامية</b></div><div class="map-link"><span class="ln"></span><span class="st st-pa">جزئي</span><span class="ln"></span></div><div class="map-cell"><b>اعتماد الوزير بتوقيع نفاذ</b><span class="en">UC-06</span> — مسار مركز الحكومة والترجمة (قرار 483) غير مغطيين</div></div>
+
+  <div class="map-row"><div class="map-cell"><b>8. الجريدة الرسمية وموقع الوزارة والترميز والتعميم والأرشفة المزدوجة</b>مكتبة الالتزام + المنصة القانونية الموحدة</div><div class="map-link"><span class="ln"></span><span class="st st-pa">جزئي</span><span class="ln"></span></div><div class="map-cell"><b>أرشفة آلية في <span class="en">DMS</span> و<span class="en">Memory Vault</span></b>التقديم للجريدة الرسمية خارج النطاق صراحة؛ دعم تحضيري أضيف في <span class="en">HLSD (CAP-10)</span></div></div>
+
+  <div class="map-row"><div class="map-cell"><b>9. قياس الجودة: الالتزام، العبء التنظيمي، الأثر، التظلمات</b>وقياس الالتزام من GRC</div><div class="map-link"><span class="ln"></span><span class="st st-pa">جزئي</span><span class="ln"></span></div><div class="map-cell"><b>رصد صحي مستمر وتصعيد متدرج</b><span class="en">UC-04 + Continuous Learning</span> — يغطي الأثر والالتزام جزئيًا دون العبء التنظيمي والتظلمات</div></div>
+</section>
+
+<!-- ============ TAB 5: GAP ANALYSIS ============ -->
+<section class="panel" id="p-gaps">
+  <h2 class="sec">تحليل الفجوات الشامل</h2>
+  <p class="lead">مقارنة <span class="en">BRD v2.0</span> مع متطلبات المنهجية المعتمدة على أربعة محاور. التصنيف: <b style="color:var(--ok)">متوافق</b> عند التغطية الكاملة، <b style="color:var(--partial)">جزئي</b> عند التكافؤ الوظيفي مع نقص نظامي، <b style="color:var(--gap)">فجوة</b> عند غياب المتطلب، <b style="color:var(--add)">إضافة</b> لما يقدمه BRD ولا تشترطه المنهجية. حيثما عالج <span class="en">HLSD V1.1</span> فجوة لاحقًا تمت الإشارة إلى ذلك، مع بقاء التقييم على نص BRD ذاته.</p>
+
+  <div class="sum-grid">
+    <div class="sum ok"><div class="n">3</div><div class="l">مواضع توافق كامل</div></div>
+    <div class="sum pa"><div class="n">13</div><div class="l">تطابق جزئي يتطلب استكمالًا</div></div>
+    <div class="sum gp"><div class="n">19</div><div class="l">فجوة في BRD مقابل المنهجية</div></div>
+    <div class="sum ad"><div class="n">4</div><div class="l">محاور إضافة نوعية يقدمها BRD</div></div>
+  </div>
+
+  <div class="filterbar" role="group" aria-label="تصفية المحاور">
+    <button class="fbtn active" data-f="all">جميع المحاور</button>
+    <button class="fbtn" data-f="f-stages">المراحل</button>
+    <button class="fbtn" data-f="f-roles">الأدوار</button>
+    <button class="fbtn" data-f="f-gates">البوابات</button>
+    <button class="fbtn" data-f="f-docs">المستندات</button>
+  </div>
+
+  <div class="gsec" id="f-stages">
+    <h3>أولًا: فجوات المراحل <span class="cnt">9 مواضع</span></h3>
+    <p class="note">مواءمة تسلسل دورة الحياة في BRD مع الخطوات التسع للمنهجية.</p>
+    <div class="gwrap"><table>
+      <thead><tr><th style="width:24%">متطلب المنهجية</th><th style="width:10%">الحالة</th><th>الوضع في BRD v2.0 والأثر</th></tr></thead>
+      <tbody>
+        <tr><td><b>مرحلة دراسة إلزامية قبل الصياغة</b><br>مقارنات، أثر، ميزانية، سلسلة قيمة</td><td><span class="st st-gp">فجوة</span></td><td>الصياغة تسبق الدراسة: التوليد خلال 60 ثانية فور الإدخال، والمقارنات والأثر مخرجات لاحقة لا بوابة مسبقة. الأثر: مخالفة تسلسل المنهجية والضوابط الصادرة بقرار مجلس الوزراء (713). عولجت جزئيًا في HLSD عبر <span class="en">Policy Concept Builder</span> قبل UC-01.</td></tr>
+        <tr><td><b>عرض التصور المبدئي على أصحاب المصلحة قبل التطوير (منصة سند)</b></td><td><span class="st st-gp">فجوة</span></td><td>التشاور في BRD بعدي (UC-05 بعد اكتمال المسودة). الأثر: فقدان مرئيات الجهات في نقطة أدنى كلفة للتغيير.</td></tr>
+        <tr><td><b>مذكرة السياسة للمجالس عند الفكرة الجديدة</b><br>عبر مكتب معالي الوزير</td><td><span class="st st-gp">فجوة</span></td><td>لا مسار في BRD لرفع التصور لمجلس الشؤون السياسية والأمنية أو الاقتصادية والتنمية. الأثر: خطر المضي في سياسات تتطلب توجيهًا أعلى دون أخذه.</td></tr>
+        <tr><td><b>النشر على منصة استطلاع (الخطوة 5)</b></td><td><span class="st st-pa">جزئي</span></td><td>BRD يذكر بوابة أبشر وقنوات تشاور عامة دون منصة استطلاع النظامية؛ HLSD صحح ذلك لاحقًا بإضافة <span class="en">CAP-08 Estitlaa Support</span>.</td></tr>
+        <tr><td><b>الترجمة الإنجليزية ومراجعتها</b><br>تعليمات قرار مجلس الوزراء (483)</td><td><span class="st st-gp">فجوة</span></td><td>لا ذكر للترجمة أو التنسيق مع شعبة الترجمة الرسمية في كامل BRD. الأثر: متطلب نظامي إلزامي غير ممثل في دورة المنتج.</td></tr>
+        <tr><td><b>النشر في الجريدة الرسمية وموقع الوزارة والتعميم والترميز (الخطوات 7-8)</b></td><td><span class="st st-pa">جزئي</span></td><td>BRD يستبعد التقديم الآلي للجريدة صراحة (Out of Scope) دون تمثيل الخطوة كمرحلة بشرية مدعومة؛ HLSD أضاف لاحقًا <span class="en">CAP-10</span> لتجهيز حزمة النشر مع بقاء التقديم بشريًا.</td></tr>
+        <tr><td><b>الأرشفة المزدوجة: مكتبة الالتزام + المنصة القانونية الموحدة</b></td><td><span class="st st-pa">جزئي</span></td><td>تكافؤ وظيفي عبر <span class="en">DMS + Institutional Memory Vault</span> دون ربط بالمستودعين النظاميين المعتمدين. الأثر: ازدواجية محتملة في مصادر الحقيقة.</td></tr>
+        <tr><td><b>قياس الجودة بأربعة مؤشرات كحد أدنى</b><br>الالتزام، العبء التنظيمي، الأثر، التظلمات</td><td><span class="st st-pa">جزئي</span></td><td>رصد BRD يغطي الأثر وعتبات المخاطر ونسب الالتزام بالأهداف، ولا يتضمن مؤشري العبء التنظيمي وحجم التظلمات المنصوص عليهما.</td></tr>
+        <tr><td><b>المحاكاة وكشف التعارض والتقييم التنبؤي والتعلم المستمر</b></td><td><span class="st st-ad">إضافة</span></td><td>قدرات لا تشترطها المنهجية ويقدمها BRD (<span class="en">UC-02/03/09/10/11 + FR-15</span>)، وتعزز جودة بندي تقييم الأثر والمقارنات في القائمة الموحدة متى أُدرجت مخرجاتها ضمن مستندات الدراسة.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="gsec" id="f-roles">
+    <h3>ثانيًا: فجوات الأدوار <span class="cnt">10 مواضع</span></h3>
+    <p class="note">مقابلة مصفوفة RACI ونموذج التفاعل المعتمدين مع شخصيات BRD.</p>
+    <div class="gwrap"><table>
+      <thead><tr><th style="width:24%">الجهة في المنهجية</th><th style="width:10%">الحالة</th><th>الوضع في BRD v2.0</th></tr></thead>
+      <tbody>
+        <tr><td><b>لجنة السياسات والتنظيم</b><br>A في مرحلة التطوير والمصادقة النهائية</td><td><span class="st st-gp">فجوة</span></td><td>غير ممثلة إطلاقًا؛ استعيض عنها بدور <span class="en">Director of Policy</span> الفردي. الأثر: إسقاط جهة الاعتماد الجماعية المنصوص عليها من سلسلة القرار.</td></tr>
+        <tr><td><b>مركز ذكاء الأعمال ودعم القرار (BIDSC)</b><br>R للمقارنات المعيارية وتقييم الأثر</td><td><span class="st st-gp">فجوة</span></td><td>يظهر كمصدر بيانات (HDOC) فقط، وأسندت مهامه إلى <span class="en">Housing Economist</span> والمحرك الآلي. الأثر: تجاوز الجهة المختصة نظامًا ببندي 8 من القائمة الموحدة.</td></tr>
+        <tr><td><b>وكالة الشؤون المالية والميزانية</b><br>R لتحديد تكاليف التفعيل</td><td><span class="st st-gp">فجوة</span></td><td>BRD يقتصر على وزارة المالية الخارجية (MoF) للتغذية بالبيانات والاستثناءات، دون دور الوكالة الداخلية في اعتماد الميزانية (البند 5 والموافقات النهائية).</td></tr>
+        <tr><td><b>الإدارة العامة للحوكمة والمخاطر والالتزام (GRC)</b><br>مراجعة، أرشفة بمكتبة الالتزام، قياس الالتزام</td><td><span class="st st-gp">فجوة</span></td><td>غائبة من الشخصيات والمصفوفة؛ لا مالك لقياس الالتزام بعد النفاذ وفق المنهجية.</td></tr>
+        <tr><td><b>الإدارة العامة للاتصال المؤسسي</b><br>R لنشر الجريدة الرسمية</td><td><span class="st st-gp">فجوة</span></td><td>غير ممثلة؛ مرحلة النشر الرسمي بلا مالك في BRD.</td></tr>
+        <tr><td><b>أمانة مجلس القطاع + وكالة التحول الرقمي + الإدارة العامة للاستراتيجية</b><br>مراجعون وموافقون نهائيون</td><td><span class="st st-gp">فجوة</span></td><td>ثلاث جهات من الموافقات النهائية السبع (البند 13) غير ممثلة في أدوار المنتج.</td></tr>
+        <tr><td><b>مركز الحكومة</b><br>A لاعتماد الأنظمة واللوائح</td><td><span class="st st-pa">جزئي</span></td><td>يظهر ضمنًا في استبعاد "التقديم التشريعي المباشر" دون تمثيل مسار الرفع عبر مكتب معالي الوزير وفق مصفوفة الصلاحيات.</td></tr>
+        <tr><td><b>وكالة الأنظمة والشؤون القانونية</b></td><td><span class="st st-pa">جزئي</span></td><td>يقابلها <span class="en">Legal &amp; Compliance Officer</span> كدور فردي؛ التكافؤ وظيفي لكن صلاحيات الوكالة (نشر استطلاع، الترجمة، المنصة القانونية) أوسع من الدور المعرف.</td></tr>
+        <tr><td><b>الوحدات التنظيمية مالكة التشريع + أصحاب المصلحة</b></td><td><span class="st st-ok">متوافق</span></td><td>يقابلها <span class="en">Policy Analyst</span> (المالك التشغيلي) و<span class="en">Stakeholder</span> بتغطية مقبولة.</td></tr>
+        <tr><td><b>أدوار جديدة يقدمها BRD</b><br><span class="en">Housing Economist, Data Scientist, Product Manager, Simulation Expert (HLSD)</span></td><td><span class="st st-ad">إضافة</span></td><td>أدوار تشغيلية للقدرات الجديدة تحتاج إلى تحديد موقعها في مصفوفة RACI المعتمدة وتبعيتها التنظيمية (المرشح الطبيعي لدوري الاقتصادي وعالم البيانات: BIDSC).</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="gsec" id="f-gates">
+    <h3>ثالثًا: فجوات البوابات <span class="cnt">7 مواضع</span></h3>
+    <p class="note">بوابات المنهجية حوكمية مستندية، وبوابات BRD كمية آلية؛ التكامل بينهما ممكن ومطلوب.</p>
+    <div class="gwrap"><table>
+      <thead><tr><th style="width:24%">البوابة</th><th style="width:10%">الحالة</th><th>التحليل</th></tr></thead>
+      <tbody>
+        <tr><td><b>القائمة الموحدة للتحقق (39 بندًا)</b><br>شرط الرفع للجنة السياسات والتنظيم</td><td><span class="st st-gp">فجوة</span></td><td>غير موجودة في BRD كبوابة؛ <span class="en">Schema Enforcement</span> يغطي حقول البيانات لا بنود التحقق الحوكمية. HLSD أضاف لاحقًا محرك امتثال للقائمة ضمن مواءمة الخطوة 3.</td></tr>
+        <tr><td><b>المستندات الداعمة العشرة كشرط اكتمال</b></td><td><span class="st st-gp">فجوة</span></td><td>لا تحقق من اكتمال المرفقات العشرة قبل المراجعة؛ مخرجات BRD تغطي بعضها آليًا (انظر محور المستندات) دون بوابة إرفاق.</td></tr>
+        <tr><td><b>الموافقات النهائية من سبع جهات + سجل المراجعة الموقع</b></td><td><span class="st st-gp">فجوة</span></td><td>سلسلة HITL الثلاثية لا تكافئ موافقات الجهات السبع المنصوص عليها في البند 13 وسجل المراجعة بالأسماء والمناصب والتواقيع.</td></tr>
+        <tr><td><b>بوابة توجيه المجالس للفكرة الجديدة</b></td><td><span class="st st-gp">فجوة</span></td><td>القرار بفتح مسار التطوير للفكرة الجديدة معلق نظامًا على توجيه المجالس؛ لا يمثله BRD.</td></tr>
+        <tr><td><b>الاعتماد بحسب مصفوفة الصلاحيات (وزاري / مركز الحكومة)</b></td><td><span class="st st-pa">جزئي</span></td><td>BRD يفترض مسار اعتماد وزاريًا واحدًا بتوقيع نفاذ؛ التفريع بحسب نوع التشريع غير ممثل.</td></tr>
+        <tr><td><b>بوابة نافذة الاستطلاع العام</b></td><td><span class="st st-pa">جزئي</span></td><td>ممثلة كمرحلة تشاور (UC-05) دون اشتراط قناة استطلاع النظامية ونشر ملخص المرئيات على المنصة.</td></tr>
+        <tr><td><b>البوابات الكمية السبع في BRD</b><br><span class="en">Explainability ≥3/2 · Critical Lock · Success ≥80% · Monte Carlo ≤30% · Fiscal Hard-Stop · Latency ≤30d · Nafath Sign</span></td><td><span class="st st-ad">إضافة</span></td><td>طبقة رقابية كمية لا مثيل لها في المنهجية؛ اعتمادها رسميًا ضمن سياسة حوكمة التشريعات يحولها من ممارسة منتج إلى ضابط نظامي قابل للتدقيق.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="gsec" id="f-docs">
+    <h3>رابعًا: فجوات المستندات <span class="cnt">13 موضعًا</span></h3>
+    <p class="note">مقابلة المستندات الداعمة العشرة وسجل المراجعة مع مخرجات BRD الموثقة.</p>
+    <div class="gwrap"><table>
+      <thead><tr><th style="width:26%">مستند المنهجية</th><th style="width:10%">الحالة</th><th>المقابل في BRD v2.0</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. السند النظامي لاختصاصات الوزارة</b></td><td><span class="st st-pa">جزئي</span></td><td>استخلاص السند القانوني <span class="en">Legal Basis Extraction</span> ضمن المسودة، دون وثيقة سند مستقلة مرفقة.</td></tr>
+        <tr><td><b>2. وثيقة سلسلة القيمة والأدوار والممكنات</b></td><td><span class="st st-gp">فجوة</span></td><td>لا مقابل؛ أقرب تمثيل هو أدوار الكائن <span class="en">Policy Object</span> دون تحليل سلسلة القيمة (تنظيم، تخطيط، تشغيل، رقابة، إدارة أداء).</td></tr>
+        <tr><td><b>3. قائمة أصحاب المصلحة وآلية إشراكهم ونموذج الحوكمة</b></td><td><span class="st st-pa">جزئي</span></td><td>ربط أصحاب المصلحة موجود في <span class="en">Knowledge Graph</span>؛ آلية الإشراك ونموذج الحوكمة كوثيقة غير ممثلين.</td></tr>
+        <tr><td><b>4. التشريعات والاتفاقيات الدولية المرتبطة</b></td><td><span class="st st-pa">جزئي</span></td><td>تغطية عبر المقارنات الدولية؛ جدول الاتفاقيات الملزمة وتعارضاتها المحتملة غير مخصص.</td></tr>
+        <tr><td><b>5. المقارنات المعيارية ودراسات التجارب</b></td><td><span class="st st-ok">متوافق</span></td><td>وحدة <span class="en">Benchmarking &amp; Comparative Analysis</span> تنتج المستند — مع ملاحظة توقيته اللاحق للصياغة (فجوة المراحل).</td></tr>
+        <tr><td><b>6. تقرير تحليل وقياس أثر السياسة</b></td><td><span class="st st-ok">متوافق</span></td><td><span class="en">Impact Brief + Simulation Outputs</span> تتجاوز متطلب التقرير الثابت — بذات ملاحظة التوقيت.</td></tr>
+        <tr><td><b>7. محاضر مناقشة التصور المبدئي مع أصحاب المصلحة</b></td><td><span class="st st-gp">فجوة</span></td><td>لا مقابل؛ لا تشاور مسبقًا على الصياغة أصلًا في BRD.</td></tr>
+        <tr><td><b>8. الميزانية المطلوبة + نطاق العمل وكراسة الشروط</b></td><td><span class="st st-gp">فجوة</span></td><td>حقل <span class="en">Budget Envelope</span> رقم واحد لا يفي بمتطلب التفصيل مع كراسة الشروط والمواصفات بالتنسيق مع وكالة الشؤون المالية.</td></tr>
+        <tr><td><b>9. خطة نشر التشريع</b><br>الفئات، النفاذية، التوعية والتدريب، مؤشرات الالتزام، جاهزية المنصات</td><td><span class="st st-gp">فجوة</span></td><td>لا مقابل مخصص؛ عناصر متفرقة (الرصد، الإشعارات) لا تشكل خطة نشر معتمدة كمستند بوابة.</td></tr>
+        <tr><td><b>10. قائمة المواد المحدثة ومقارنتها (عند التحديث)</b></td><td><span class="st st-pa">جزئي</span></td><td><span class="en">Amendment traceability + version diff</span> يغطي التتبع تقنيًا دون قالب المقارنة وبيان الأهمية المطلوب نظامًا.</td></tr>
+        <tr><td><b>سجل المراجعة الموقع (7 جهات)</b></td><td><span class="st st-pa">جزئي</span></td><td>توقيع نفاذ للوزير وسجل تدقيق آلي؛ تواقيع الجهات السبع بالمناصب والتواريخ غير ممثلة.</td></tr>
+        <tr><td><b>النسخة المترجمة المعتمدة</b></td><td><span class="st st-gp">فجوة</span></td><td>لا مقابل في BRD.</td></tr>
+        <tr><td><b>مخرجات يقدمها BRD ولا تشترطها المنهجية</b><br><span class="en">Explainability Report, Conflict Report, Stress Test Report, Predictive Score, Consultation Report, Decision Deck, Optimization Memo</span></td><td><span class="st st-ad">إضافة</span></td><td>سبعة مخرجات توثيقية جديدة ترفع جودة ملف السياسة، ويستحسن إدراجها ضمن "أي مستندات أخرى داعمة" في قائمة التحقق الموحدة.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="callout">
+    <h3>الخلاصة</h3>
+    <p>المساران متكاملان لا متعارضان: تملك المنهجية المعتمدة ما يفتقده <span class="en">BRD v2.0</span> من حوكمة نظامية — مرحلة الدراسة المسبقة، لجنة السياسات والتنظيم، موافقات الجهات السبع، القائمة الموحدة، منصة استطلاع، الترجمة، والنشر الرسمي — ويملك BRD ما يفتقده المسار النظامي من قدرة تحققية كمية — المحاكاة، كشف التعارض الآلي، التقييم التنبؤي، والرصد المستمر. وقد قطع <span class="en">HLSD V1.1</span> شوطًا في ردم فجوات المراحل عبر مواءمة الخطوات التسع صراحة (<span class="en">Section 3.4.1, CAP-08/09/10</span>)، فيما تبقى فجوات الأدوار (لجنة السياسات والتنظيم، BIDSC، GRC، الشؤون المالية) وفجوات المستندات (الميزانية المفصلة، خطة النشر، سلسلة القيمة، سجل المراجعة الموقع) الأكثر إلحاحًا للمعالجة قبل اعتماد المتطلبات في مرحلة التصميم التفصيلي <span class="en">SDD</span>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft">
+    <span>أعد هذا التحليل استنادًا إلى: منهجية تطوير التشريعات (مارس 2026) · سياسة حوكمة التشريعات · <span class="en" style="color:#cfe8e3">Policy_AI_Lab_BRD_v2.0</span> · <span class="en" style="color:#cfe8e3">HLSD V1.1</span></span>
+    <span>مركز ذكاء الأعمال ودعم القرار — قطاع التخطيط والتطوير</span>
+  </div>
+</footer>
+
+<script>
+// Tabs
+const tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('section.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');document.getElementById(t.dataset.p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+// Gap filters
+const fb=document.querySelectorAll('.fbtn'),gs=document.querySelectorAll('.gsec');
+fb.forEach(b=>b.addEventListener('click',()=>{
+  fb.forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  const f=b.dataset.f;
+  gs.forEach(s=>{s.style.display=(f==='all'||s.id===f)?'':'none';});
+}));
+</script>
+</body>
+</html>
